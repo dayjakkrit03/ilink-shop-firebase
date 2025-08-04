@@ -130,13 +130,18 @@ export const Header = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <div className="hidden lg:flex items-center gap-8">
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">LAN (UTP) System</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">FIBER OPTIC System</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">DATA CENTER System</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">COAXIAL (RG) System</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">NETWORKING System</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">GERMANY RACK</a>
+            <div className="hidden xl:flex items-center gap-6">
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">LAN (UTP)</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">FIBER OPTIC</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">DATA CENTER</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">COAXIAL (RG)</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">NETWORKING</a>
+            </div>
+            <div className="hidden lg:flex xl:hidden items-center gap-4">
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">LAN</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">FIBER</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">DATA CENTER</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">NETWORKING</a>
             </div>
             <span className="text-sale font-semibold ml-auto shrink-0 text-xs sm:text-sm">Sale ลด 80%</span>
           </nav>
