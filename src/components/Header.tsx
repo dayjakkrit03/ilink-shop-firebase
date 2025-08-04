@@ -129,12 +129,12 @@ export const Header = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <a href="#" className="hover:text-primary/80 transition-colors">สายเคเบิ้ล</a>
-            <a href="#" className="hover:text-primary/80 transition-colors">Router/Switch</a>
-            <a href="#" className="hover:text-primary/80 transition-colors">Server/Storage</a>
-            <a href="#" className="hover:text-primary/80 transition-colors">Wireless</a>
-            <a href="#" className="hover:text-primary/80 transition-colors">Audio/Video</a>
-            <a href="#" className="hover:text-primary/80 transition-colors">Network Tools</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">LAN (UTP) System</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">FIBER OPTIC System</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">DATA CENTER System</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">COAXIAL (RG) System</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">NETWORKING System</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">GERMANY RACK</a>
             <span className="text-sale font-semibold ml-auto">Sale ลดสูงสุด 80%</span>
           </nav>
         </div>
