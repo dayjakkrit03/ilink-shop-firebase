@@ -40,14 +40,14 @@ export const Header = () => {
 
           {/* Search */}
           <div className="flex-1 max-w-2xl">
-            <div className="relative">
+            <div className="relative flex items-center">
               <Input
                 placeholder="ค้นหาสินค้า หมวดหมู่ หรือร้านค้า..."
-                className="w-full pl-4 pr-12 py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50"
+                className="w-full pl-4 pr-12 py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-12"
               />
               <Button
                 size="sm"
-                className="absolute right-1 top-1 bg-secondary hover:bg-secondary/90"
+                className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-secondary hover:bg-secondary/90 h-10 w-10 p-0"
               >
                 <Search className="h-4 w-4" />
               </Button>
