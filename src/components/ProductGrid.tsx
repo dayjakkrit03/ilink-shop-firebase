@@ -1,4 +1,5 @@
 import { ProductCard } from "./ProductCard";
+import { Button } from "@/components/ui/button";
 
 // Mock product data
 const products = [
@@ -94,16 +95,26 @@ const products = [
 
 export const ProductGrid = () => {
   return (
-    <section className="py-8 bg-background">
+    <section className="py-12 bg-gradient-subtle">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">สินค้าแนะนำ</h2>
-          <button className="text-primary hover:underline">ดูทั้งหมด</button>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-4">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-2">สินค้าแนะนำ</h2>
+            <p className="text-muted-foreground">อุปกรณ์เครือข่ายคุณภาพสูงที่คัดสรรมาแล้ว</p>
+          </div>
+          <Button variant="outline" className="hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+            ดูทั้งหมด →
+          </Button>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} {...product} />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+          {products.map((product, index) => (
+            <div
+              key={product.id}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <ProductCard {...product} />
+            </div>
           ))}
         </div>
       </div>
