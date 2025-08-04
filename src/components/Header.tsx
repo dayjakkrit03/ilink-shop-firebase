@@ -68,7 +68,7 @@ export const Header = () => {
       </div>
 
       {/* Navigation */}
-      <div className="bg-primary/5 text-primary border-t border-primary/10">
+      <div className="bg-white text-primary border-t border-primary/10">
         <div className="container mx-auto px-4">
           <nav className="flex items-center gap-8 py-3 text-sm">
             <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10">
