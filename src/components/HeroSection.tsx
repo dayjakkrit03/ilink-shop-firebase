@@ -27,10 +27,10 @@ export const HeroSection = () => {
                 อุปกรณ์เครือข่ายคุณภาพสูง ส่งฟรี ทั่วไทย ส่งไว ถึงมือใน 24 ชม.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="secondary" className="text-lg px-8 py-4 shadow-glow transition-spring hover:scale-105">
+                <Button size="lg" className="text-lg px-8 py-4 shadow-glow transition-spring hover:scale-105 bg-orange-500 hover:bg-orange-600 text-white">
                   เริ่มช็อปเลย
                 </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary transition-spring hover:scale-105">
+                <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-2 border-white bg-white/10 text-white hover:bg-white hover:text-primary transition-spring hover:scale-105">
                   ดูแคตตาล็อก
                 </Button>
               </div>
