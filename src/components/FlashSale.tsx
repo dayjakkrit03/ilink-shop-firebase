@@ -82,7 +82,7 @@ export const FlashSale = () => {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
             <div className="flex items-center gap-2">
               <div className="text-xl sm:text-2xl">⚡</div>
-              <h2 className="text-xl sm:text-2xl font-bold">Flash Sale</h2>
+              <h2 className="text-xl sm:text-2xl font-bold">Clearance Sale</h2>
             </div>
             <div className="flex items-center gap-2 text-xs sm:text-sm">
               <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
