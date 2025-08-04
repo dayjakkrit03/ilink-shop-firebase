@@ -68,19 +68,19 @@ export const Header = () => {
       </div>
 
       {/* Navigation */}
-      <div className="bg-white text-foreground border-t">
+      <div className="bg-primary/5 text-primary border-t border-primary/10">
         <div className="container mx-auto px-4">
           <nav className="flex items-center gap-8 py-3 text-sm">
-            <Button variant="ghost" size="sm" className="text-foreground hover:text-primary">
+            <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10">
               <Menu className="h-4 w-4 mr-2" />
               หมวดหมู่สินค้า
             </Button>
-            <a href="#" className="hover:text-primary">แฟชั่น</a>
-            <a href="#" className="hover:text-primary">เครื่องใช้ไฟฟ้า</a>
-            <a href="#" className="hover:text-primary">ความงาม</a>
-            <a href="#" className="hover:text-primary">บ้านและไลฟ์สไตล์</a>
-            <a href="#" className="hover:text-primary">กีฬาและกิจกรรมกลางแจ้ง</a>
-            <a href="#" className="hover:text-primary">มือถือและแกดเจ็ต</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">สายเคเบิ้ล</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">Router/Switch</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">Server/Storage</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">Wireless</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">Audio/Video</a>
+            <a href="#" className="hover:text-primary/80 transition-colors">Network Tools</a>
             <span className="text-sale font-semibold">Sale ลดสูงสุด 80%</span>
           </nav>
         </div>
