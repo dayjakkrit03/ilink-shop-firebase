@@ -1,14 +1,14 @@
-import { Smartphone, Shirt, Home, Zap, Heart, Gamepad2, Car, Gift } from "lucide-react";
+import { Cable, Router, Server, Wifi, MonitorSpeaker, Network, Cpu, Shield } from "lucide-react";
 
 const categories = [
-  { icon: Smartphone, name: "มือถือ", color: "bg-blue-500" },
-  { icon: Shirt, name: "แฟชั่น", color: "bg-pink-500" },
-  { icon: Home, name: "บ้าน", color: "bg-green-500" },
-  { icon: Zap, name: "อิเล็กทรอนิกส์", color: "bg-yellow-500" },
-  { icon: Heart, name: "ความงาม", color: "bg-rose-500" },
-  { icon: Gamepad2, name: "เกม", color: "bg-purple-500" },
-  { icon: Car, name: "ยานยนต์", color: "bg-gray-500" },
-  { icon: Gift, name: "ของขวัญ", color: "bg-orange-500" },
+  { icon: Cable, name: "สายเคเบิ้ล", color: "bg-primary" },
+  { icon: Router, name: "Router/Switch", color: "bg-secondary" },
+  { icon: Server, name: "Server/Storage", color: "bg-accent" },
+  { icon: Wifi, name: "Wireless", color: "bg-primary/80" },
+  { icon: MonitorSpeaker, name: "Audio/Video", color: "bg-secondary/80" },
+  { icon: Network, name: "Network Tools", color: "bg-muted" },
+  { icon: Cpu, name: "Components", color: "bg-primary/60" },
+  { icon: Shield, name: "Security", color: "bg-destructive" },
 ];
 
 export const CategoryGrid = () => {
