@@ -29,7 +29,7 @@ export const Header = () => {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="bg-white text-primary px-3 py-2 rounded-lg font-bold text-xl">
-              ไทยช็อป
+              Interlink Shop
             </div>
           </div>
 
