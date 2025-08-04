@@ -81,13 +81,13 @@ export const Header = () => {
       {/* Navigation */}
       <div className="bg-white text-primary border-t border-primary/10">
         <div className="container mx-auto px-4">
-          <nav className="flex items-center gap-2 md:gap-4 lg:gap-8 py-3 text-sm overflow-x-auto">
+          <nav className="flex items-center gap-2 md:gap-4 lg:gap-8 py-3 text-sm">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10 shrink-0">
-                  <Menu className="h-4 w-4 mr-2" />
+                  <Menu className="h-4 w-4 mr-1" />
                   <span className="hidden sm:inline">หมวดหมู่สินค้า</span>
-                  <span className="sm:hidden">หมวดหมู่</span>
+                  <span className="sm:hidden text-xs">หมวดหมู่</span>
                   <ChevronDown className="h-3 w-3 ml-1" />
                 </Button>
               </DropdownMenuTrigger>
@@ -130,13 +130,15 @@ export const Header = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden lg:block">LAN (UTP) System</a>
-            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden lg:block">FIBER OPTIC System</a>
-            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden xl:block">DATA CENTER System</a>
-            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden xl:block">COAXIAL (RG) System</a>
-            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden xl:block">NETWORKING System</a>
-            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden xl:block">GERMANY RACK</a>
-            <span className="text-sale font-semibold ml-auto shrink-0">Sale ลดสูงสุด 80%</span>
+            <div className="hidden lg:flex items-center gap-8">
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">LAN (UTP) System</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">FIBER OPTIC System</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">DATA CENTER System</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">COAXIAL (RG) System</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">NETWORKING System</a>
+              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap">GERMANY RACK</a>
+            </div>
+            <span className="text-sale font-semibold ml-auto shrink-0 text-xs sm:text-sm">Sale ลด 80%</span>
           </nav>
         </div>
       </div>
