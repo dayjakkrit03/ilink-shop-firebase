@@ -6,13 +6,13 @@ const categories = [
   { icon: Database, name: "FTTR/FTTx OVAL / FLAT CABLE", color: "bg-accent" },
   { icon: Server, name: "DATA CENTER System", color: "bg-primary/80" },
   { icon: Codesandbox, name: "COAXIAL (RG) System", color: "bg-secondary/80" },
-  { icon: Phone, name: "Telephone CABLE", color: "bg-muted" },
+  { icon: Phone, name: "Telephone CABLE", color: "bg-secondary" },
   { icon: Sun, name: "SOLAR CABLE", color: "bg-primary/60" },
   { icon: Shield, name: "SECURITY AND CONTROL System", color: "bg-destructive" },
   { icon: Network, name: "NETWORKING System", color: "bg-primary/40" },
   { icon: MonitorSpeaker, name: "GERMANY RACK", color: "bg-secondary/60" },
   { icon: Camera, name: "CCTV OUTDOOR CABINET", color: "bg-accent/80" },
-  { icon: HardDrive, name: "LINK RACK", color: "bg-muted/80" },
+  { icon: HardDrive, name: "LINK RACK", color: "bg-accent" },
 ];
 
 export const CategoryGrid = () => {
