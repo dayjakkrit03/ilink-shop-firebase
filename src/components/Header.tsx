@@ -12,7 +12,7 @@ export const Header = () => {
   return (
     <header className="bg-gradient-primary text-primary-foreground shadow-header sticky top-0 z-50">
       {/* Top bar */}
-      <div className="bg-primary/90 text-xs py-1">
+      <div className="bg-primary/90 text-xs py-1 hidden md:block">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <span>ขายของกับเรา</span>
@@ -31,15 +31,15 @@ export const Header = () => {
 
       {/* Main header */}
       <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 lg:gap-6">
           {/* Logo */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 lg:gap-3">
             <img 
               src="/lovable-uploads/445c1f0e-86bc-45a1-a47c-fe9bd739d132.png" 
               alt="Interlink Logo" 
-              className="h-10 w-auto"
+              className="h-8 lg:h-10 w-auto"
             />
-            <div className="text-white font-bold text-xl drop-shadow-lg" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>
+            <div className="text-white font-bold text-lg lg:text-xl drop-shadow-lg hidden sm:block" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>
               Interlink Shop
             </div>
           </div>
@@ -48,29 +48,29 @@ export const Header = () => {
           <div className="flex-1 max-w-2xl">
             <div className="relative flex items-center">
               <Input
-                placeholder="ค้นหาสินค้า หมวดหมู่ หรือร้านค้า..."
-                className="w-full pl-4 pr-12 py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-12"
+                placeholder="ค้นหาสินค้า..."
+                className="w-full pl-4 pr-12 py-2 lg:py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-10 lg:h-12 text-sm lg:text-base"
               />
               <Button
                 size="sm"
-                className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-secondary hover:bg-secondary/90 h-10 w-10 p-0"
+                className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-secondary hover:bg-secondary/90 h-8 w-8 lg:h-10 lg:w-10 p-0"
               >
-                <Search className="h-4 w-4" />
+                <Search className="h-3 w-3 lg:h-4 lg:w-4" />
               </Button>
             </div>
           </div>
 
           {/* Right actions */}
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" className="text-white hover:bg-white/20">
-              <Bell className="h-5 w-5" />
+          <div className="flex items-center gap-2 lg:gap-4">
+            <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 hidden md:flex">
+              <Bell className="h-4 w-4 lg:h-5 lg:w-5" />
             </Button>
-            <Button variant="ghost" size="sm" className="text-white hover:bg-white/20">
-              <User className="h-5 w-5" />
+            <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 hidden sm:flex">
+              <User className="h-4 w-4 lg:h-5 lg:w-5" />
             </Button>
             <Button variant="cart" size="sm" className="relative">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-2 -right-2 bg-sale text-sale-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              <ShoppingCart className="h-4 w-4 lg:h-5 lg:w-5" />
+              <span className="absolute -top-1 -right-1 lg:-top-2 lg:-right-2 bg-sale text-sale-foreground text-xs rounded-full w-4 h-4 lg:w-5 lg:h-5 flex items-center justify-center">
                 0
               </span>
             </Button>
@@ -81,12 +81,13 @@ export const Header = () => {
       {/* Navigation */}
       <div className="bg-white text-primary border-t border-primary/10">
         <div className="container mx-auto px-4">
-          <nav className="flex items-center gap-8 py-3 text-sm">
+          <nav className="flex items-center gap-2 md:gap-4 lg:gap-8 py-3 text-sm overflow-x-auto">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10">
+                <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10 shrink-0">
                   <Menu className="h-4 w-4 mr-2" />
-                  หมวดหมู่สินค้า
+                  <span className="hidden sm:inline">หมวดหมู่สินค้า</span>
+                  <span className="sm:hidden">หมวดหมู่</span>
                   <ChevronDown className="h-3 w-3 ml-1" />
                 </Button>
               </DropdownMenuTrigger>
@@ -129,13 +130,13 @@ export const Header = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <a href="#" className="hover:text-primary/80 transition-colors">LAN (UTP) System</a>
-            <a href="#" className="hover:text-primary/80 transition-colors">FIBER OPTIC System</a>
-            <a href="#" className="hover:text-primary/80 transition-colors">DATA CENTER System</a>
-            <a href="#" className="hover:text-primary/80 transition-colors">COAXIAL (RG) System</a>
-            <a href="#" className="hover:text-primary/80 transition-colors">NETWORKING System</a>
-            <a href="#" className="hover:text-primary/80 transition-colors">GERMANY RACK</a>
-            <span className="text-sale font-semibold ml-auto">Sale ลดสูงสุด 80%</span>
+            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden lg:block">LAN (UTP) System</a>
+            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden lg:block">FIBER OPTIC System</a>
+            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden xl:block">DATA CENTER System</a>
+            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden xl:block">COAXIAL (RG) System</a>
+            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden xl:block">NETWORKING System</a>
+            <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap hidden xl:block">GERMANY RACK</a>
+            <span className="text-sale font-semibold ml-auto shrink-0">Sale ลดสูงสุด 80%</span>
           </nav>
         </div>
       </div>
