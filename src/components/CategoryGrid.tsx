@@ -1,14 +1,18 @@
-import { Cable, Router, Server, Wifi, MonitorSpeaker, Network, Cpu, Shield } from "lucide-react";
+import { Cable, Wifi, Database, Codesandbox, Phone, Sun, Shield, Network, MonitorSpeaker, Server, Camera, HardDrive } from "lucide-react";
 
 const categories = [
-  { icon: Cable, name: "สายเคเบิ้ล", color: "bg-primary" },
-  { icon: Router, name: "Router/Switch", color: "bg-secondary" },
-  { icon: Server, name: "Server/Storage", color: "bg-accent" },
-  { icon: Wifi, name: "Wireless", color: "bg-primary/80" },
-  { icon: MonitorSpeaker, name: "Audio/Video", color: "bg-secondary/80" },
-  { icon: Network, name: "Network Tools", color: "bg-muted" },
-  { icon: Cpu, name: "Components", color: "bg-primary/60" },
-  { icon: Shield, name: "Security", color: "bg-destructive" },
+  { icon: Cable, name: "LAN (UTP) System", color: "bg-primary" },
+  { icon: Wifi, name: "FIBER OPTIC System", color: "bg-secondary" },
+  { icon: Database, name: "FTTR/FTTx OVAL / FLAT CABLE", color: "bg-accent" },
+  { icon: Server, name: "DATA CENTER System", color: "bg-primary/80" },
+  { icon: Codesandbox, name: "COAXIAL (RG) System", color: "bg-secondary/80" },
+  { icon: Phone, name: "Telephone CABLE", color: "bg-muted" },
+  { icon: Sun, name: "SOLAR CABLE", color: "bg-primary/60" },
+  { icon: Shield, name: "SECURITY AND CONTROL System", color: "bg-destructive" },
+  { icon: Network, name: "NETWORKING System", color: "bg-primary/40" },
+  { icon: MonitorSpeaker, name: "GERMANY RACK", color: "bg-secondary/60" },
+  { icon: Camera, name: "CCTV OUTDOOR CABINET", color: "bg-accent/80" },
+  { icon: HardDrive, name: "LINK RACK", color: "bg-muted/80" },
 ];
 
 export const CategoryGrid = () => {
