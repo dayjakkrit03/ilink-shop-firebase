@@ -33,7 +33,7 @@ export const Header = () => {
               alt="Interlink Logo" 
               className="h-10 w-auto"
             />
-            <div className="bg-white text-primary px-3 py-2 rounded-lg font-bold text-xl">
+            <div className="text-white font-bold text-xl drop-shadow-lg" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>
               Interlink Shop
             </div>
           </div>
