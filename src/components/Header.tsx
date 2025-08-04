@@ -1,6 +1,12 @@
-import { Search, ShoppingCart, User, Menu, Bell } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, Bell, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const Header = () => {
   return (
@@ -76,10 +82,53 @@ export const Header = () => {
       <div className="bg-white text-primary border-t border-primary/10">
         <div className="container mx-auto px-4">
           <nav className="flex items-center gap-8 py-3 text-sm">
-            <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10">
-              <Menu className="h-4 w-4 mr-2" />
-              หมวดหมู่สินค้า
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10">
+                  <Menu className="h-4 w-4 mr-2" />
+                  หมวดหมู่สินค้า
+                  <ChevronDown className="h-3 w-3 ml-1" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-64 bg-white shadow-lg border border-primary/10 z-50">
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  LAN (UTP) System
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  FIBER OPTIC System
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  FTTR/FTTx OVAL / FLAT CABLE
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  DATA CENTER System
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  COAXIAL (RG) System
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  Telephone CABLE
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  SOLAR CABLE
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  SECURITY AND CONTROL System
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  NETWORKING System
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  GERMANY RACK
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  CCTV OUTDOOR CABINET
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                  LINK RACK
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <a href="#" className="hover:text-primary/80 transition-colors">สายเคเบิ้ล</a>
             <a href="#" className="hover:text-primary/80 transition-colors">Router/Switch</a>
             <a href="#" className="hover:text-primary/80 transition-colors">Server/Storage</a>
