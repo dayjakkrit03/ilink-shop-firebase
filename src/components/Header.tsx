@@ -1,0 +1,90 @@
+import { Search, ShoppingCart, User, Menu, Bell } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+export const Header = () => {
+  return (
+    <header className="bg-gradient-primary text-primary-foreground shadow-header sticky top-0 z-50">
+      {/* Top bar */}
+      <div className="bg-primary/90 text-xs py-1">
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <span>ขายของกับเรา</span>
+            <span>ดาวน์โหลดแอป</span>
+            <span>ติดตาม</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span>แจ้งเตือน</span>
+            <span>ช่วยเหลือ</span>
+            <span>ภาษาไทย</span>
+            <span>เข้าสู่ระบบ</span>
+            <span>สมัครสมาชิก</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Main header */}
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex items-center gap-6">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <div className="bg-white text-primary px-3 py-2 rounded-lg font-bold text-xl">
+              ไทยช็อป
+            </div>
+          </div>
+
+          {/* Search */}
+          <div className="flex-1 max-w-2xl">
+            <div className="relative">
+              <Input
+                placeholder="ค้นหาสินค้า หมวดหมู่ หรือร้านค้า..."
+                className="w-full pl-4 pr-12 py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50"
+              />
+              <Button
+                size="sm"
+                className="absolute right-1 top-1 bg-secondary hover:bg-secondary/90"
+              >
+                <Search className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Right actions */}
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="sm" className="text-white hover:bg-white/20">
+              <Bell className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="sm" className="text-white hover:bg-white/20">
+              <User className="h-5 w-5" />
+            </Button>
+            <Button variant="cart" size="sm" className="relative">
+              <ShoppingCart className="h-5 w-5" />
+              <span className="absolute -top-2 -right-2 bg-sale text-sale-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                0
+              </span>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div className="bg-white text-foreground border-t">
+        <div className="container mx-auto px-4">
+          <nav className="flex items-center gap-8 py-3 text-sm">
+            <Button variant="ghost" size="sm" className="text-foreground hover:text-primary">
+              <Menu className="h-4 w-4 mr-2" />
+              หมวดหมู่สินค้า
+            </Button>
+            <a href="#" className="hover:text-primary">แฟชั่น</a>
+            <a href="#" className="hover:text-primary">เครื่องใช้ไฟฟ้า</a>
+            <a href="#" className="hover:text-primary">ความงาม</a>
+            <a href="#" className="hover:text-primary">บ้านและไลฟ์สไตล์</a>
+            <a href="#" className="hover:text-primary">กีฬาและกิจกรรมกลางแจ้ง</a>
+            <a href="#" className="hover:text-primary">มือถือและแกดเจ็ต</a>
+            <span className="text-sale font-semibold">Sale ลดสูงสุด 80%</span>
+          </nav>
+        </div>
+      </div>
+    </header>
+  );
+};
