@@ -78,31 +78,31 @@ export const FlashSale = () => {
     <section className="py-8 bg-gradient-to-r from-sale/10 to-warning/10">
       <div className="container mx-auto px-4">
         {/* Flash Sale Header */}
-        <div className="flex items-center justify-between mb-6 bg-gradient-to-r from-sale to-warning text-white p-4 rounded-lg">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 bg-gradient-to-r from-sale to-warning text-white p-4 rounded-lg">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
             <div className="flex items-center gap-2">
-              <div className="text-2xl">⚡</div>
-              <h2 className="text-2xl font-bold">Flash Sale</h2>
+              <div className="text-xl sm:text-2xl">⚡</div>
+              <h2 className="text-xl sm:text-2xl font-bold">Flash Sale</h2>
             </div>
-            <div className="flex items-center gap-2 text-sm">
-              <Clock className="h-4 w-4" />
+            <div className="flex items-center gap-2 text-xs sm:text-sm">
+              <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
               <span>เหลือเวลา:</span>
               <div className="flex gap-1">
-                <div className="bg-white/20 px-2 py-1 rounded font-mono">
+                <div className="bg-white/20 px-1 sm:px-2 py-1 rounded font-mono text-xs sm:text-sm">
                   {timeLeft.hours.toString().padStart(2, "0")}
                 </div>
-                <span>:</span>
-                <div className="bg-white/20 px-2 py-1 rounded font-mono">
+                <span className="text-xs sm:text-sm">:</span>
+                <div className="bg-white/20 px-1 sm:px-2 py-1 rounded font-mono text-xs sm:text-sm">
                   {timeLeft.minutes.toString().padStart(2, "0")}
                 </div>
-                <span>:</span>
-                <div className="bg-white/20 px-2 py-1 rounded font-mono">
+                <span className="text-xs sm:text-sm">:</span>
+                <div className="bg-white/20 px-1 sm:px-2 py-1 rounded font-mono text-xs sm:text-sm">
                   {timeLeft.seconds.toString().padStart(2, "0")}
                 </div>
               </div>
             </div>
           </div>
-          <Button variant="secondary" size="sm">
+          <Button variant="secondary" size="sm" className="w-full sm:w-auto shrink-0 text-sm">
             ดูทั้งหมด
           </Button>
         </div>
