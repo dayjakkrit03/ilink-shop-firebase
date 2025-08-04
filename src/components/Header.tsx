@@ -86,7 +86,7 @@ export const Header = () => {
             <a href="#" className="hover:text-primary/80 transition-colors">Wireless</a>
             <a href="#" className="hover:text-primary/80 transition-colors">Audio/Video</a>
             <a href="#" className="hover:text-primary/80 transition-colors">Network Tools</a>
-            <span className="text-sale font-semibold">Sale ลดสูงสุด 80%</span>
+            <span className="text-sale font-semibold ml-auto">Sale ลดสูงสุด 80%</span>
           </nav>
         </div>
       </div>
