@@ -27,7 +27,12 @@ export const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center gap-6">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            <img 
+              src="/lovable-uploads/445c1f0e-86bc-45a1-a47c-fe9bd739d132.png" 
+              alt="Interlink Logo" 
+              className="h-10 w-auto"
+            />
             <div className="bg-white text-primary px-3 py-2 rounded-lg font-bold text-xl">
               Interlink Shop
             </div>
