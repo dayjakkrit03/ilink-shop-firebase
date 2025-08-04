@@ -19,7 +19,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         sale: "bg-sale text-sale-foreground hover:bg-sale/90 font-bold",
-        cart: "bg-warning text-warning-foreground hover:bg-warning/90 font-semibold",
+        cart: "bg-primary text-primary-foreground hover:bg-primary/90 font-semibold",
       },
       size: {
         default: "h-10 px-4 py-2",
