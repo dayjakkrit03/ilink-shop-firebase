@@ -37,12 +37,13 @@ const cartItems = [
 
 interface ShoppingCartProps {
   isOpen?: boolean;
+  isVisible?: boolean;
   onClose?: () => void;
 }
 
-export const ShoppingCart = ({ isOpen: externalIsOpen, onClose }: ShoppingCartProps = {}) => {
+export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: ShoppingCartProps = {}) => {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
-  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+  const isOpen = isVisible !== undefined ? isVisible : (externalIsOpen !== undefined ? externalIsOpen : internalIsOpen);
   const handleClose = onClose || (() => setInternalIsOpen(false));
   const handleOpen = () => externalIsOpen === undefined && setInternalIsOpen(true);
   const [items, setItems] = useState(cartItems);

@@ -1,6 +1,7 @@
 import { Heart, Star, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   id: number;
@@ -19,6 +20,7 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({
+  id,
   name,
   price,
   originalPrice,
@@ -32,8 +34,16 @@ export const ProductCard = ({
   isInterlinkMall = false,
   isClearanceSale = false,
 }: ProductCardProps) => {
+  const navigate = useNavigate();
+
+  const handleProductClick = () => {
+    navigate(`/product/${id}`);
+  };
   return (
-    <div className="bg-card rounded-xl shadow-soft hover:shadow-card-hover transition-all duration-300 overflow-hidden group cursor-pointer hover:-translate-y-1 animate-fade-in">
+    <div 
+      className="bg-card rounded-xl shadow-soft hover:shadow-card-hover transition-all duration-300 overflow-hidden group cursor-pointer hover:-translate-y-1 animate-fade-in"
+      onClick={handleProductClick}
+    >
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-muted/30">
         <img
@@ -54,6 +64,7 @@ export const ProductCard = ({
               ? "text-sale bg-white/20 hover:bg-white/30 scale-110" 
               : "text-white/80 bg-black/20 hover:bg-white/20 hover:text-sale"
           }`}
+          onClick={(e) => e.stopPropagation()}
         >
           <Heart className={`h-4 w-4 transition-transform ${isLiked ? "fill-current scale-110" : "hover:scale-110"}`} />
         </Button>
@@ -120,7 +131,12 @@ export const ProductCard = ({
         </div>
 
         {/* Add to Cart Button */}
-        <Button className="w-full group-hover:shadow-glow transition-all duration-300" size="sm" variant="cart">
+        <Button 
+          className="w-full group-hover:shadow-glow transition-all duration-300" 
+          size="sm" 
+          variant="cart"
+          onClick={(e) => e.stopPropagation()}
+        >
           <ShoppingCart className="h-4 w-4 mr-2 group-hover:animate-bounce-gentle" />
           ใส่ตะกร้า
         </Button>
