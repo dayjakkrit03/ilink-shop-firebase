@@ -6,6 +6,7 @@ import { ProductGrid } from "@/components/ProductGrid";
 import { ShoppingCart } from "@/components/ShoppingCart";
 import { MessageChat } from "@/components/MessageChat";
 import { ProductFilters } from "@/components/ProductFilters";
+import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Grid3X3, List, ChevronLeft, ChevronRight } from "lucide-react";
@@ -36,7 +37,7 @@ const ProductListing = () => {
       rating: 4.5,
       reviews: 128,
       discount: null,
-      badge: "LazMall"
+      badge: "InterlinkMall"
     },
     {
       id: 2,
@@ -47,7 +48,7 @@ const ProductListing = () => {
       rating: 4.3,
       reviews: 95,
       discount: null,
-      badge: "LazMall"
+      badge: "InterlinkMall"
     },
     {
       id: 3,
@@ -58,7 +59,7 @@ const ProductListing = () => {
       rating: 4.8,
       reviews: 234,
       discount: null,
-      badge: null
+      badge: "สินค้าแนะนำ"
     },
     {
       id: 4,
@@ -69,7 +70,7 @@ const ProductListing = () => {
       rating: 4.6,
       reviews: 156,
       discount: null,
-      badge: null
+      badge: "สินค้าแนะนำ"
     },
     {
       id: 5,
@@ -86,12 +87,12 @@ const ProductListing = () => {
       id: 6,
       name: "10M/100M/1000Mbps Network Card Gigabit Ethernet PCI Express",
       price: 87.18,
-      originalPrice: null,
+      originalPrice: 174.36,
       image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=300&h=300&fit=crop",
       rating: 4.4,
       reviews: 89,
       discount: 50,
-      badge: "LazMall"
+      badge: "Clearance Sale"
     }
   ];
 
@@ -180,45 +181,17 @@ const ProductListing = () => {
                 : "grid-cols-1"
             }`}>
               {mockProducts.map((product) => (
-                <div key={product.id} className="bg-card rounded-lg border p-4 hover:shadow-md transition-shadow">
-                  <div className="relative mb-3">
-                    <img 
-                      src={product.image} 
-                      alt={product.name}
-                      className="w-full h-48 object-cover rounded-md"
-                    />
-                    {product.badge && (
-                      <span className="absolute top-2 left-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded">
-                        {product.badge}
-                      </span>
-                    )}
-                    {product.discount && (
-                      <span className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
-                        -{product.discount}%
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-medium text-sm mb-2 line-clamp-2 min-h-[2.5rem]">
-                    {product.name}
-                  </h3>
-                  <div className="flex items-center gap-1 mb-2">
-                    <div className="flex text-yellow-400 text-sm">
-                      {"★".repeat(Math.floor(product.rating))}
-                      {"☆".repeat(5 - Math.floor(product.rating))}
-                    </div>
-                    <span className="text-xs text-muted-foreground">({product.reviews})</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg font-bold text-primary">
-                      ฿{product.price.toLocaleString()}
-                    </span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-muted-foreground line-through">
-                        ฿{product.originalPrice.toLocaleString()}
-                      </span>
-                    )}
-                  </div>
-                </div>
+                <ProductCard
+                  key={product.id}
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  originalPrice={product.originalPrice}
+                  discount={product.discount}
+                  rating={product.rating}
+                  reviews={product.reviews}
+                  image={product.image}
+                />
               ))}
             </div>
 
