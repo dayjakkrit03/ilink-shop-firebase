@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductGrid } from "@/components/ProductGrid";
@@ -13,6 +13,7 @@ import { Grid3X3, List, ChevronLeft, ChevronRight } from "lucide-react";
 
 const ProductListing = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [sortBy, setSortBy] = useState("best-match");
@@ -106,7 +107,7 @@ const ProductListing = () => {
       <div className="container mx-auto px-4 py-6">
         {/* Breadcrumb */}
         <nav className="text-sm text-muted-foreground mb-4">
-          <span>หน้าแรก</span>
+          <span className="cursor-pointer hover:text-primary transition-colors" onClick={() => navigate('/')}>หน้าแรก</span>
           {category && (
             <>
               <span className="mx-2">/</span>
