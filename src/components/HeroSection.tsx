@@ -1,7 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 import heroBanner from "@/assets/hero-banner.jpg";
 export const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const handleClearanceSaleClick = () => {
+    navigate('/products?search=Clearance Sale');
+  };
   return <section className="relative overflow-hidden">
       {/* Main hero banner */}
       <div className="relative h-[320px] lg:h-[400px] bg-gradient-hero">
@@ -9,7 +15,12 @@ export const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-secondary/60">
           <div className="container mx-auto px-4 h-full flex items-center">
             <div className="text-white w-full animate-slide-up">
-              <Badge className="mb-3 sm:mb-6 bg-sale/90 text-sale-foreground text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-2 animate-bounce-gentle shadow-glow">🔥 Clearance Sale ลดสูงสุด 90%</Badge>
+              <Badge 
+                className="mb-3 sm:mb-6 bg-sale/90 text-sale-foreground text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-2 animate-bounce-gentle shadow-glow cursor-pointer hover:bg-sale hover:scale-105 transition-all duration-200" 
+                onClick={handleClearanceSaleClick}
+              >
+                🔥 Clearance Sale ลดสูงสุด 90%
+              </Badge>
               <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-3 sm:mb-6 leading-tight">
                 ช็อปออนไลน์
                 <br />
