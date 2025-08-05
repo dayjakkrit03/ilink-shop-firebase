@@ -2,7 +2,12 @@ import { Search, ShoppingCart, User, Menu, Bell, ChevronDown } from "lucide-reac
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-export const Header = () => {
+
+interface HeaderProps {
+  onCartClick?: () => void;
+}
+
+export const Header = ({ onCartClick }: HeaderProps) => {
   return <header className="bg-gradient-primary text-primary-foreground shadow-header sticky top-0 z-50">
       {/* Top bar */}
       <div className="bg-primary/90 text-xs py-1 hidden md:block">
@@ -53,7 +58,7 @@ export const Header = () => {
             <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 hidden sm:flex">
               <User className="h-4 w-4 lg:h-5 lg:w-5" />
             </Button>
-            <Button variant="cart" size="sm" className="relative">
+            <Button variant="cart" size="sm" className="relative" onClick={onCartClick}>
               <ShoppingCart className="h-4 w-4 lg:h-5 lg:w-5" />
               <span className="absolute -top-1 -right-1 lg:-top-2 lg:-right-2 bg-sale text-sale-foreground text-xs rounded-full w-4 h-4 lg:w-5 lg:h-5 flex items-center justify-center">
                 0

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { CategoryGrid } from "@/components/CategoryGrid";
@@ -9,16 +10,18 @@ import { ShoppingCart } from "@/components/ShoppingCart";
 import { MessageChat } from "@/components/MessageChat";
 
 const Index = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header onCartClick={() => setIsCartOpen(true)} />
       <HeroSection />
       <ProductGrid />
       <CategoryGrid />
       <FlashSale />
       <InterlinkMall />
       <Footer />
-      <ShoppingCart />
+      <ShoppingCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <MessageChat />
     </div>
   );

@@ -35,8 +35,16 @@ const cartItems = [
   }
 ];
 
-export const ShoppingCart = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface ShoppingCartProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export const ShoppingCart = ({ isOpen: externalIsOpen, onClose }: ShoppingCartProps = {}) => {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+  const handleClose = onClose || (() => setInternalIsOpen(false));
+  const handleOpen = () => externalIsOpen === undefined && setInternalIsOpen(true);
   const [items, setItems] = useState(cartItems);
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
@@ -53,11 +61,12 @@ export const ShoppingCart = () => {
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet open={isOpen} onOpenChange={(open) => open ? handleOpen() : handleClose()}>
       <SheetTrigger asChild>
         <Button
           className="fixed right-1 top-1/2 -translate-y-1/2 z-50 w-10 h-10 rounded-full shadow-md bg-primary hover:bg-primary/90 border-2 border-background"
           size="icon"
+          onClick={handleOpen}
         >
           <CartIcon className="h-4 w-4" />
           {totalItems > 0 && (
