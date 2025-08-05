@@ -68,7 +68,7 @@ export const ProductCard = ({
 
       {/* Product Info */}
       <div className="p-5">
-        <h3 className="font-medium text-sm line-clamp-2 mb-3 group-hover:text-primary transition-colors leading-tight min-h-[2.5rem]">
+        <h3 className="font-medium text-sm line-clamp-2 mb-2 group-hover:text-primary transition-colors leading-tight min-h-[2.5rem]">
           {name}
         </h3>
 
@@ -92,14 +92,14 @@ export const ProductCard = ({
         )}
 
         {/* Price */}
-        <div className="flex items-center gap-2 mb-4">
-          <span className="text-lg font-bold text-sale">
+        <div className="mb-4">
+          <div className="text-lg font-bold text-sale mb-1">
             ฿{price.toLocaleString()}
-          </span>
+          </div>
           {originalPrice && (
-            <span className="text-sm text-muted-foreground line-through">
+            <div className="text-sm text-muted-foreground line-through">
               ฿{originalPrice.toLocaleString()}
-            </span>
+            </div>
           )}
         </div>
 
