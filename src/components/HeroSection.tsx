@@ -1,23 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import heroBanner from "@/assets/hero-banner.jpg";
-
 export const HeroSection = () => {
-  return (
-    <section className="relative overflow-hidden">
+  return <section className="relative overflow-hidden">
       {/* Main hero banner */}
       <div className="relative h-[500px] lg:h-[600px] bg-gradient-hero">
-        <img 
-          src={heroBanner} 
-          alt="Hero Banner" 
-          className="w-full h-full object-cover mix-blend-overlay"
-        />
+        <img src={heroBanner} alt="Hero Banner" className="w-full h-full object-cover mix-blend-overlay" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-secondary/60">
           <div className="container mx-auto px-4 h-full flex items-center">
             <div className="text-white max-w-3xl animate-slide-up">
-              <Badge className="mb-6 bg-sale/90 text-sale-foreground text-sm px-4 py-2 animate-bounce-gentle shadow-glow">
-                🔥 เมกะเซล ลดสูงสุด 90%
-              </Badge>
+              <Badge className="mb-6 bg-sale/90 text-sale-foreground text-sm px-4 py-2 animate-bounce-gentle shadow-glow">🔥 Clearance Sale
+ ลดสูงสุด 90%</Badge>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                 ช็อปออนไลน์
                 <br />
@@ -73,6 +66,5 @@ export const HeroSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };

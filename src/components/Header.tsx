@@ -38,7 +38,7 @@ export const Header = () => {
           {/* Search */}
           <div className="flex-1 max-w-2xl">
             <div className="relative flex items-center">
-              <Input placeholder="ค้นหาสินค้า หมวดหมู่ หรือร้านค้า..." className="w-full pl-4 pr-12 py-2 lg:py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-10 lg:h-12 text-sm lg:text-base" />
+              <Input placeholder="ค้นหาสินค้า..." className="w-full pl-4 pr-12 py-2 lg:py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-10 lg:h-12 text-sm lg:text-base" />
               <Button size="sm" className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-secondary hover:bg-secondary/90 h-8 w-8 lg:h-10 lg:w-10 p-0">
                 <Search className="h-3 w-3 lg:h-4 lg:w-4" />
               </Button>
@@ -128,7 +128,7 @@ export const Header = () => {
               <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">DATA CENTER</a>
               <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">NETWORKING</a>
             </div>
-            <span className="text-sale font-semibold ml-auto shrink-0 text-xs sm:text-sm">Sale ลด 80%</span>
+            <span className="text-sale font-semibold ml-auto shrink-0 text-xs sm:text-sm">Clearance Sale ลดสูงสุด 90%</span>
           </nav>
         </div>
       </div>
