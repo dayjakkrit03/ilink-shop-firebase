@@ -12,7 +12,7 @@ const flashSaleProducts = [
     discount: 50,
     rating: 4.6,
     reviews: 234,
-    image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=400&h=400&fit=crop",
     isFreeShipping: true,
   },
   {
@@ -23,7 +23,7 @@ const flashSaleProducts = [
     discount: 50,
     rating: 4.7,
     reviews: 345,
-    image: "https://images.unsplash.com/photo-1585515656792-f2cb1b3388f7?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=400&fit=crop",
     isFreeShipping: true,
   },
   {
@@ -34,7 +34,7 @@ const flashSaleProducts = [
     discount: 50,
     rating: 4.5,
     reviews: 167,
-    image: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=400&h=400&fit=crop",
     isFreeShipping: true,
   },
   {
@@ -45,7 +45,7 @@ const flashSaleProducts = [
     discount: 50,
     rating: 4.8,
     reviews: 456,
-    image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=400&h=400&fit=crop",
     isFreeShipping: true,
   },
 ];
