@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { CategoryGrid } from "@/components/CategoryGrid";
 import { FlashSale } from "@/components/FlashSale";
+import { InterlinkMall } from "@/components/InterlinkMall";
 import { ProductGrid } from "@/components/ProductGrid";
 import { Footer } from "@/components/Footer";
 
@@ -12,6 +13,7 @@ const Index = () => {
       <HeroSection />
       <CategoryGrid />
       <FlashSale />
+      <InterlinkMall />
       <ProductGrid />
       <Footer />
     </div>
