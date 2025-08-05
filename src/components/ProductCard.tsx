@@ -13,6 +13,7 @@ interface ProductCardProps {
   image: string;
   isLiked?: boolean;
   isFreeShipping?: boolean;
+  showRating?: boolean;
 }
 
 export const ProductCard = ({
@@ -25,6 +26,7 @@ export const ProductCard = ({
   image,
   isLiked = false,
   isFreeShipping = false,
+  showRating = true,
 }: ProductCardProps) => {
   return (
     <div className="bg-card rounded-xl shadow-soft hover:shadow-card-hover transition-all duration-300 overflow-hidden group cursor-pointer hover:-translate-y-1 animate-fade-in">
@@ -71,21 +73,23 @@ export const ProductCard = ({
         </h3>
 
         {/* Rating */}
-        <div className="flex items-center gap-1 mb-3">
-          <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`h-3 w-3 transition-colors ${
-                  i < Math.floor(rating)
-                    ? "text-warning fill-current"
-                    : "text-gray-300"
-                }`}
-              />
-            ))}
+        {showRating && (
+          <div className="flex items-center gap-1 mb-3">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`h-3 w-3 transition-colors ${
+                    i < Math.floor(rating)
+                      ? "text-warning fill-current"
+                      : "text-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-muted-foreground ml-1">({reviews})</span>
           </div>
-          <span className="text-xs text-muted-foreground ml-1">({reviews})</span>
-        </div>
+        )}
 
         {/* Price */}
         <div className="flex items-center gap-2 mb-4">
