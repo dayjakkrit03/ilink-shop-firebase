@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Search, ShoppingCart, User, Menu, Bell, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,22 @@ interface HeaderProps {
 
 export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
+
+  // Update search term when URL parameters change
+  useEffect(() => {
+    const category = searchParams.get("category");
+    const search = searchParams.get("search");
+    
+    if (category) {
+      setSearchTerm(category);
+    } else if (search) {
+      setSearchTerm(search);
+    } else {
+      setSearchTerm("");
+    }
+  }, [searchParams]);
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
@@ -21,6 +36,7 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
   };
 
   const handleCategoryClick = (category: string) => {
+    setSearchTerm(category);
     navigate(`/products?category=${encodeURIComponent(category)}`);
   };
 
