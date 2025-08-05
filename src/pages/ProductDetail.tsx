@@ -10,6 +10,11 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ShoppingCart as ShoppingCartComponent } from "@/components/ShoppingCart";
 import { MessageChat } from "@/components/MessageChat";
+import lanCable1 from "@/assets/lan-cable-1.jpg";
+import lanCable2 from "@/assets/lan-cable-2.jpg";
+import lanCable3 from "@/assets/lan-cable-3.jpg";
+import lanCable4 from "@/assets/lan-cable-4.jpg";
+import lanCable5 from "@/assets/lan-cable-5.jpg";
 
 // Mock product data (ในการใช้งานจริงจะดึงจาก API โดยใช้ id)
 const mockProduct = {
@@ -24,10 +29,11 @@ const mockProduct = {
   brand: "Kingston",
   model: "KF432C16BBK2/16",
   images: [
-    "/lovable-uploads/445c1f0e-86bc-45a1-a47c-fe9bd739d132.png",
-    "/lovable-uploads/78cf201b-eda1-430e-b6e9-e00fc17054a4.png",
-    "/lovable-uploads/445c1f0e-86bc-45a1-a47c-fe9bd739d132.png",
-    "/lovable-uploads/78cf201b-eda1-430e-b6e9-e00fc17054a4.png"
+    lanCable1,
+    lanCable2,
+    lanCable3,
+    lanCable4,
+    lanCable5
   ],
   description: "Kingston FURY Beast DDR4 delivers the reliable high-performance needed to power desktops with the latest AMD and Intel CPUs. The aggressive look with bold heat spreaders will level up the look of your rig.",
   specifications: {
