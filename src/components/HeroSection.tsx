@@ -4,7 +4,7 @@ import heroBanner from "@/assets/hero-banner.jpg";
 export const HeroSection = () => {
   return <section className="relative overflow-hidden">
       {/* Main hero banner */}
-      <div className="relative h-[500px] lg:h-[600px] bg-gradient-hero">
+      <div className="relative h-[400px] lg:h-[480px] bg-gradient-hero">
         <img src={heroBanner} alt="Hero Banner" className="w-full h-full object-cover mix-blend-overlay" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-secondary/60">
           <div className="container mx-auto px-4 h-full flex items-center">
