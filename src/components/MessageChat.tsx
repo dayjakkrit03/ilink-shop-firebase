@@ -151,13 +151,6 @@ export const MessageChat = () => {
             <MessageCircle className="h-5 w-5" />
             <span className="font-semibold">Messages</span>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsOpen(false)}
-          >
-            <X className="h-4 w-4" />
-          </Button>
         </div>
         
         <div className="flex flex-1 overflow-hidden">
