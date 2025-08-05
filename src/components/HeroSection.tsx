@@ -8,22 +8,21 @@ export const HeroSection = () => {
         <img src={heroBanner} alt="Hero Banner" className="w-full h-full object-cover mix-blend-overlay" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-secondary/60">
           <div className="container mx-auto px-4 h-full flex items-center">
-            <div className="text-white max-w-3xl animate-slide-up">
-              <Badge className="mb-6 bg-sale/90 text-sale-foreground text-sm px-4 py-2 animate-bounce-gentle shadow-glow">🔥 Clearance Sale
- ลดสูงสุด 90%</Badge>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <div className="text-white w-full animate-slide-up">
+              <Badge className="mb-3 sm:mb-6 bg-sale/90 text-sale-foreground text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-2 animate-bounce-gentle shadow-glow">🔥 Clearance Sale ลดสูงสุด 90%</Badge>
+              <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-3 sm:mb-6 leading-tight">
                 ช็อปออนไลน์
                 <br />
                 ง่ายๆ ที่ <span className="text-accent animate-float inline-block">Interlink</span>
               </h1>
-              <p className="text-lg md:text-xl lg:text-2xl mb-8 text-white/90 max-w-2xl">
+              <p className="text-sm sm:text-lg md:text-xl lg:text-2xl mb-4 sm:mb-8 text-white/90">
                 อุปกรณ์เครือข่ายคุณภาพสูง ส่งฟรี ทั่วไทย ส่งไว ถึงมือใน 24 ชม.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="text-lg px-8 py-4 shadow-glow transition-spring hover:scale-105 bg-orange-500 hover:bg-orange-600 text-white">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Button size="sm" className="text-sm sm:text-lg px-4 sm:px-8 py-2 sm:py-4 shadow-glow transition-spring hover:scale-105 bg-orange-500 hover:bg-orange-600 text-white sm:size-lg">
                   เริ่มช็อปเลย
                 </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-2 border-white bg-white/10 text-white hover:bg-white hover:text-primary transition-spring hover:scale-105">
+                <Button size="sm" variant="outline" className="text-sm sm:text-lg px-4 sm:px-8 py-2 sm:py-4 border border-white sm:border-2 bg-white/10 text-white hover:bg-white hover:text-primary transition-spring hover:scale-105 sm:size-lg">
                   ดูแคตตาล็อก
                 </Button>
               </div>
