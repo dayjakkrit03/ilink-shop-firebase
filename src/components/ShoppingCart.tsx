@@ -14,17 +14,24 @@ import { Badge } from "@/components/ui/badge";
 const cartItems = [
   {
     id: 1,
-    name: "เสื้อยืดสีขาว",
-    price: 299,
-    quantity: 2,
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=100&h=100&fit=crop"
+    name: "Switch 24 Port Gigabit",
+    price: 2899,
+    quantity: 1,
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=100&h=100&fit=crop"
   },
   {
     id: 2,
-    name: "กางเกงยีนส์",
-    price: 599,
+    name: "สายแลน Cat6 UTP Cable 305m",
+    price: 1599,
+    quantity: 2,
+    image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=100&h=100&fit=crop"
+  },
+  {
+    id: 3,
+    name: "WiFi Router AC1200",
+    price: 1899,
     quantity: 1,
-    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=100&h=100&fit=crop"
+    image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=100&h=100&fit=crop"
   }
 ];
 
