@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "./ProductCard";
 import { Clock } from "lucide-react";
@@ -51,11 +52,16 @@ const flashSaleProducts = [
 ];
 
 export const FlashSale = () => {
+  const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState({
     hours: 2,
     minutes: 30,
     seconds: 45,
   });
+
+  const handleViewAll = () => {
+    navigate('/products?search=Clearance Sale');
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -102,7 +108,7 @@ export const FlashSale = () => {
               </div>
             </div>
           </div>
-          <Button variant="secondary" size="sm" className="w-full sm:w-auto shrink-0 text-sm">
+          <Button variant="secondary" size="sm" className="w-full sm:w-auto shrink-0 text-sm" onClick={handleViewAll}>
             ดูทั้งหมด
           </Button>
         </div>
