@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Star, Heart, Share2, ShoppingCart, Plus, Minus, Shield, Truck, RotateCcw, ChevronLeft, ChevronRight, ZoomIn, MapPin, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -69,6 +69,11 @@ const ProductDetail = () => {
   const [selectedStorage, setSelectedStorage] = useState("512GB");
 
   const product = mockProduct; // ในการใช้งานจริงจะใช้ id เพื่อดึงข้อมูลสินค้า
+
+  // Scroll to top when component mounts or id changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   const handleQuantityChange = (change: number) => {
     const newQuantity = quantity + change;
