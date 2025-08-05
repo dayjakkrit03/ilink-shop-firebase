@@ -59,7 +59,7 @@ export const Footer = () => {
               <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20 text-xs text-center text-white font-medium hover:bg-white/20 transition-colors">MC</div>
               <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20 text-xs text-center text-white font-medium hover:bg-white/20 transition-colors">JCB</div>
               <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20 text-xs text-center text-white font-medium hover:bg-white/20 transition-colors">พร้อมเพย์</div>
-              <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20 text-xs text-center text-white font-medium hover:bg-white/20 transition-colors">TrueMoney</div>
+              <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20 text-xs text-center text-white font-medium hover:bg-white/20 transition-colors">True Money</div>
               <div className="bg-white/10 backdrop-blur-sm p-3 rounded-lg border border-white/20 text-xs text-center text-white font-medium hover:bg-white/20 transition-colors">เก็บปลายทาง</div>
             </div>
             <h3 className="font-semibold mb-4 text-white text-lg">การขนส่ง</h3>
