@@ -11,10 +11,13 @@ import { MessageChat } from "@/components/MessageChat";
 
 const Index = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  
+  // Mock cart items count - in real app this would come from state management
+  const cartItemCount = 4;
 
   return (
     <div className="min-h-screen bg-background">
-      <Header onCartClick={() => setIsCartOpen(true)} />
+      <Header onCartClick={() => setIsCartOpen(true)} cartItemCount={cartItemCount} />
       <HeroSection />
       <ProductGrid />
       <CategoryGrid />

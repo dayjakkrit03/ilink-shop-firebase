@@ -5,9 +5,10 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 
 interface HeaderProps {
   onCartClick?: () => void;
+  cartItemCount?: number;
 }
 
-export const Header = ({ onCartClick }: HeaderProps) => {
+export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
   return <header className="bg-gradient-primary text-primary-foreground shadow-header sticky top-0 z-50">
       {/* Top bar */}
       <div className="bg-primary/90 text-xs py-1 hidden md:block">
@@ -61,7 +62,7 @@ export const Header = ({ onCartClick }: HeaderProps) => {
             <Button variant="cart" size="sm" className="relative" onClick={onCartClick}>
               <ShoppingCart className="h-4 w-4 lg:h-5 lg:w-5" />
               <span className="absolute -top-1 -right-1 lg:-top-2 lg:-right-2 bg-sale text-sale-foreground text-xs rounded-full w-4 h-4 lg:w-5 lg:h-5 flex items-center justify-center">
-                0
+                {cartItemCount}
               </span>
             </Button>
           </div>
