@@ -18,14 +18,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header onCartClick={() => setIsCartOpen(true)} cartItemCount={cartItemCount} />
-      
-      {/* Breadcrumb for homepage */}
-      <div className="container mx-auto px-4 py-4">
-        <nav className="text-sm text-muted-foreground">
-          <span className="text-primary font-medium">หน้าแรก</span>
-        </nav>
-      </div>
-      
       <HeroSection />
       <ProductGrid />
       <CategoryGrid />
