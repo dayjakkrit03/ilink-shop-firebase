@@ -45,6 +45,10 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
       handleSearch();
     }
   };
+
+  const handleClearanceSaleClick = () => {
+    navigate('/products?search=Clearance Sale');
+  };
   return <header className="bg-gradient-primary text-primary-foreground shadow-header sticky top-0 z-50">
       {/* Top bar */}
       <div className="bg-primary/90 text-xs py-1 hidden md:block">
@@ -217,7 +221,12 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
               <button onClick={() => handleCategoryClick("DATA CENTER System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">DATA CENTER</button>
               <button onClick={() => handleCategoryClick("NETWORKING System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">NETWORKING</button>
             </div>
-            <span className="text-sale font-semibold ml-auto shrink-0 text-xs sm:text-sm">Clearance Sale ลดสูงสุด 90%</span>
+            <span 
+              className="text-sale font-semibold ml-auto shrink-0 text-xs sm:text-sm cursor-pointer hover:text-sale/80 transition-colors" 
+              onClick={handleClearanceSaleClick}
+            >
+              Clearance Sale ลดสูงสุด 90%
+            </span>
           </nav>
         </div>
       </div>
