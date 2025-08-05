@@ -49,12 +49,12 @@ export const ShoppingCart = () => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button
-          className="fixed right-4 top-1/2 -translate-y-1/2 z-50 w-14 h-14 rounded-full shadow-lg bg-primary hover:bg-primary/90"
+          className="fixed right-1 top-1/2 -translate-y-1/2 z-50 w-10 h-10 rounded-full shadow-md bg-primary hover:bg-primary/90 border-2 border-background"
           size="icon"
         >
-          <CartIcon className="h-6 w-6" />
+          <CartIcon className="h-4 w-4" />
           {totalItems > 0 && (
-            <Badge className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 flex items-center justify-center text-xs">
+            <Badge className="absolute -top-1 -right-1 h-4 w-4 rounded-full p-0 flex items-center justify-center text-xs">
               {totalItems}
             </Badge>
           )}
