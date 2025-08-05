@@ -75,6 +75,21 @@ const ProductDetail = () => {
     window.scrollTo(0, 0);
   }, [id]);
 
+  // Carousel navigation functions
+  const nextThumbnail = () => {
+    const carousel = document.querySelector('[data-carousel-content]');
+    if (carousel) {
+      carousel.scrollBy({ left: 100, behavior: 'smooth' });
+    }
+  };
+
+  const prevThumbnail = () => {
+    const carousel = document.querySelector('[data-carousel-content]');
+    if (carousel) {
+      carousel.scrollBy({ left: -100, behavior: 'smooth' });
+    }
+  };
+
   const handleQuantityChange = (change: number) => {
     const newQuantity = quantity + change;
     if (newQuantity >= 1 && newQuantity <= product.stock) {
@@ -180,8 +195,14 @@ const ProductDetail = () => {
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious className="left-0" />
-                <CarouselNext className="right-0" />
+                <CarouselPrevious 
+                  className="left-0" 
+                  onMouseEnter={prevThumbnail}
+                />
+                <CarouselNext 
+                  className="right-0" 
+                  onMouseEnter={nextThumbnail}
+                />
               </Carousel>
             </div>
           </div>
