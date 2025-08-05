@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -22,6 +22,11 @@ const ProductListing = () => {
   const category = searchParams.get("category") || "";
   const search = searchParams.get("search") || "";
   const cartItemCount = 4;
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Mock data for demonstration
   const totalItems = 2552;
