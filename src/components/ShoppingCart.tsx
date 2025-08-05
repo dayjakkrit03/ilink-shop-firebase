@@ -1,0 +1,148 @@
+import { useState } from "react";
+import { ShoppingCart as CartIcon, Plus, Minus, X } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+// Mock cart data
+const cartItems = [
+  {
+    id: 1,
+    name: "เสื้อยืดสีขาว",
+    price: 299,
+    quantity: 2,
+    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=100&h=100&fit=crop"
+  },
+  {
+    id: 2,
+    name: "กางเกงยีนส์",
+    price: 599,
+    quantity: 1,
+    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=100&h=100&fit=crop"
+  }
+];
+
+export const ShoppingCart = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [items, setItems] = useState(cartItems);
+
+  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  const totalPrice = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  const updateQuantity = (id: number, newQuantity: number) => {
+    if (newQuantity <= 0) {
+      setItems(items.filter(item => item.id !== id));
+    } else {
+      setItems(items.map(item => 
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      ));
+    }
+  };
+
+  return (
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger asChild>
+        <Button
+          className="fixed right-4 top-1/2 -translate-y-1/2 z-50 w-14 h-14 rounded-full shadow-lg bg-primary hover:bg-primary/90"
+          size="icon"
+        >
+          <CartIcon className="h-6 w-6" />
+          {totalItems > 0 && (
+            <Badge className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 flex items-center justify-center text-xs">
+              {totalItems}
+            </Badge>
+          )}
+        </Button>
+      </SheetTrigger>
+      
+      <SheetContent side="right" className="w-96 sm:max-w-md">
+        <SheetHeader>
+          <SheetTitle className="flex items-center gap-2">
+            <CartIcon className="h-5 w-5" />
+            ตะกร้าสินค้า ({totalItems} รายการ)
+          </SheetTitle>
+        </SheetHeader>
+        
+        <div className="flex flex-col h-full">
+          {/* Cart Items */}
+          <div className="flex-1 overflow-y-auto py-4">
+            {items.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
+                <CartIcon className="h-12 w-12 mb-4" />
+                <p>ตะกร้าสินค้าว่าง</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {items.map((item) => (
+                  <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg">
+                    <img 
+                      src={item.image} 
+                      alt={item.name}
+                      className="w-12 h-12 object-cover rounded"
+                    />
+                    <div className="flex-1">
+                      <h4 className="font-medium text-sm">{item.name}</h4>
+                      <p className="text-primary font-semibold">฿{item.price}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        className="h-8 w-8"
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      >
+                        <Minus className="h-3 w-3" />
+                      </Button>
+                      <span className="w-8 text-center">{item.quantity}</span>
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        className="h-8 w-8"
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      >
+                        <Plus className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="h-8 w-8 text-destructive"
+                        onClick={() => updateQuantity(item.id, 0)}
+                      >
+                        <X className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          
+          {/* Cart Summary */}
+          {items.length > 0 && (
+            <div className="border-t pt-4 space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="font-medium">รวม:</span>
+                <span className="font-bold text-lg text-primary">฿{totalPrice.toLocaleString()}</span>
+              </div>
+              
+              <div className="space-y-2">
+                <Button className="w-full" size="lg">
+                  ชำระเงิน ({totalItems} รายการ)
+                </Button>
+                <Button variant="outline" className="w-full">
+                  ดูตะกร้าสินค้า
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+};

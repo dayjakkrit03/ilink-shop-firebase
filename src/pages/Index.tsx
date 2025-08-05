@@ -5,6 +5,7 @@ import { FlashSale } from "@/components/FlashSale";
 import { InterlinkMall } from "@/components/InterlinkMall";
 import { ProductGrid } from "@/components/ProductGrid";
 import { Footer } from "@/components/Footer";
+import { ShoppingCart } from "@/components/ShoppingCart";
 
 const Index = () => {
   return (
@@ -16,6 +17,7 @@ const Index = () => {
       <FlashSale />
       <InterlinkMall />
       <Footer />
+      <ShoppingCart />
     </div>
   );
 };
