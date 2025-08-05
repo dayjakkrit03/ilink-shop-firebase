@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageCircle, Send, X, Gift, ShoppingBag } from "lucide-react";
+import { MessageCircle, Send, X, Gift, ShoppingBag, Menu, ChevronDown } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -9,6 +9,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 // Mock conversation list
 const conversations = [
@@ -154,8 +160,8 @@ export const MessageChat = () => {
         </div>
         
         <div className="flex flex-1 overflow-hidden">
-          {/* Left Column - Conversation List */}
-          <div className="w-full sm:w-80 border-r bg-muted/20 sm:block">
+          {/* Left Column - Conversation List - Hidden on mobile */}
+          <div className="hidden sm:block w-80 border-r bg-muted/20">
             <ScrollArea className="h-full">
               <div className="p-2">
                 {conversations.map((conversation) => (
@@ -189,7 +195,48 @@ export const MessageChat = () => {
           <div className="flex-1 flex flex-col">
             {/* Chat Header */}
             <div className="p-4 border-b bg-background">
-              <h3 className="font-semibold">{selectedShop?.shopName}</h3>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  {/* Mobile dropdown menu */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm" className="sm:hidden">
+                        <Menu className="h-4 w-4 mr-2" />
+                        <span className="text-sm">{selectedShop?.shopName}</span>
+                        <ChevronDown className="h-4 w-4 ml-1" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start" className="w-64 max-h-[300px] overflow-y-auto bg-background border shadow-lg z-50">
+                      {conversations.map((conversation) => (
+                        <DropdownMenuItem
+                          key={conversation.id}
+                          onClick={() => handleConversationSelect(conversation.id)}
+                          className="p-3 cursor-pointer hover:bg-muted focus:bg-muted"
+                        >
+                          <div className="flex items-center gap-3 w-full">
+                            <div className="text-lg">{conversation.avatar}</div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1">
+                                <h4 className="font-medium text-sm truncate">{conversation.shopName}</h4>
+                                <span className="text-xs text-muted-foreground">{conversation.timestamp}</span>
+                              </div>
+                              <p className="text-xs text-muted-foreground line-clamp-1">{conversation.lastMessage}</p>
+                            </div>
+                            {conversation.unreadCount > 0 && (
+                              <Badge className="bg-red-500 text-white text-xs min-w-[16px] h-[16px] rounded-full p-0 flex items-center justify-center">
+                                {conversation.unreadCount}
+                              </Badge>
+                            )}
+                          </div>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  
+                  {/* Desktop shop name */}
+                  <h3 className="font-semibold hidden sm:block">{selectedShop?.shopName}</h3>
+                </div>
+              </div>
             </div>
 
             {/* Messages */}
