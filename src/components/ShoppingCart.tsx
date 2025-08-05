@@ -62,21 +62,6 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, onClose }: ShoppingCartPr
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => open ? handleOpen() : handleClose()}>
-      <SheetTrigger asChild>
-        <Button
-          className="fixed right-1 top-1/2 -translate-y-1/2 z-50 w-10 h-10 rounded-full shadow-md bg-primary hover:bg-primary/90 border-2 border-background"
-          size="icon"
-          onClick={handleOpen}
-        >
-          <CartIcon className="h-4 w-4" />
-          {totalItems > 0 && (
-            <Badge className="absolute -top-1 -right-1 h-4 w-4 rounded-full p-0 flex items-center justify-center text-xs">
-              {totalItems}
-            </Badge>
-          )}
-        </Button>
-      </SheetTrigger>
-      
       <SheetContent side="right" className="w-96 sm:max-w-md">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
