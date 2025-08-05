@@ -14,6 +14,8 @@ interface ProductCardProps {
   isLiked?: boolean;
   isFreeShipping?: boolean;
   showRating?: boolean;
+  isInterlinkMall?: boolean;
+  isClearanceSale?: boolean;
 }
 
 export const ProductCard = ({
@@ -27,6 +29,8 @@ export const ProductCard = ({
   isLiked = false,
   isFreeShipping = false,
   showRating = true,
+  isInterlinkMall = false,
+  isClearanceSale = false,
 }: ProductCardProps) => {
   return (
     <div className="bg-card rounded-xl shadow-soft hover:shadow-card-hover transition-all duration-300 overflow-hidden group cursor-pointer hover:-translate-y-1 animate-fade-in">
@@ -53,6 +57,16 @@ export const ProductCard = ({
         >
           <Heart className={`h-4 w-4 transition-transform ${isLiked ? "fill-current scale-110" : "hover:scale-110"}`} />
         </Button>
+        {isInterlinkMall && (
+          <Badge className="absolute top-12 left-3 bg-primary text-primary-foreground px-3 py-1 text-xs font-bold shadow-glow">
+            InterlinkMall
+          </Badge>
+        )}
+        {isClearanceSale && (
+          <Badge className="absolute top-12 left-3 bg-warning text-warning-foreground px-3 py-1 text-xs font-bold shadow-glow">
+            Clearance Sale
+          </Badge>
+        )}
         {isFreeShipping && (
           <div className="absolute bottom-3 left-3 bg-success text-success-foreground text-xs px-3 py-1 rounded-full shadow-soft font-medium">
             ส่งฟรี

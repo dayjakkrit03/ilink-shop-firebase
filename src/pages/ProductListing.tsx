@@ -37,6 +37,7 @@ const ProductListing = () => {
       rating: 4.5,
       reviews: 128,
       discount: null,
+      isInterlinkMall: true,
       badge: "InterlinkMall"
     },
     {
@@ -48,6 +49,7 @@ const ProductListing = () => {
       rating: 4.3,
       reviews: 95,
       discount: null,
+      isFreeShipping: true,
       badge: "InterlinkMall"
     },
     {
@@ -92,6 +94,7 @@ const ProductListing = () => {
       rating: 4.4,
       reviews: 89,
       discount: 50,
+      isClearanceSale: true,
       badge: "Clearance Sale"
     }
   ];
@@ -191,6 +194,9 @@ const ProductListing = () => {
                   rating={product.rating}
                   reviews={product.reviews}
                   image={product.image}
+                  isFreeShipping={product.isFreeShipping}
+                  isInterlinkMall={product.isInterlinkMall}
+                  isClearanceSale={product.isClearanceSale}
                 />
               ))}
             </div>
