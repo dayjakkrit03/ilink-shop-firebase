@@ -20,7 +20,7 @@ import lanCable5 from "@/assets/lan-cable-5.jpg";
 // Mock product data (ในการใช้งานจริงจะดึงจาก API โดยใช้ id)
 const mockProduct = {
   id: 1,
-  name: "Kingston FURY Beast DDR4-3200 CL16 Memory Kit 16GB (2x8GB)",
+  name: "CAT 6 UTP (250 MHz) w/Cross Filler, 24 AWG, CM , UL Blue 305 M./Reelex",
   price: 2390,
   originalPrice: 2990,
   discount: 20,
