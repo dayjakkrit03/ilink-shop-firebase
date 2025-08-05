@@ -27,8 +27,8 @@ const mockProduct = {
   rating: 4.5,
   reviews: 128,
   stock: 15,
-  brand: "Kingston",
-  model: "KF432C16BBK2/16",
+  brand: "Link",
+  model: "US-9106A",
   images: [
     lanCable1,
     lanCable2,
