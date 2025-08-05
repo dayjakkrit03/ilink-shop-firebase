@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { MessageCircle, Send, Image, Gift } from "lucide-react";
+import { MessageCircle, Send, X, Gift, ShoppingBag } from "lucide-react";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -12,50 +10,97 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-// Mock chat messages
-const chatMessages = [
+// Mock conversation list
+const conversations = [
   {
     id: 1,
-    type: "text",
-    content: "สวัสดีครับ! ยินดีต้อนรับสู่ร้านอุปกรณ์เครือข่าย",
-    sender: "shop",
-    timestamp: "09:30",
-    senderName: "ร้านค้า"
+    shopName: "Fucos",
+    lastMessage: "[Voucher] เข้ามาโปรโมชั่นเลิศ ตี ลิสต์พิเศษ ก่อนใคร คลิกเลย!",
+    timestamp: "10:00",
+    unreadCount: 2,
+    avatar: "🛒"
   },
   {
     id: 2,
-    type: "coupon",
-    content: "คูปองส่วนลด 10% สำหรับลูกค้าใหม่",
-    discount: "10%",
-    code: "NEW10",
-    sender: "shop",
-    timestamp: "09:35",
-    senderName: "ร้านค้า"
+    shopName: "KMAIXA STRAP STORE",
+    lastMessage: "[Voucher] เข้ามาโปรโมชั่นเลิศ ตี ลิสต์พิเศษ ก่อนใคร คลิกเลย!",
+    timestamp: "yesterday",
+    unreadCount: 0,
+    avatar: "📱"
   },
   {
     id: 3,
-    type: "image",
-    content: "สินค้าแนะนำประจำสัปดาห์",
-    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=200&fit=crop",
-    sender: "shop",
-    timestamp: "10:15",
-    senderName: "ร้านค้า"
+    shopName: "endless holiday",
+    lastMessage: "🔥ลิสตุ้คๆโหมด🔥มีคือสวม สลคพิ เซ สำหรับการสั่งซื้อคร่าวแรกกับ...",
+    timestamp: "yesterday", 
+    unreadCount: 1,
+    avatar: "🏖️"
   },
   {
     id: 4,
-    type: "text",
-    content: "ขอบคุณครับ! สนใจสินค้าไหนสามารถสอบถามได้เลยนะครับ",
-    sender: "user",
-    timestamp: "10:20",
-    senderName: "คุณ"
+    shopName: "Sun Phone",
+    lastMessage: "❤️TOP❤️สสนียมิษากๆ ล่มล่าตี้ และไดรับการร์ว...",
+    timestamp: "yesterday",
+    unreadCount: 1,
+    avatar: "☀️"
   }
 ];
 
+// Mock messages for selected conversation
+const conversationMessages = {
+  1: [
+    {
+      id: 1,
+      type: "text",
+      content: "สวัสดีครับ! ยินดีต้อนรับสู่ร้านอุปกรณ์เครือข่าย",
+      sender: "shop",
+      timestamp: "09:30",
+      senderName: "Fucos"
+    },
+    {
+      id: 2,
+      type: "coupon",
+      content: "คูปองส่วนลด 10% สำหรับลูกค้าใหม่", 
+      discount: "10%",
+      code: "NEW10",
+      sender: "shop",
+      timestamp: "09:35",
+      senderName: "Fucos"
+    }
+  ],
+  2: [
+    {
+      id: 1,
+      type: "text",
+      content: "เข้ามาโปรโมชั่นชั่นเลิศ ตี ลิสต์พิเศษ ก่อนใคร คลิกเลย!",
+      sender: "shop", 
+      timestamp: "10:15",
+      senderName: "KMAIXA STRAP STORE"
+    },
+    {
+      id: 2,
+      type: "product",
+      content: "ชุดสายและเคสแบบ2 In 1สำหรับการนำกิตต์",
+      price: "฿83.18",
+      imageUrl: "/lovable-uploads/78cf201b-eda1-430e-b6e9-e00fc17054a4.png",
+      sender: "shop",
+      timestamp: "10:20", 
+      senderName: "KMAIXA STRAP STORE"
+    }
+  ]
+};
+
 export const MessageChat = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState(chatMessages);
+  const [selectedConversation, setSelectedConversation] = useState<number>(1);
+  const [messages, setMessages] = useState(conversationMessages[1] || []);
   const [newMessage, setNewMessage] = useState("");
-  const [unreadCount] = useState(2);
+  const [unreadCount] = useState(3);
+
+  const handleConversationSelect = (conversationId: number) => {
+    setSelectedConversation(conversationId);
+    setMessages(conversationMessages[conversationId] || []);
+  };
 
   const sendMessage = () => {
     if (newMessage.trim()) {
@@ -81,6 +126,8 @@ export const MessageChat = () => {
     }
   };
 
+  const selectedShop = conversations.find(c => c.id === selectedConversation);
+
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
@@ -97,76 +144,148 @@ export const MessageChat = () => {
         </Button>
       </SheetTrigger>
       
-      <SheetContent side="right" className="w-96 sm:max-w-md p-0 flex flex-col">
-        <SheetHeader className="p-4 border-b">
-          <SheetTitle className="flex items-center gap-2">
+      <SheetContent side="right" className="w-[800px] sm:max-w-[800px] p-0 flex flex-col">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b bg-background">
+          <div className="flex items-center gap-2">
             <MessageCircle className="h-5 w-5" />
-            ข้อความจากร้านค้า
-          </SheetTitle>
-        </SheetHeader>
+            <span className="font-semibold">Messages</span>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsOpen(false)}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
         
-        <div className="flex flex-col h-full">
-          {/* Messages */}
-          <ScrollArea className="flex-1 p-4">
-            <div className="space-y-4">
-              {messages.map((message) => (
-                <div key={message.id} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] ${message.sender === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'} rounded-lg p-3`}>
-                    <div className="text-xs opacity-70 mb-1">{message.senderName}</div>
-                    
-                    {message.type === 'text' && (
-                      <p className="text-sm">{message.content}</p>
-                    )}
-                    
-                    {message.type === 'coupon' && (
-                      <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white p-3 rounded-md">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Gift className="h-4 w-4" />
-                          <span className="font-bold">คูปองพิเศษ!</span>
-                        </div>
-                        <p className="text-sm mb-2">{message.content}</p>
-                        <div className="bg-white/20 rounded px-2 py-1 text-center">
-                          <span className="font-mono text-lg">{message.code}</span>
-                        </div>
-                        <p className="text-xs mt-1 opacity-90">คัดลอกรหัสเพื่อใช้ส่วนลด</p>
+        <div className="flex flex-1 overflow-hidden">
+          {/* Left Column - Conversation List */}
+          <div className="w-80 border-r bg-muted/20">
+            <ScrollArea className="h-full">
+              <div className="p-2">
+                {conversations.map((conversation) => (
+                  <div
+                    key={conversation.id}
+                    onClick={() => handleConversationSelect(conversation.id)}
+                    className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-muted/50 transition-colors ${
+                      selectedConversation === conversation.id ? 'bg-muted' : ''
+                    }`}
+                  >
+                    <div className="text-2xl">{conversation.avatar}</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-1">
+                        <h4 className="font-medium text-sm truncate">{conversation.shopName}</h4>
+                        <span className="text-xs text-muted-foreground">{conversation.timestamp}</span>
                       </div>
+                      <p className="text-xs text-muted-foreground line-clamp-2">{conversation.lastMessage}</p>
+                    </div>
+                    {conversation.unreadCount > 0 && (
+                      <Badge className="bg-red-500 text-white text-xs min-w-[18px] h-[18px] rounded-full p-0 flex items-center justify-center">
+                        {conversation.unreadCount}
+                      </Badge>
                     )}
-                    
-                    {message.type === 'image' && (
-                      <div>
-                        <p className="text-sm mb-2">{message.content}</p>
-                        <img 
-                          src={message.imageUrl} 
-                          alt="รูปภาพจากร้านค้า"
-                          className="w-full rounded-md"
-                        />
-                      </div>
-                    )}
-                    
-                    <div className="text-xs opacity-60 mt-2">{message.timestamp}</div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </ScrollArea>
+          </div>
+
+          {/* Right Column - Chat Messages */}
+          <div className="flex-1 flex flex-col">
+            {/* Chat Header */}
+            <div className="p-4 border-b bg-background">
+              <h3 className="font-semibold">{selectedShop?.shopName}</h3>
             </div>
-          </ScrollArea>
-          
-          {/* Message Input */}
-          <div className="border-t p-4">
-            <div className="flex items-center gap-2">
-              <Input
-                placeholder="พิมพ์ข้อความ..."
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="flex-1"
-              />
-              <Button 
-                size="icon" 
-                onClick={sendMessage}
-                disabled={!newMessage.trim()}
-              >
-                <Send className="h-4 w-4" />
-              </Button>
+
+            {/* Messages */}
+            <ScrollArea className="flex-1 p-4">
+              <div className="space-y-4">
+                {messages.map((message) => (
+                  <div key={message.id} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-[80%] ${message.sender === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'} rounded-lg p-3`}>
+                      <div className="text-xs opacity-70 mb-1">{message.senderName}</div>
+                      
+                      {message.type === 'text' && (
+                        <p className="text-sm">{message.content}</p>
+                      )}
+                      
+                      {message.type === 'coupon' && (
+                        <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white p-3 rounded-md">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Gift className="h-4 w-4" />
+                            <span className="font-bold">Seller Voucher</span>
+                          </div>
+                          <div className="text-lg font-bold">B{message.discount}</div>
+                          <p className="text-xs mb-2">ค่าป่าง่าน</p>
+                          <div className="bg-white/20 rounded px-2 py-1 text-center">
+                            <span className="font-mono text-sm">{message.code}</span>
+                          </div>
+                          <Button className="w-full mt-2 bg-orange-500 hover:bg-orange-600 text-white">
+                            Collect
+                          </Button>
+                        </div>
+                      )}
+
+                      {message.type === 'product' && (
+                        <div className="bg-white rounded-lg p-3 shadow-sm border">
+                          <div className="flex gap-3">
+                            <img 
+                              src={(message as any).imageUrl} 
+                              alt="Product"
+                              className="w-16 h-16 object-cover rounded"
+                            />
+                            <div className="flex-1">
+                              <p className="text-sm text-gray-800 mb-1">{message.content}</p>
+                              <p className="text-orange-500 font-bold">{(message as any).price}</p>
+                            </div>
+                          </div>
+                          <Button className="w-full mt-3 bg-orange-100 text-orange-600 hover:bg-orange-200 border border-orange-300">
+                            View More Product
+                          </Button>
+                        </div>
+                      )}
+                      
+                      {message.type === 'image' && (
+                        <div>
+                          <p className="text-sm mb-2">{message.content}</p>
+                          <img 
+                            src={(message as any).imageUrl} 
+                            alt="รูปภาพจากร้านค้า"
+                            className="w-full rounded-md"
+                          />
+                        </div>
+                      )}
+                      
+                      <div className="text-xs opacity-60 mt-2">{message.timestamp}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
+            
+            {/* Message Input */}
+            <div className="border-t p-4 bg-background">
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="icon">
+                  <ShoppingBag className="h-4 w-4" />
+                </Button>
+                <Input
+                  placeholder="พิมพ์ข้อความ..."
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  className="flex-1"
+                />
+                <Button 
+                  size="icon" 
+                  onClick={sendMessage}
+                  disabled={!newMessage.trim()}
+                >
+                  <Send className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
