@@ -12,7 +12,7 @@ const products = [
     discount: 25,
     rating: 4.5,
     reviews: 128,
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=400&h=400&fit=crop",
     isLiked: true,
     isFreeShipping: true,
   },
@@ -24,7 +24,7 @@ const products = [
     discount: 30,
     rating: 4.2,
     reviews: 89,
-    image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=400&fit=crop",
     isFreeShipping: true,
   },
   {
@@ -35,7 +35,7 @@ const products = [
     discount: 25,
     rating: 4.7,
     reviews: 256,
-    image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=400&h=400&fit=crop",
     isLiked: false,
   },
   {
@@ -46,7 +46,7 @@ const products = [
     discount: 29,
     rating: 4.3,
     reviews: 167,
-    image: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=400&h=400&fit=crop",
     isFreeShipping: true,
   },
   {
@@ -57,7 +57,7 @@ const products = [
     discount: 21,
     rating: 4.8,
     reviews: 92,
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=400&h=400&fit=crop",
   },
   {
     id: 6,
@@ -67,7 +67,7 @@ const products = [
     discount: 24,
     rating: 4.1,
     reviews: 201,
-    image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=400&fit=crop",
     isFreeShipping: true,
   },
   {
@@ -78,7 +78,7 @@ const products = [
     discount: 7,
     rating: 4.6,
     reviews: 143,
-    image: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1572949645841-094f3ee6eca2?w=400&h=400&fit=crop",
     isLiked: true,
   },
   {
@@ -89,7 +89,7 @@ const products = [
     discount: 16,
     rating: 4.4,
     reviews: 178,
-    image: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=400&fit=crop",
     isFreeShipping: true,
   },
 ];
