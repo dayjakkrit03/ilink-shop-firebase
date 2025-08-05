@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Search, ShoppingCart, User, Menu, Bell, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +11,24 @@ interface HeaderProps {
 }
 
 export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
+
+  const handleCategoryClick = (category: string) => {
+    navigate(`/products?category=${encodeURIComponent(category)}`);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
   return <header className="bg-gradient-primary text-primary-foreground shadow-header sticky top-0 z-50">
       {/* Top bar */}
       <div className="bg-primary/90 text-xs py-1 hidden md:block">
@@ -44,8 +64,18 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
           {/* Search */}
           <div className="flex-1 max-w-2xl">
             <div className="relative flex items-center">
-              <Input placeholder="ค้นหาสินค้า..." className="w-full pl-4 pr-12 py-2 lg:py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-10 lg:h-12 text-sm lg:text-base" />
-              <Button size="sm" className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-secondary hover:bg-secondary/90 h-8 w-8 lg:h-10 lg:w-10 p-0">
+              <Input 
+                placeholder="ค้นหาสินค้า..." 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyPress={handleKeyPress}
+                className="w-full pl-4 pr-12 py-2 lg:py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-10 lg:h-12 text-sm lg:text-base" 
+              />
+              <Button 
+                size="sm" 
+                onClick={handleSearch}
+                className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-secondary hover:bg-secondary/90 h-8 w-8 lg:h-10 lg:w-10 p-0"
+              >
                 <Search className="h-3 w-3 lg:h-4 lg:w-4" />
               </Button>
             </div>
@@ -83,56 +113,92 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-64 bg-white shadow-lg border border-primary/10 z-50">
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("LAN (UTP) System")}
+                >
                   LAN (UTP) System
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("FIBER OPTIC System")}
+                >
                   FIBER OPTIC System
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("FTTR/FTTx OVAL / FLAT CABLE")}
+                >
                   FTTR/FTTx OVAL / FLAT CABLE
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("DATA CENTER System")}
+                >
                   DATA CENTER System
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("COAXIAL (RG) System")}
+                >
                   COAXIAL (RG) System
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("Telephone CABLE")}
+                >
                   Telephone CABLE
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("SOLAR CABLE")}
+                >
                   SOLAR CABLE
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("SECURITY AND CONTROL System")}
+                >
                   SECURITY AND CONTROL System
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("NETWORKING System")}
+                >
                   NETWORKING System
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("GERMANY RACK")}
+                >
                   GERMANY RACK
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("CCTV OUTDOOR CABINET")}
+                >
                   CCTV OUTDOOR CABINET
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer">
+                <DropdownMenuItem 
+                  className="text-primary hover:bg-primary/10 cursor-pointer"
+                  onClick={() => handleCategoryClick("LINK RACK")}
+                >
                   LINK RACK
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             <div className="hidden xl:flex items-center gap-6">
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">LAN (UTP)</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">FIBER OPTIC</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">DATA CENTER</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">COAXIAL (RG)</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">NETWORKING</a>
+              <button onClick={() => handleCategoryClick("LAN (UTP) System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">LAN (UTP)</button>
+              <button onClick={() => handleCategoryClick("FIBER OPTIC System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">FIBER OPTIC</button>
+              <button onClick={() => handleCategoryClick("DATA CENTER System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">DATA CENTER</button>
+              <button onClick={() => handleCategoryClick("COAXIAL (RG) System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">COAXIAL (RG)</button>
+              <button onClick={() => handleCategoryClick("NETWORKING System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">NETWORKING</button>
             </div>
             <div className="hidden lg:flex xl:hidden items-center gap-4">
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">LAN</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">FIBER</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">DATA CENTER</a>
-              <a href="#" className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">NETWORKING</a>
+              <button onClick={() => handleCategoryClick("LAN (UTP) System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">LAN</button>
+              <button onClick={() => handleCategoryClick("FIBER OPTIC System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">FIBER</button>
+              <button onClick={() => handleCategoryClick("DATA CENTER System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">DATA CENTER</button>
+              <button onClick={() => handleCategoryClick("NETWORKING System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">NETWORKING</button>
             </div>
             <span className="text-sale font-semibold ml-auto shrink-0 text-xs sm:text-sm">Clearance Sale ลดสูงสุด 90%</span>
           </nav>

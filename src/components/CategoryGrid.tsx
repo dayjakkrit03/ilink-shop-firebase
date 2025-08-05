@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Cable, Wifi, Database, Codesandbox, Phone, Sun, Shield, Network, MonitorSpeaker, Server, Camera, HardDrive } from "lucide-react";
 
 const categories = [
@@ -16,6 +17,11 @@ const categories = [
 ];
 
 export const CategoryGrid = () => {
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (categoryName: string) => {
+    navigate(`/products?category=${encodeURIComponent(categoryName)}`);
+  };
   return (
     <section className="py-12 bg-background">
       <div className="container mx-auto px-4">
@@ -31,6 +37,7 @@ export const CategoryGrid = () => {
             return (
               <div
                 key={index}
+                onClick={() => handleCategoryClick(category.name)}
                 className="flex flex-col items-center p-6 rounded-xl bg-card hover:bg-gradient-card shadow-soft hover:shadow-card-hover transition-all duration-300 cursor-pointer group animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
