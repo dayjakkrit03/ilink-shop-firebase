@@ -50,6 +50,7 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
       <div className="bg-primary/90 text-xs py-1 hidden md:block">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
+            <span className="cursor-pointer hover:text-white/80 transition-colors" onClick={() => navigate('/')}>หน้าแรก</span>
             <span>ร้านค้าของเรา</span>
             <span>ดาวน์โหลดแคตาล็อก</span>
             <span>ติดตาม</span>
@@ -68,9 +69,9 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center gap-4 lg:gap-6">
           {/* Logo */}
-          <div className="flex items-center gap-2 lg:gap-3">
-            <img src="/lovable-uploads/445c1f0e-86bc-45a1-a47c-fe9bd739d132.png" alt="Interlink Logo" className="h-8 lg:h-10 w-auto" />
-            <div className="text-white font-bold text-lg lg:text-xl drop-shadow-lg hidden sm:block" style={{
+          <div className="flex items-center gap-2 lg:gap-3 cursor-pointer" onClick={() => navigate('/')}>
+            <img src="/lovable-uploads/445c1f0e-86bc-45a1-a47c-fe9bd739d132.png" alt="Interlink Logo" className="h-8 lg:h-10 w-auto hover:scale-105 transition-transform" />
+            <div className="text-white font-bold text-lg lg:text-xl drop-shadow-lg hidden sm:block hover:text-white/90 transition-colors" style={{
             textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
           }}>
               Interlink Shop
