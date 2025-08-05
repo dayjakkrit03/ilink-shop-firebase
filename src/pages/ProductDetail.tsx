@@ -256,17 +256,15 @@ const ProductDetail = () => {
             </div>
 
             {/* Return & Warranty */}
-            <div className="space-y-3">
-              <h3 className="text-muted-foreground font-medium">Return & Warranty:</h3>
-              <div className="flex items-center gap-2">
-                <RotateCcw className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm">Change of Mind • 7 Days Free Return • Warranty not available</span>
-              </div>
+            <div className="flex items-center gap-2">
+              <span className="text-muted-foreground font-medium">Return & Warranty:</span>
+              <RotateCcw className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm">Change of Mind • 7 Days Free Return • Warranty not available</span>
             </div>
 
             {/* Color Family */}
-            <div className="space-y-3">
-              <h3 className="text-muted-foreground font-medium">Color Family:</h3>
+            <div className="flex items-center gap-4">
+              <span className="text-muted-foreground font-medium">Color Family:</span>
               <RadioGroup value={selectedColor} onValueChange={setSelectedColor} className="flex gap-3">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Black" id="black" />
@@ -283,12 +281,12 @@ const ProductDetail = () => {
                   </Label>
                 </div>
               </RadioGroup>
-              <p className="text-sm text-muted-foreground">{selectedColor}</p>
+              <span className="text-sm text-muted-foreground">({selectedColor})</span>
             </div>
 
             {/* Storage Capacity */}
-            <div className="space-y-3">
-              <h3 className="text-muted-foreground font-medium">Storage Capacity:</h3>
+            <div className="flex items-center gap-4">
+              <span className="text-muted-foreground font-medium">Storage Capacity:</span>
               <RadioGroup value={selectedStorage} onValueChange={setSelectedStorage} className="flex gap-3">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="512GB" id="512gb" />
@@ -309,7 +307,7 @@ const ProductDetail = () => {
                   </Label>
                 </div>
               </RadioGroup>
-              <p className="text-sm text-muted-foreground">{selectedStorage}</p>
+              <span className="text-sm text-muted-foreground">({selectedStorage})</span>
             </div>
 
             {/* Stock Status */}
