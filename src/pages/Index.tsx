@@ -6,6 +6,7 @@ import { InterlinkMall } from "@/components/InterlinkMall";
 import { ProductGrid } from "@/components/ProductGrid";
 import { Footer } from "@/components/Footer";
 import { ShoppingCart } from "@/components/ShoppingCart";
+import { MessageChat } from "@/components/MessageChat";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
       <InterlinkMall />
       <Footer />
       <ShoppingCart />
+      <MessageChat />
     </div>
   );
 };
