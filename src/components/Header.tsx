@@ -1,22 +1,15 @@
 import { Search, ShoppingCart, User, Menu, Bell, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 export const Header = () => {
-  return (
-    <header className="bg-gradient-primary text-primary-foreground shadow-header sticky top-0 z-50">
+  return <header className="bg-gradient-primary text-primary-foreground shadow-header sticky top-0 z-50">
       {/* Top bar */}
       <div className="bg-primary/90 text-xs py-1 hidden md:block">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <span>ขายของกับเรา</span>
-            <span>ดาวน์โหลดแอป</span>
+            <span>ร้านค้าของเรา</span>
+            <span>ดาวน์โหลดแคตาล็อก</span>
             <span>ติดตาม</span>
           </div>
           <div className="flex items-center gap-4">
@@ -34,12 +27,10 @@ export const Header = () => {
         <div className="flex items-center gap-4 lg:gap-6">
           {/* Logo */}
           <div className="flex items-center gap-2 lg:gap-3">
-            <img 
-              src="/lovable-uploads/445c1f0e-86bc-45a1-a47c-fe9bd739d132.png" 
-              alt="Interlink Logo" 
-              className="h-8 lg:h-10 w-auto"
-            />
-            <div className="text-white font-bold text-lg lg:text-xl drop-shadow-lg hidden sm:block" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>
+            <img src="/lovable-uploads/445c1f0e-86bc-45a1-a47c-fe9bd739d132.png" alt="Interlink Logo" className="h-8 lg:h-10 w-auto" />
+            <div className="text-white font-bold text-lg lg:text-xl drop-shadow-lg hidden sm:block" style={{
+            textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
+          }}>
               Interlink Shop
             </div>
           </div>
@@ -47,14 +38,8 @@ export const Header = () => {
           {/* Search */}
           <div className="flex-1 max-w-2xl">
             <div className="relative flex items-center">
-              <Input
-                placeholder="ค้นหาสินค้า..."
-                className="w-full pl-4 pr-12 py-2 lg:py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-10 lg:h-12 text-sm lg:text-base"
-              />
-              <Button
-                size="sm"
-                className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-secondary hover:bg-secondary/90 h-8 w-8 lg:h-10 lg:w-10 p-0"
-              >
+              <Input placeholder="ค้นหาสินค้า..." className="w-full pl-4 pr-12 py-2 lg:py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-10 lg:h-12 text-sm lg:text-base" />
+              <Button size="sm" className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-secondary hover:bg-secondary/90 h-8 w-8 lg:h-10 lg:w-10 p-0">
                 <Search className="h-3 w-3 lg:h-4 lg:w-4" />
               </Button>
             </div>
@@ -147,6 +132,5 @@ export const Header = () => {
           </nav>
         </div>
       </div>
-    </header>
-  );
+    </header>;
 };
