@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Star, Heart, Share2, ShoppingCart, Plus, Minus, Shield, Truck, RotateCcw, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { Star, Heart, Share2, ShoppingCart, Plus, Minus, Shield, Truck, RotateCcw, ChevronLeft, ChevronRight, ZoomIn, MapPin, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ShoppingCart as ShoppingCartComponent } from "@/components/ShoppingCart";
@@ -63,6 +65,8 @@ const ProductDetail = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [showZoom, setShowZoom] = useState(false);
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
+  const [selectedColor, setSelectedColor] = useState("Silver");
+  const [selectedStorage, setSelectedStorage] = useState("512GB");
 
   const product = mockProduct; // ในการใช้งานจริงจะใช้ id เพื่อดึงข้อมูลสินค้า
 
@@ -223,6 +227,91 @@ const ProductDetail = () => {
               <p className="text-sm text-muted-foreground">รวม VAT แล้ว</p>
             </div>
 
+            {/* Promotions */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground font-medium">Promotions:</span>
+                <Badge className="bg-primary text-primary-foreground">B2</Badge>
+                <Badge variant="outline" className="text-primary border-primary">
+                  Buy 2, get 3% off. Buy 4, get 5% off.
+                </Badge>
+              </div>
+            </div>
+
+            {/* Delivery Options */}
+            <div className="space-y-3">
+              <h3 className="text-muted-foreground font-medium">Delivery Options:</h3>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm">กรุงเทพมหานคร/ Bangkok, วังทองหลาง/ Wang Thonglang, 10310</span>
+                  <Button variant="link" className="text-primary text-sm p-0 h-auto">CHANGE</Button>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Package className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm">Guaranteed by 8 Aug</span>
+                </div>
+                <p className="text-sm text-muted-foreground pl-6">Standard, with shipping fee ฿29.00</p>
+              </div>
+            </div>
+
+            {/* Return & Warranty */}
+            <div className="space-y-3">
+              <h3 className="text-muted-foreground font-medium">Return & Warranty:</h3>
+              <div className="flex items-center gap-2">
+                <RotateCcw className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm">Change of Mind • 7 Days Free Return • Warranty not available</span>
+              </div>
+            </div>
+
+            {/* Color Family */}
+            <div className="space-y-3">
+              <h3 className="text-muted-foreground font-medium">Color Family:</h3>
+              <RadioGroup value={selectedColor} onValueChange={setSelectedColor} className="flex gap-3">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="Black" id="black" />
+                  <Label htmlFor="black" className="flex items-center gap-2 cursor-pointer">
+                    <div className="w-6 h-6 bg-black rounded border"></div>
+                    Black
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="Silver" id="silver" />
+                  <Label htmlFor="silver" className="flex items-center gap-2 cursor-pointer">
+                    <div className="w-6 h-6 bg-gray-300 rounded border"></div>
+                    Silver
+                  </Label>
+                </div>
+              </RadioGroup>
+              <p className="text-sm text-muted-foreground">{selectedColor}</p>
+            </div>
+
+            {/* Storage Capacity */}
+            <div className="space-y-3">
+              <h3 className="text-muted-foreground font-medium">Storage Capacity:</h3>
+              <RadioGroup value={selectedStorage} onValueChange={setSelectedStorage} className="flex gap-3">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="512GB" id="512gb" />
+                  <Label htmlFor="512gb" className="cursor-pointer border rounded-lg px-3 py-2 hover:bg-muted/50 transition-colors">
+                    512GB
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="1TB" id="1tb" />
+                  <Label htmlFor="1tb" className="cursor-pointer border rounded-lg px-3 py-2 hover:bg-muted/50 transition-colors">
+                    1TB
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="2TB" id="2tb" />
+                  <Label htmlFor="2tb" className="cursor-pointer border rounded-lg px-3 py-2 hover:bg-muted/50 transition-colors">
+                    2TB
+                  </Label>
+                </div>
+              </RadioGroup>
+              <p className="text-sm text-muted-foreground">{selectedStorage}</p>
+            </div>
+
             {/* Stock Status */}
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-success rounded-full"></div>
@@ -232,7 +321,7 @@ const ProductDetail = () => {
             {/* Quantity Selector */}
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <span className="font-medium">จำนวน:</span>
+                <span className="font-medium text-muted-foreground">Quantity:</span>
                 <div className="flex items-center border rounded-lg">
                   <Button
                     variant="ghost"
@@ -259,22 +348,28 @@ const ProductDetail = () => {
               {/* Action Buttons */}
               <div className="flex gap-3">
                 <Button 
+                  variant="outline"
                   size="lg" 
-                  className="flex-1"
+                  className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                >
+                  Buy Now
+                </Button>
+                <Button 
+                  size="lg" 
+                  className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
                   onClick={() => setIsCartVisible(true)}
                 >
-                  <ShoppingCart className="h-5 w-5 mr-2" />
-                  เพิ่มลงตะกร้า
+                  Add to Cart
                 </Button>
                 <Button
                   variant="outline"
                   size="lg"
                   onClick={() => setIsLiked(!isLiked)}
-                  className={isLiked ? "text-sale border-sale" : ""}
+                  className={`${isLiked ? "text-sale border-sale" : ""} p-3`}
                 >
                   <Heart className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`} />
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className="p-3">
                   <Share2 className="h-5 w-5" />
                 </Button>
               </div>
