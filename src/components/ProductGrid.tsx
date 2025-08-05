@@ -12,7 +12,7 @@ const products = [
     discount: 25,
     rating: 4.5,
     reviews: 128,
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=400&fit=crop",
     isLiked: true,
     isFreeShipping: true,
   },
@@ -57,7 +57,7 @@ const products = [
     discount: 21,
     rating: 4.8,
     reviews: 92,
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=400&fit=crop",
   },
   {
     id: 6,
