@@ -19,7 +19,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'sans': ['Prompt', 'sans-serif'],
+				'sans': ['Mitr', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
