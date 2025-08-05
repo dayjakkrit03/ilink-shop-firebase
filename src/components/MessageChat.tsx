@@ -144,7 +144,7 @@ export const MessageChat = () => {
         </Button>
       </SheetTrigger>
       
-      <SheetContent side="right" className="w-[800px] sm:max-w-[800px] p-0 flex flex-col">
+      <SheetContent side="right" className="w-full sm:w-[500px] md:w-[700px] lg:w-[800px] sm:max-w-[90vw] p-0 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b bg-background">
           <div className="flex items-center gap-2">
@@ -155,7 +155,7 @@ export const MessageChat = () => {
         
         <div className="flex flex-1 overflow-hidden">
           {/* Left Column - Conversation List */}
-          <div className="w-80 border-r bg-muted/20">
+          <div className="w-full sm:w-80 border-r bg-muted/20 sm:block">
             <ScrollArea className="h-full">
               <div className="p-2">
                 {conversations.map((conversation) => (
