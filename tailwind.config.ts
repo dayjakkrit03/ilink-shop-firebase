@@ -19,7 +19,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'sans': ['Kanit', 'sans-serif'],
+				'sans': ['Sarabun', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
