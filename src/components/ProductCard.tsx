@@ -93,14 +93,16 @@ export const ProductCard = ({
 
         {/* Price */}
         <div className="mb-4">
-          <div className="text-lg font-bold text-sale mb-1">
-            ฿{price.toLocaleString()}
-          </div>
-          {originalPrice && (
-            <div className="text-sm text-muted-foreground line-through">
-              ฿{originalPrice.toLocaleString()}
+          <div className="flex items-center gap-2">
+            <div className={`text-lg font-bold ${originalPrice ? 'text-sale' : 'text-primary'}`}>
+              ฿{price.toLocaleString()}
             </div>
-          )}
+            {originalPrice && (
+              <div className="text-sm text-muted-foreground line-through">
+                ฿{originalPrice.toLocaleString()}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Add to Cart Button */}
