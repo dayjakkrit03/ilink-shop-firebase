@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Star, Heart, Share2, ShoppingCart, Plus, Minus, Shield, Truck, RotateCcw } from "lucide-react";
+import { Star, Heart, Share2, ShoppingCart, Plus, Minus, Shield, Truck, RotateCcw, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ShoppingCart as ShoppingCartComponent } from "@/components/ShoppingCart";
@@ -60,6 +61,8 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
   const [isCartVisible, setIsCartVisible] = useState(false);
+  const [showZoom, setShowZoom] = useState(false);
+  const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
 
   const product = mockProduct; // ในการใช้งานจริงจะใช้ id เพื่อดึงข้อมูลสินค้า
 
@@ -68,6 +71,25 @@ const ProductDetail = () => {
     if (newQuantity >= 1 && newQuantity <= product.stock) {
       setQuantity(newQuantity);
     }
+  };
+
+  const handleMouseEnterImage = (e: React.MouseEvent<HTMLImageElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setZoomPosition({ x, y });
+    setShowZoom(true);
+  };
+
+  const handleMouseMoveImage = (e: React.MouseEvent<HTMLImageElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setZoomPosition({ x, y });
+  };
+
+  const handleMouseLeaveImage = () => {
+    setShowZoom(false);
   };
 
   return (
@@ -94,39 +116,69 @@ const ProductDetail = () => {
           <span className="text-primary">{product.name}</span>
         </nav>
 
-        <div className="grid lg:grid-cols-2 gap-12 mb-12">
+        <div className="grid lg:grid-cols-5 gap-12 mb-12">
           {/* Product Images */}
-          <div className="space-y-4">
-            <div className="aspect-square bg-muted/30 rounded-lg overflow-hidden">
+          <div className="lg:col-span-2 space-y-4 relative">
+            <div className="aspect-square bg-muted/30 rounded-lg overflow-hidden relative">
               <img
                 src={product.images[selectedImage]}
                 alt={product.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover cursor-zoom-in"
+                onMouseEnter={handleMouseEnterImage}
+                onMouseMove={handleMouseMoveImage}
+                onMouseLeave={handleMouseLeaveImage}
               />
+              {showZoom && (
+                <div className="absolute inset-0 pointer-events-none">
+                  <ZoomIn className="absolute top-4 right-4 h-6 w-6 text-white/80" />
+                </div>
+              )}
             </div>
-            <div className="grid grid-cols-4 gap-2">
-              {product.images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`aspect-square rounded-lg overflow-hidden border-2 transition-colors ${
-                    selectedImage === index 
-                      ? 'border-primary' 
-                      : 'border-muted hover:border-primary/50'
-                  }`}
-                >
-                  <img
-                    src={image}
-                    alt={`${product.name} ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
+            
+            {/* Zoom overlay */}
+            {showZoom && (
+              <div 
+                className="absolute top-0 left-full ml-4 w-96 h-96 bg-white rounded-lg shadow-xl border overflow-hidden z-50"
+                style={{
+                  backgroundImage: `url(${product.images[selectedImage]})`,
+                  backgroundSize: '200%',
+                  backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
+                  backgroundRepeat: 'no-repeat'
+                }}
+              />
+            )}
+
+            {/* Thumbnail Carousel */}
+            <div className="max-w-md mx-auto">
+              <Carousel className="w-full">
+                <CarouselContent className="-ml-2">
+                  {product.images.map((image, index) => (
+                    <CarouselItem key={index} className="pl-2 basis-1/4">
+                      <button
+                        onMouseEnter={() => setSelectedImage(index)}
+                        className={`aspect-square rounded-lg overflow-hidden border-2 transition-colors w-full ${
+                          selectedImage === index 
+                            ? 'border-primary' 
+                            : 'border-muted hover:border-primary/50'
+                        }`}
+                      >
+                        <img
+                          src={image}
+                          alt={`${product.name} ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-0" />
+                <CarouselNext className="right-0" />
+              </Carousel>
             </div>
           </div>
 
           {/* Product Info */}
-          <div className="space-y-6">
+          <div className="lg:col-span-3 space-y-6">
             <div>
               <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
               <p className="text-muted-foreground">Brand: {product.brand} | Model: {product.model}</p>
