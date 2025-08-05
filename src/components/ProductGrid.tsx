@@ -1,5 +1,6 @@
 import { ProductCard } from "./ProductCard";
 import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 
 // Mock product data
 const products = [
@@ -97,13 +98,12 @@ export const ProductGrid = () => {
   return (
     <section className="py-12 bg-gradient-subtle">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-4">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-2">สินค้าแนะนำ</h2>
-            <p className="text-muted-foreground">อุปกรณ์เครือข่ายคุณภาพสูงที่คัดสรรมาแล้ว</p>
-          </div>
-          <Button variant="outline" className="hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-            ดูทั้งหมด →
+        {/* Product Grid Header */}
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-foreground">สินค้าแนะนำ</h2>
+          <Button variant="ghost" size="sm" className="text-primary hover:text-primary/80">
+            ดูทั้งหมด
+            <ChevronRight className="h-4 w-4 ml-1" />
           </Button>
         </div>
         
