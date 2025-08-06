@@ -173,6 +173,10 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
                   className="w-full" 
                   size="lg"
                   disabled={selectedItems.length === 0}
+                  onClick={() => {
+                    navigate('/checkout');
+                    handleClose();
+                  }}
                 >
                   ชำระเงิน ({selectedTotalItems} รายการ)
                 </Button>
