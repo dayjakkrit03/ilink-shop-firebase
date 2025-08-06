@@ -123,7 +123,7 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
                     />
                     <div className="flex-1">
                       <h4 className="font-medium text-sm">{item.name}</h4>
-                      <p className="text-primary font-semibold">฿{item.price}</p>
+                      <p className="text-primary font-semibold">฿{item.price.toLocaleString()}</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <Button
