@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Truck, CreditCard, Wallet } from "lucide-react";
+import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +7,9 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -40,6 +43,18 @@ const checkoutItems = [
   }
 ];
 
+// Mock addresses data
+const initialAddresses = [
+  {
+    id: 1,
+    type: "HOME",
+    name: "สิรดา ธำรำ",
+    phone: "0863527663",
+    address: "สบปิดิ์ ร้ำปี ร่ำวชำกระก๊วยิดส เคลส์ 50/37 ซอย 8 ซิ์ง อ.สิ่ง ลิ. สะหมำเชม/ Saphan Song, 10310, วำงห่องส่ำม/ Wang Thonglang, กรุงเทพมหำนคร/ Bangkok",
+    isDefault: true
+  }
+];
+
 export default function Checkout() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -49,12 +64,58 @@ export default function Checkout() {
   const [deliveryOption, setDeliveryOption] = useState("standard");
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [voucherCode, setVoucherCode] = useState("");
+  const [addresses, setAddresses] = useState(initialAddresses);
+  const [selectedAddress, setSelectedAddress] = useState(initialAddresses[0]);
+  const [isAddressSheetOpen, setIsAddressSheetOpen] = useState(false);
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  
+  // Form states for new address
+  const [newAddress, setNewAddress] = useState({
+    type: "HOME",
+    name: "",
+    phone: "",
+    address: "",
+    province: "",
+    district: "",
+    subdistrict: "",
+    zipcode: ""
+  });
 
   // Calculate totals
   const subtotal = checkoutItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const shippingFee = deliveryOption === "standard" ? 0 : 65;
   const shippingDiscount = 0; // Could be calculated based on voucher
   const total = subtotal + shippingFee - shippingDiscount;
+
+  // Handle adding new address
+  const handleAddAddress = () => {
+    const newAddr = {
+      id: addresses.length + 1,
+      type: newAddress.type,
+      name: newAddress.name,
+      phone: newAddress.phone,
+      address: `${newAddress.address}, ${newAddress.subdistrict}, ${newAddress.zipcode}, ${newAddress.district}, ${newAddress.province}`,
+      isDefault: false
+    };
+    
+    setAddresses([...addresses, newAddr]);
+    setNewAddress({
+      type: "HOME",
+      name: "",
+      phone: "",
+      address: "",
+      province: "",
+      district: "",
+      subdistrict: "",
+      zipcode: ""
+    });
+    setIsAddDialogOpen(false);
+  };
+
+  const handleSelectAddress = (address: any) => {
+    setSelectedAddress(address);
+    setIsAddressSheetOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -80,20 +141,191 @@ export default function Checkout() {
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <MapPin className="h-5 w-5" />
                   ที่อยู่จัดส่ง
-                  <Button variant="ghost" size="sm" className="ml-auto text-primary">
-                    แก้ไข
-                  </Button>
+                  <Sheet open={isAddressSheetOpen} onOpenChange={setIsAddressSheetOpen}>
+                    <SheetTrigger asChild>
+                      <Button variant="ghost" size="sm" className="ml-auto text-primary">
+                        แก้ไข
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent className="w-[400px] sm:w-[540px]">
+                      <SheetHeader>
+                        <SheetTitle>ที่อยู่จัดส่ง</SheetTitle>
+                      </SheetHeader>
+                      
+                      <div className="mt-6 space-y-4">
+                        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+                          <DialogTrigger asChild>
+                            <Button variant="outline" className="w-full justify-start gap-2">
+                              <Plus className="h-4 w-4" />
+                              Add new address
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-[500px]">
+                            <DialogHeader>
+                              <DialogTitle>Add new shipping Address</DialogTitle>
+                            </DialogHeader>
+                            
+                            <div className="grid gap-4 py-4">
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                  <Label htmlFor="name">Full name</Label>
+                                  <Input
+                                    id="name"
+                                    placeholder="Please enter your full name"
+                                    value={newAddress.name}
+                                    onChange={(e) => setNewAddress({...newAddress, name: e.target.value})}
+                                  />
+                                </div>
+                                <div>
+                                  <Label htmlFor="phone">Phone Number</Label>
+                                  <Input
+                                    id="phone"
+                                    placeholder="Please enter your phone number"
+                                    value={newAddress.phone}
+                                    onChange={(e) => setNewAddress({...newAddress, phone: e.target.value})}
+                                  />
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <Label htmlFor="address">Address</Label>
+                                <Textarea
+                                  id="address"
+                                  placeholder="House number, Floor, Building name, Street name"
+                                  value={newAddress.address}
+                                  onChange={(e) => setNewAddress({...newAddress, address: e.target.value})}
+                                  className="min-h-[80px]"
+                                />
+                              </div>
+                              
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                  <Label htmlFor="province">Province</Label>
+                                  <Input
+                                    id="province"
+                                    placeholder="Please select your province"
+                                    value={newAddress.province}
+                                    onChange={(e) => setNewAddress({...newAddress, province: e.target.value})}
+                                  />
+                                </div>
+                                <div>
+                                  <Label htmlFor="district">District</Label>
+                                  <Input
+                                    id="district"
+                                    placeholder="Please select your district"
+                                    value={newAddress.district}
+                                    onChange={(e) => setNewAddress({...newAddress, district: e.target.value})}
+                                  />
+                                </div>
+                              </div>
+                              
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                  <Label htmlFor="subdistrict">Sub District</Label>
+                                  <Input
+                                    id="subdistrict"
+                                    placeholder="Please select your sub district"
+                                    value={newAddress.subdistrict}
+                                    onChange={(e) => setNewAddress({...newAddress, subdistrict: e.target.value})}
+                                  />
+                                </div>
+                                <div>
+                                  <Label htmlFor="zipcode">Postcode</Label>
+                                  <Input
+                                    id="zipcode"
+                                    placeholder="00000"
+                                    value={newAddress.zipcode}
+                                    onChange={(e) => setNewAddress({...newAddress, zipcode: e.target.value})}
+                                  />
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <Label>Select a label for effective delivery</Label>
+                                <div className="flex gap-2 mt-2">
+                                  <Button
+                                    variant={newAddress.type === "HOME" ? "default" : "outline"}
+                                    size="sm"
+                                    onClick={() => setNewAddress({...newAddress, type: "HOME"})}
+                                  >
+                                    <Home className="h-4 w-4 mr-1" />
+                                    HOME
+                                  </Button>
+                                  <Button
+                                    variant={newAddress.type === "OFFICE" ? "default" : "outline"}
+                                    size="sm"
+                                    onClick={() => setNewAddress({...newAddress, type: "OFFICE"})}
+                                  >
+                                    <Building className="h-4 w-4 mr-1" />
+                                    OFFICE
+                                  </Button>
+                                </div>
+                              </div>
+                              
+                              <div className="flex justify-end gap-2 pt-4">
+                                <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+                                  Cancel
+                                </Button>
+                                <Button 
+                                  className="bg-teal-500 hover:bg-teal-600"
+                                  onClick={handleAddAddress}
+                                  disabled={!newAddress.name || !newAddress.phone || !newAddress.address}
+                                >
+                                  SAVE
+                                </Button>
+                              </div>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                        
+                        {/* Address List */}
+                        <div className="space-y-3">
+                          {addresses.map((address) => (
+                            <div
+                              key={address.id}
+                              className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                                selectedAddress.id === address.id 
+                                  ? 'border-teal-500 bg-teal-50' 
+                                  : 'border-gray-200 hover:border-gray-300'
+                              }`}
+                              onClick={() => handleSelectAddress(address)}
+                            >
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className={`text-xs px-2 py-1 rounded text-white ${
+                                  address.type === 'HOME' ? 'bg-orange-500' : 'bg-blue-500'
+                                }`}>
+                                  {address.type}
+                                </span>
+                                <span className="font-medium">{address.name}</span>
+                                <span className="text-muted-foreground text-sm">{address.phone}</span>
+                                {address.isDefault && (
+                                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">DEFAULT</span>
+                                )}
+                              </div>
+                              <p className="text-sm text-muted-foreground">
+                                {address.address}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </SheetContent>
+                  </Sheet>
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="bg-orange-50 p-3 rounded border border-orange-200">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="bg-orange-500 text-white text-xs px-2 py-1 rounded">HOME</span>
-                    <span className="font-medium">สิรดา ธำรำ</span>
-                    <span className="text-muted-foreground">0863527663</span>
+                    <span className={`text-white text-xs px-2 py-1 rounded ${
+                      selectedAddress.type === 'HOME' ? 'bg-orange-500' : 'bg-blue-500'
+                    }`}>
+                      {selectedAddress.type}
+                    </span>
+                    <span className="font-medium">{selectedAddress.name}</span>
+                    <span className="text-muted-foreground">{selectedAddress.phone}</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    สบปิดิ์ ร้ำปี ร่ำวชำกระก๊วยิดส เคลส์ 50/37 ซอย 8 ซิ์ง อ.สิ่ง ลิ. สะหมำเชม/ Saphan Song, 10310, วำงห่องส่ำม/ Wang Thonglang, กรุงเทพมหำนคร/ Bangkok
+                    {selectedAddress.address}
                   </p>
                 </div>
               </CardContent>
