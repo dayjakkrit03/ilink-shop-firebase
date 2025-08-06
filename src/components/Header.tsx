@@ -4,13 +4,14 @@ import { Search, ShoppingCart, User, Menu, Bell, ChevronDown } from "lucide-reac
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-
 interface HeaderProps {
   onCartClick?: () => void;
   cartItemCount?: number;
 }
-
-export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
+export const Header = ({
+  onCartClick,
+  cartItemCount = 0
+}: HeaderProps) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,7 +20,6 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
   useEffect(() => {
     const category = searchParams.get("category");
     const search = searchParams.get("search");
-    
     if (category) {
       setSearchTerm(category);
     } else if (search) {
@@ -28,24 +28,20 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
       setSearchTerm("");
     }
   }, [searchParams]);
-
   const handleSearch = () => {
     if (searchTerm.trim()) {
       navigate(`/products?search=${encodeURIComponent(searchTerm.trim())}`);
     }
   };
-
   const handleCategoryClick = (category: string) => {
     setSearchTerm(category);
     navigate(`/products?category=${encodeURIComponent(category)}`);
   };
-
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       handleSearch();
     }
   };
-
   const handleClearanceSaleClick = () => {
     navigate('/products?search=Clearance Sale');
   };
@@ -64,7 +60,7 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
             <span>ช่วยเหลือ</span>
             <span>ภาษาไทย</span>
             <span>เข้าสู่ระบบ</span>
-            <span>สมัครสมาชิก</span>
+            <span>สมัครใหม่</span>
           </div>
         </div>
       </div>
@@ -85,18 +81,8 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
           {/* Search */}
           <div className="flex-1 max-w-2xl">
             <div className="relative flex items-center">
-              <Input 
-                placeholder="ค้นหาสินค้า..." 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="w-full pl-4 pr-12 py-2 lg:py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-10 lg:h-12 text-sm lg:text-base" 
-              />
-              <Button 
-                size="sm" 
-                onClick={handleSearch}
-                className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-secondary hover:bg-secondary/90 h-8 w-8 lg:h-10 lg:w-10 p-0"
-              >
+              <Input placeholder="ค้นหาสินค้า..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} onKeyPress={handleKeyPress} className="w-full pl-4 pr-12 py-2 lg:py-3 text-foreground bg-white border-0 focus:ring-2 focus:ring-white/50 h-10 lg:h-12 text-sm lg:text-base" />
+              <Button size="sm" onClick={handleSearch} className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-secondary hover:bg-secondary/90 h-8 w-8 lg:h-10 lg:w-10 p-0">
                 <Search className="h-3 w-3 lg:h-4 lg:w-4" />
               </Button>
             </div>
@@ -134,76 +120,40 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-64 bg-white shadow-lg border border-primary/10 z-50">
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("LAN (UTP) System")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("LAN (UTP) System")}>
                   LAN (UTP) System
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("FIBER OPTIC System")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("FIBER OPTIC System")}>
                   FIBER OPTIC System
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("FTTR/FTTx OVAL / FLAT CABLE")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("FTTR/FTTx OVAL / FLAT CABLE")}>
                   FTTR/FTTx OVAL / FLAT CABLE
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("DATA CENTER System")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("DATA CENTER System")}>
                   DATA CENTER System
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("COAXIAL (RG) System")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("COAXIAL (RG) System")}>
                   COAXIAL (RG) System
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("Telephone CABLE")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("Telephone CABLE")}>
                   Telephone CABLE
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("SOLAR CABLE")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("SOLAR CABLE")}>
                   SOLAR CABLE
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("SECURITY AND CONTROL System")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("SECURITY AND CONTROL System")}>
                   SECURITY AND CONTROL System
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("NETWORKING System")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("NETWORKING System")}>
                   NETWORKING System
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("GERMANY RACK")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("GERMANY RACK")}>
                   GERMANY RACK
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("CCTV OUTDOOR CABINET")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("CCTV OUTDOOR CABINET")}>
                   CCTV OUTDOOR CABINET
                 </DropdownMenuItem>
-                <DropdownMenuItem 
-                  className="text-primary hover:bg-primary/10 cursor-pointer"
-                  onClick={() => handleCategoryClick("LINK RACK")}
-                >
+                <DropdownMenuItem className="text-primary hover:bg-primary/10 cursor-pointer" onClick={() => handleCategoryClick("LINK RACK")}>
                   LINK RACK
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -221,10 +171,7 @@ export const Header = ({ onCartClick, cartItemCount = 0 }: HeaderProps) => {
               <button onClick={() => handleCategoryClick("DATA CENTER System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">DATA CENTER</button>
               <button onClick={() => handleCategoryClick("NETWORKING System")} className="hover:text-primary/80 transition-colors whitespace-nowrap text-sm">NETWORKING</button>
             </div>
-            <span 
-              className="text-sale font-semibold ml-auto shrink-0 text-xs sm:text-sm cursor-pointer hover:text-sale/80 transition-colors" 
-              onClick={handleClearanceSaleClick}
-            >
+            <span className="text-sale font-semibold ml-auto shrink-0 text-xs sm:text-sm cursor-pointer hover:text-sale/80 transition-colors" onClick={handleClearanceSaleClick}>
               Clearance Sale ลดสูงสุด 90%
             </span>
           </nav>
