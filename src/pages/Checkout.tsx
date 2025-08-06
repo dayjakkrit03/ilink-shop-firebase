@@ -573,48 +573,15 @@ export default function Checkout() {
               </CardContent>
             </Card>
 
-            {/* Shopping Cart Items */}
+            {/* Package and Delivery */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg flex items-center justify-between">
-                  <span>ตะกร้าสินค้า ({checkoutItems.length} รายการ)</span>
-                  <label className="flex items-center gap-2 text-sm text-primary cursor-pointer">
-                    <input type="checkbox" defaultChecked className="rounded" />
-                    เลือกทั้งหมด
-                  </label>
-                </CardTitle>
+                <CardTitle className="text-lg">Package 1 of 1</CardTitle>
+                <p className="text-sm text-muted-foreground">Shipped by การแพตเซอเรวิ</p>
               </CardHeader>
-              <CardContent className="space-y-3">
-                {checkoutItems.map((item) => (
-                  <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg">
-                    <input type="checkbox" defaultChecked className="rounded text-primary" />
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-16 h-16 object-cover rounded-lg"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-gray-900 truncate">{item.name}</h3>
-                      <div className="flex items-center justify-between mt-2">
-                        <div className="text-lg font-bold text-primary">
-                          ฿{item.price.toLocaleString()}
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <button className="w-8 h-8 rounded border flex items-center justify-center hover:bg-gray-50">
-                            -
-                          </button>
-                          <span className="w-8 text-center">{item.quantity}</span>
-                          <button className="w-8 h-8 rounded border flex items-center justify-center hover:bg-gray-50">
-                            +
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                
+              <CardContent className="space-y-4">
                 {/* Delivery Options */}
-                <div className="mt-6">
+                <div>
                   <h4 className="font-medium mb-3">Choose your delivery option</h4>
                   <RadioGroup value={deliveryOption} onValueChange={setDeliveryOption}>
                     <div className="border rounded-lg p-4">
@@ -637,6 +604,28 @@ export default function Checkout() {
                       </div>
                     </div>
                   </RadioGroup>
+                </div>
+
+                {/* Product Items */}
+                <div className="space-y-3">
+                  {checkoutItems.map((item) => (
+                    <div key={item.id} className="border rounded-lg p-4 bg-muted/30">
+                      <div className="flex gap-3">
+                        <img 
+                          src={item.image}
+                          alt={item.name}
+                          className="w-16 h-16 object-cover rounded"
+                        />
+                        <div className="flex-1">
+                          <h3 className="font-medium text-sm">{item.name}</h3>
+                          <div className="flex justify-between items-center mt-2">
+                            <div className="text-orange-600 font-bold">฿{item.price.toLocaleString()}</div>
+                            <div className="text-sm text-muted-foreground">Qty: {item.quantity}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
