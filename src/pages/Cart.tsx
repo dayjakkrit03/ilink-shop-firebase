@@ -247,13 +247,15 @@ export default function Cart() {
                 </p>
               </div>
               
-              <Button 
-                className="w-full mt-4" 
-                size="lg"
-                disabled={selectedItems.length === 0}
-              >
-                PROCEED TO CHECKOUT ({selectedItems.length})
-              </Button>
+              <Link to="/checkout">
+                <Button 
+                  className="w-full mt-4" 
+                  size="lg"
+                  disabled={selectedItems.length === 0}
+                >
+                  PROCEED TO CHECKOUT ({selectedItems.length})
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
