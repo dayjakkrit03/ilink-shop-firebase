@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building } from "lucide-react";
+import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building, Edit, Check } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -68,6 +68,8 @@ export default function Checkout() {
   const [selectedAddress, setSelectedAddress] = useState(initialAddresses[0]);
   const [isAddressSheetOpen, setIsAddressSheetOpen] = useState(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editingAddress, setEditingAddress] = useState<any>(null);
   
   // Form states for new address
   const [newAddress, setNewAddress] = useState({
@@ -115,6 +117,68 @@ export default function Checkout() {
   const handleSelectAddress = (address: any) => {
     setSelectedAddress(address);
     setIsAddressSheetOpen(false);
+  };
+
+  // Handle setting default address
+  const handleSetDefault = (addressId: number) => {
+    setAddresses(addresses.map(addr => ({
+      ...addr,
+      isDefault: addr.id === addressId
+    })));
+    const newDefault = addresses.find(addr => addr.id === addressId);
+    if (newDefault) {
+      setSelectedAddress(newDefault);
+    }
+  };
+
+  // Handle editing address
+  const handleEditAddress = (address: any) => {
+    setEditingAddress(address);
+    setNewAddress({
+      type: address.type,
+      name: address.name,
+      phone: address.phone,
+      address: address.address.split(',')[0], // Extract just the street address part
+      province: "กรุงเทพมหานคร",
+      district: "Wang Thonglang", 
+      subdistrict: "Saphan Song",
+      zipcode: "10310"
+    });
+    setIsEditDialogOpen(true);
+  };
+
+  // Handle saving edited address
+  const handleSaveEditedAddress = () => {
+    if (editingAddress) {
+      const updatedAddress = {
+        ...editingAddress,
+        type: newAddress.type,
+        name: newAddress.name,
+        phone: newAddress.phone,
+        address: `${newAddress.address}, ${newAddress.subdistrict}, ${newAddress.zipcode}, ${newAddress.district}, ${newAddress.province}`
+      };
+      
+      setAddresses(addresses.map(addr => 
+        addr.id === editingAddress.id ? updatedAddress : addr
+      ));
+      
+      if (selectedAddress.id === editingAddress.id) {
+        setSelectedAddress(updatedAddress);
+      }
+      
+      setNewAddress({
+        type: "HOME",
+        name: "",
+        phone: "",
+        address: "",
+        province: "",
+        district: "",
+        subdistrict: "",
+        zipcode: ""
+      });
+      setEditingAddress(null);
+      setIsEditDialogOpen(false);
+    }
   };
 
   return (
@@ -283,12 +347,11 @@ export default function Checkout() {
                           {addresses.map((address) => (
                             <div
                               key={address.id}
-                              className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                              className={`border rounded-lg p-4 transition-colors ${
                                 selectedAddress.id === address.id 
                                   ? 'border-teal-500 bg-teal-50' 
                                   : 'border-gray-200 hover:border-gray-300'
                               }`}
-                              onClick={() => handleSelectAddress(address)}
                             >
                               <div className="flex items-center gap-2 mb-2">
                                 <span className={`text-xs px-2 py-1 rounded text-white ${
@@ -301,13 +364,160 @@ export default function Checkout() {
                                 {address.isDefault && (
                                   <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">DEFAULT</span>
                                 )}
+                                <div className="ml-auto flex items-center gap-2">
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleEditAddress(address);
+                                    }}
+                                    className="h-8 w-8 p-0"
+                                  >
+                                    <Edit className="h-4 w-4" />
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleSetDefault(address.id);
+                                    }}
+                                    className={`h-8 w-8 p-0 ${address.isDefault ? 'text-green-600' : 'text-gray-400'}`}
+                                  >
+                                    <Check className="h-4 w-4" />
+                                  </Button>
+                                </div>
                               </div>
-                              <p className="text-sm text-muted-foreground">
+                              <p 
+                                className="text-sm text-muted-foreground cursor-pointer"
+                                onClick={() => handleSelectAddress(address)}
+                              >
                                 {address.address}
                               </p>
                             </div>
                           ))}
                         </div>
+                        
+                        {/* Edit Address Dialog */}
+                        <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+                          <DialogContent className="sm:max-w-[500px]">
+                            <DialogHeader>
+                              <DialogTitle>Edit shipping Address</DialogTitle>
+                            </DialogHeader>
+                            
+                            <div className="grid gap-4 py-4">
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                  <Label htmlFor="edit-name">Full name</Label>
+                                  <Input
+                                    id="edit-name"
+                                    placeholder="Please enter your full name"
+                                    value={newAddress.name}
+                                    onChange={(e) => setNewAddress({...newAddress, name: e.target.value})}
+                                  />
+                                </div>
+                                <div>
+                                  <Label htmlFor="edit-phone">Phone Number</Label>
+                                  <Input
+                                    id="edit-phone"
+                                    placeholder="Please enter your phone number"
+                                    value={newAddress.phone}
+                                    onChange={(e) => setNewAddress({...newAddress, phone: e.target.value})}
+                                  />
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <Label htmlFor="edit-address">Address</Label>
+                                <Textarea
+                                  id="edit-address"
+                                  placeholder="House number, Floor, Building name, Street name"
+                                  value={newAddress.address}
+                                  onChange={(e) => setNewAddress({...newAddress, address: e.target.value})}
+                                  className="min-h-[80px]"
+                                />
+                              </div>
+                              
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                  <Label htmlFor="edit-province">Province</Label>
+                                  <Input
+                                    id="edit-province"
+                                    placeholder="Please select your province"
+                                    value={newAddress.province}
+                                    onChange={(e) => setNewAddress({...newAddress, province: e.target.value})}
+                                  />
+                                </div>
+                                <div>
+                                  <Label htmlFor="edit-district">District</Label>
+                                  <Input
+                                    id="edit-district"
+                                    placeholder="Please select your district"
+                                    value={newAddress.district}
+                                    onChange={(e) => setNewAddress({...newAddress, district: e.target.value})}
+                                  />
+                                </div>
+                              </div>
+                              
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                  <Label htmlFor="edit-subdistrict">Sub District</Label>
+                                  <Input
+                                    id="edit-subdistrict"
+                                    placeholder="Please select your sub district"
+                                    value={newAddress.subdistrict}
+                                    onChange={(e) => setNewAddress({...newAddress, subdistrict: e.target.value})}
+                                  />
+                                </div>
+                                <div>
+                                  <Label htmlFor="edit-zipcode">Postcode</Label>
+                                  <Input
+                                    id="edit-zipcode"
+                                    placeholder="00000"
+                                    value={newAddress.zipcode}
+                                    onChange={(e) => setNewAddress({...newAddress, zipcode: e.target.value})}
+                                  />
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <Label>Select a label for effective delivery</Label>
+                                <div className="flex gap-2 mt-2">
+                                  <Button
+                                    variant={newAddress.type === "HOME" ? "default" : "outline"}
+                                    size="sm"
+                                    onClick={() => setNewAddress({...newAddress, type: "HOME"})}
+                                  >
+                                    <Home className="h-4 w-4 mr-1" />
+                                    HOME
+                                  </Button>
+                                  <Button
+                                    variant={newAddress.type === "OFFICE" ? "default" : "outline"}
+                                    size="sm"
+                                    onClick={() => setNewAddress({...newAddress, type: "OFFICE"})}
+                                  >
+                                    <Building className="h-4 w-4 mr-1" />
+                                    OFFICE
+                                  </Button>
+                                </div>
+                              </div>
+                              
+                              <div className="flex justify-end gap-2 pt-4">
+                                <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+                                  Cancel
+                                </Button>
+                                <Button 
+                                  className="bg-teal-500 hover:bg-teal-600"
+                                  onClick={handleSaveEditedAddress}
+                                  disabled={!newAddress.name || !newAddress.phone || !newAddress.address}
+                                >
+                                  SAVE
+                                </Button>
+                              </div>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
                       </div>
                     </SheetContent>
                   </Sheet>
