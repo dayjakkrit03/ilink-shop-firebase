@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building, Edit, Check, ChevronRight, QrCode } from "lucide-react";
+import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building, Edit, Check, QrCode } from "lucide-react";
+import mastercardLogo from "@/assets/mastercard-logo.svg";
+import jcbLogo from "@/assets/jcb-logo.svg";
+import visaLogo from "@/assets/visa-logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -62,7 +65,7 @@ export default function Checkout() {
 
   const location = useLocation();
   const [deliveryOption, setDeliveryOption] = useState("standard");
-  const [paymentMethod, setPaymentMethod] = useState("cod");
+  const [paymentMethod, setPaymentMethod] = useState("card");
   const [voucherCode, setVoucherCode] = useState("");
   const [addresses, setAddresses] = useState(initialAddresses);
   const [selectedAddress, setSelectedAddress] = useState(initialAddresses[0]);
@@ -642,22 +645,18 @@ export default function Checkout() {
                     <div className="bg-blue-100 p-2 rounded-lg">
                       <CreditCard className="h-6 w-6 text-blue-600" />
                     </div>
-                    <Label htmlFor="card" className="flex-1 cursor-pointer">
-                      <div className="font-semibold text-gray-900">Credit/Debit Card</div>
-                      <div className="text-sm text-gray-500">Credit/Debit Card</div>
-                    </Label>
-                    <div className="flex items-center gap-1">
-                      <div className="w-8 h-5 bg-red-500 rounded-sm flex items-center justify-center">
-                        <span className="text-white text-xs font-bold">M</span>
+                    <div className="flex-1">
+                      <Label htmlFor="card" className="cursor-pointer">
+                        <div className="font-semibold text-gray-900">Credit/Debit Card</div>
+                        <div className="text-sm text-gray-500">Credit/Debit Card</div>
+                      </Label>
+                      <div className="flex items-center gap-2 mt-2">
+                        <img src={mastercardLogo} alt="Mastercard" className="h-6 w-auto" />
+                        <img src={jcbLogo} alt="JCB" className="h-6 w-auto" />
+                        <img src={visaLogo} alt="Visa" className="h-6 w-auto" />
                       </div>
-                      <div className="w-8 h-5 bg-blue-600 rounded-sm flex items-center justify-center">
-                        <span className="text-white text-xs font-bold">JCB</span>
-                      </div>
-                      <div className="w-8 h-5 bg-blue-700 rounded-sm flex items-center justify-center">
-                        <span className="text-white text-xs font-bold">V</span>
-                      </div>
-                      <ChevronRight className="h-4 w-4 text-gray-400 ml-2" />
                     </div>
+                    <Check className="h-5 w-5 text-green-500" />
                   </div>
                   
                   {/* QR PromptPay */}
@@ -670,7 +669,7 @@ export default function Checkout() {
                       <div className="font-semibold text-gray-900">QR PromptPay</div>
                       <div className="text-sm text-gray-500">Scan QR code to pay</div>
                     </Label>
-                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                    <Check className="h-5 w-5 text-green-500" />
                   </div>
                 </RadioGroup>
               </CardContent>
