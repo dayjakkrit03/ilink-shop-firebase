@@ -640,7 +640,7 @@ export default function Checkout() {
               <CardContent className="space-y-3">
                 <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
                   {/* Credit/Debit Card */}
-                  <div className="flex items-center space-x-2 p-4 border rounded-lg hover:border-primary/50 transition-colors">
+                  <div className={`flex items-center space-x-2 p-4 border-2 rounded-lg hover:border-primary/50 transition-colors ${paymentMethod === 'card' ? 'border-primary bg-primary/5' : 'border-gray-200'}`}>
                     <RadioGroupItem value="card" id="card" />
                     <div className="bg-blue-100 p-2 rounded-lg">
                       <CreditCard className="h-6 w-6 text-blue-600" />
@@ -650,17 +650,17 @@ export default function Checkout() {
                         <div className="font-semibold text-gray-900">Credit/Debit Card</div>
                         <div className="text-sm text-gray-500">Credit/Debit Card</div>
                       </Label>
-                      <div className="flex items-center gap-2 mt-2">
-                        <img src={mastercardLogo} alt="Mastercard" className="h-6 w-auto" />
-                        <img src={jcbLogo} alt="JCB" className="h-6 w-auto" />
-                        <img src={visaLogo} alt="Visa" className="h-6 w-auto" />
+                      <div className="flex items-center gap-1 mt-2">
+                        <img src={mastercardLogo} alt="Mastercard" className="h-4 w-auto" />
+                        <img src={jcbLogo} alt="JCB" className="h-4 w-auto" />
+                        <img src={visaLogo} alt="Visa" className="h-4 w-auto" />
                       </div>
                     </div>
-                    <Check className="h-5 w-5 text-green-500" />
+                    {paymentMethod === 'card' && <Check className="h-5 w-5 text-green-500" />}
                   </div>
                   
                   {/* QR PromptPay */}
-                  <div className="flex items-center space-x-2 p-4 border rounded-lg hover:border-primary/50 transition-colors">
+                  <div className={`flex items-center space-x-2 p-4 border-2 rounded-lg hover:border-primary/50 transition-colors ${paymentMethod === 'qr' ? 'border-primary bg-primary/5' : 'border-gray-200'}`}>
                     <RadioGroupItem value="qr" id="qr" />
                     <div className="bg-blue-100 p-2 rounded-lg">
                       <QrCode className="h-6 w-6 text-blue-600" />
@@ -669,7 +669,7 @@ export default function Checkout() {
                       <div className="font-semibold text-gray-900">QR PromptPay</div>
                       <div className="text-sm text-gray-500">Scan QR code to pay</div>
                     </Label>
-                    <Check className="h-5 w-5 text-green-500" />
+                    {paymentMethod === 'qr' && <Check className="h-5 w-5 text-green-500" />}
                   </div>
                 </RadioGroup>
               </CardContent>
