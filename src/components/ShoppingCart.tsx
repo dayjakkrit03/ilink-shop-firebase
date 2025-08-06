@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ShoppingCart as CartIcon, Plus, Minus, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import {
   Sheet,
   SheetContent,
@@ -43,6 +44,7 @@ interface ShoppingCartProps {
 }
 
 export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: ShoppingCartProps = {}) => {
+  const navigate = useNavigate();
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const isOpen = isVisible !== undefined ? isVisible : (externalIsOpen !== undefined ? externalIsOpen : internalIsOpen);
   const handleClose = onClose || (() => setInternalIsOpen(false));
@@ -174,7 +176,14 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
                 >
                   ชำระเงิน ({selectedTotalItems} รายการ)
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => {
+                    navigate('/cart');
+                    handleClose();
+                  }}
+                >
                   ดูตะกร้าสินค้า
                 </Button>
               </div>
