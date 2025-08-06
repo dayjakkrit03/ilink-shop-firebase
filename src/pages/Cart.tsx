@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, Plus, Minus, X, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,10 @@ const cartItems = [
 ];
 
 export default function Cart() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [items, setItems] = useState(cartItems);
   const [selectedItems, setSelectedItems] = useState<number[]>(cartItems.map(item => item.id));
   const [voucherCode, setVoucherCode] = useState("");
