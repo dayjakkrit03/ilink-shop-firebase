@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 
 // Mock cart data
 const cartItems = [
@@ -47,9 +48,28 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
   const handleClose = onClose || (() => setInternalIsOpen(false));
   const handleOpen = () => externalIsOpen === undefined && setInternalIsOpen(true);
   const [items, setItems] = useState(cartItems);
+  const [selectedItems, setSelectedItems] = useState<number[]>(cartItems.map(item => item.id)); // Select all by default
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const selectedTotalItems = items
+    .filter(item => selectedItems.includes(item.id))
+    .reduce((sum, item) => sum + item.quantity, 0);
+  const selectedTotalPrice = items
+    .filter(item => selectedItems.includes(item.id))
+    .reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  const toggleItemSelection = (itemId: number) => {
+    setSelectedItems(prev => 
+      prev.includes(itemId) 
+        ? prev.filter(id => id !== itemId)
+        : [...prev, itemId]
+    );
+  };
+
+  const toggleAllItems = () => {
+    const allSelected = selectedItems.length === items.length;
+    setSelectedItems(allSelected ? [] : items.map(item => item.id));
+  };
 
   const updateQuantity = (id: number, newQuantity: number) => {
     if (newQuantity <= 0) {
@@ -81,8 +101,21 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
               </div>
             ) : (
               <div className="space-y-4">
+                {/* Select All Checkbox */}
+                <div className="flex items-center gap-2 pb-2 border-b">
+                  <Checkbox
+                    checked={selectedItems.length === items.length}
+                    onCheckedChange={toggleAllItems}
+                  />
+                  <span className="text-sm font-medium">เลือกทั้งหมด</span>
+                </div>
+                
                 {items.map((item) => (
                   <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg">
+                    <Checkbox
+                      checked={selectedItems.includes(item.id)}
+                      onCheckedChange={() => toggleItemSelection(item.id)}
+                    />
                     <img 
                       src={item.image} 
                       alt={item.name}
@@ -129,13 +162,17 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
           {items.length > 0 && (
             <div className="border-t pt-4 space-y-4">
               <div className="flex justify-between items-center">
-                <span className="font-medium">รวม:</span>
-                <span className="font-bold text-lg text-primary">฿{totalPrice.toLocaleString()}</span>
+                <span className="font-medium">รวม ({selectedItems.length} รายการ):</span>
+                <span className="font-bold text-lg text-primary">฿{selectedTotalPrice.toLocaleString()}</span>
               </div>
               
               <div className="space-y-2">
-                <Button className="w-full" size="lg">
-                  ชำระเงิน ({totalItems} รายการ)
+                <Button 
+                  className="w-full" 
+                  size="lg"
+                  disabled={selectedItems.length === 0}
+                >
+                  ชำระเงิน ({selectedTotalItems} รายการ)
                 </Button>
                 <Button variant="outline" className="w-full">
                   ดูตะกร้าสินค้า
