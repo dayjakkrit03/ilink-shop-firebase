@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building, Edit, Check, QrCode } from "lucide-react";
+import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building, Edit, Check, QrCode, Trash2 } from "lucide-react";
 import mastercardLogo from "@/assets/mastercard-logo.svg";
 import jcbLogo from "@/assets/jcb-logo.svg";
 import visaLogo from "@/assets/visa-logo.svg";
@@ -12,12 +12,13 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 // Mock data for checkout items (in real app, this would come from state/props)
-const checkoutItems = [
+const initialCheckoutItems = [
   {
     id: 1,
     name: "Switch 24 Port Gigabit",
@@ -73,6 +74,7 @@ export default function Checkout() {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editingAddress, setEditingAddress] = useState<any>(null);
+  const [checkoutItems, setCheckoutItems] = useState(initialCheckoutItems);
   
   // Form states for new address
   const [newAddress, setNewAddress] = useState({
@@ -182,6 +184,11 @@ export default function Checkout() {
       setEditingAddress(null);
       setIsEditDialogOpen(false);
     }
+  };
+
+  // Handle remove item from checkout
+  const handleRemoveItem = (itemId: number) => {
+    setCheckoutItems(items => items.filter(item => item.id !== itemId));
   };
 
   return (
@@ -573,31 +580,108 @@ export default function Checkout() {
               </CardContent>
             </Card>
 
-            {/* Package and Delivery */}
+            {/* Package 1 */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Package 1 of 1</CardTitle>
-                <p className="text-sm text-muted-foreground">Shipped by การแพตเซอเรวิ</p>
+                <CardTitle className="text-lg">Package 1 of 2</CardTitle>
+                <p className="text-sm text-muted-foreground">Shipped by TechMall Official Store</p>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Delivery Options */}
                 <div>
                   <h4 className="font-medium mb-3">Choose your delivery option</h4>
                   <RadioGroup value={deliveryOption} onValueChange={setDeliveryOption}>
-                    <div className="border rounded-lg p-4">
+                    <div className="border rounded-lg p-4 border-teal-500 bg-teal-50">
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="standard" id="standard" />
-                        <Label htmlFor="standard" className="flex-1">
-                          <div className="flex justify-between items-start">
+                        <RadioGroupItem value="standard" id="standard" className="text-teal-600" />
+                        <Label htmlFor="standard" className="flex-1 cursor-pointer">
+                          <div className="flex justify-between items-center">
                             <div>
-                              <div className="font-medium">฿7.00 Standard</div>
-                              <div className="text-sm text-muted-foreground">
-                                Guaranteed by 9 Aug. Get ฿25 Cashback if your package arrives late.
+                              <div className="font-medium text-teal-800">฿19.52 <span className="text-gray-500 line-through text-sm">฿42.00</span></div>
+                              <div className="text-sm text-gray-600">Standard</div>
+                              <div className="text-sm text-gray-500">
+                                Guaranteed by 9 Aug. Get ฿25 LazRewards if your package arrives late.
                               </div>
                             </div>
-                            <div className="text-right">
-                              <div className="text-sm text-muted-foreground line-through">฿65.00</div>
-                              <div className="font-medium">ฟรี</div>
+                            <div className="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center">
+                              <Check className="h-3 w-3 text-white" />
+                            </div>
+                          </div>
+                        </Label>
+                      </div>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                {/* Product Item */}
+                <div className="border rounded-lg p-4 bg-gray-50">
+                  <div className="flex gap-3">
+                    <img 
+                      src={checkoutItems[0]?.image}
+                      alt={checkoutItems[0]?.name}
+                      className="w-16 h-16 object-cover rounded"
+                    />
+                    <div className="flex-1">
+                      <h3 className="font-medium text-sm">{checkoutItems[0]?.name}</h3>
+                      <div className="flex justify-between items-center mt-2">
+                        <div className="text-orange-600 font-bold">฿{checkoutItems[0]?.price.toLocaleString()}</div>
+                        <div className="text-sm text-gray-600">Qty: {checkoutItems[0]?.quantity}</div>
+                      </div>
+                    </div>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-gray-400 hover:text-red-500">
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>ยืนยันการลบสินค้า</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            คุณต้องการลบ "{checkoutItems[0]?.name}" ออกจากรายการสั่งซื้อหรือไม่?
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>ยกเลิก</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={() => handleRemoveItem(checkoutItems[0]?.id)}
+                            className="bg-red-600 hover:bg-red-700"
+                          >
+                            ลบ
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Package 2 */}
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Package 2 of 2</CardTitle>
+                <p className="text-sm text-muted-foreground">Shipped by NetworkPro Store</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Delivery Options */}
+                <div>
+                  <h4 className="font-medium mb-3">Choose your delivery option</h4>
+                  <RadioGroup value="express" onValueChange={() => {}}>
+                    <div className="border rounded-lg p-4 border-teal-500 bg-teal-50">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="express" id="express" className="text-teal-600" />
+                        <Label htmlFor="express" className="flex-1 cursor-pointer">
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <div className="font-medium text-teal-800">฿13.48 <span className="text-gray-500 line-through text-sm">฿29.00</span></div>
+                              <div className="text-sm text-gray-600">Standard</div>
+                              <div className="text-sm text-gray-500">
+                                Guaranteed by 9 Aug. Get ฿25 LazRewards if your package arrives late.
+                              </div>
+                            </div>
+                            <div className="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center">
+                              <Check className="h-3 w-3 text-white" />
                             </div>
                           </div>
                         </Label>
@@ -608,8 +692,8 @@ export default function Checkout() {
 
                 {/* Product Items */}
                 <div className="space-y-3">
-                  {checkoutItems.map((item) => (
-                    <div key={item.id} className="border rounded-lg p-4 bg-muted/30">
+                  {checkoutItems.slice(1).map((item) => (
+                    <div key={item.id} className="border rounded-lg p-4 bg-gray-50">
                       <div className="flex gap-3">
                         <img 
                           src={item.image}
@@ -619,10 +703,42 @@ export default function Checkout() {
                         <div className="flex-1">
                           <h3 className="font-medium text-sm">{item.name}</h3>
                           <div className="flex justify-between items-center mt-2">
-                            <div className="text-orange-600 font-bold">฿{item.price.toLocaleString()}</div>
-                            <div className="text-sm text-muted-foreground">Qty: {item.quantity}</div>
+                            <div>
+                              <div className="text-orange-600 font-bold">฿{item.price.toLocaleString()}</div>
+                              {item.originalPrice && (
+                                <div className="text-sm text-gray-500 line-through">฿{item.originalPrice.toLocaleString()}</div>
+                              )}
+                              {item.discount && (
+                                <div className="text-sm text-orange-600">{item.discount}</div>
+                              )}
+                            </div>
+                            <div className="text-sm text-gray-600">Qty: {item.quantity}</div>
                           </div>
                         </div>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-gray-400 hover:text-red-500">
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>ยืนยันการลบสินค้า</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                คุณต้องการลบ "{item.name}" ออกจากรายการสั่งซื้อหรือไม่?
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>ยกเลิก</AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={() => handleRemoveItem(item.id)}
+                                className="bg-red-600 hover:bg-red-700"
+                              >
+                                ลบ
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       </div>
                     </div>
                   ))}
