@@ -375,6 +375,7 @@ const ProductDetail = () => {
                   variant="outline"
                   size="lg" 
                   className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                  onClick={() => navigate('/checkout')}
                 >
                   Buy Now
                 </Button>
