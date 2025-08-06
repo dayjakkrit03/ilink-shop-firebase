@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building, Edit, Check } from "lucide-react";
+import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building, Edit, Check, ChevronRight, QrCode } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -636,24 +636,41 @@ export default function Checkout() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
-                  <div className="flex items-center space-x-2 p-3 border rounded-lg">
-                    <RadioGroupItem value="cod" id="cod" />
-                    <Truck className="h-5 w-5 text-blue-500" />
-                    <Label htmlFor="cod" className="flex-1">
-                      <div className="font-medium">Cash on Delivery</div>
+                  {/* Credit/Debit Card */}
+                  <div className="flex items-center space-x-2 p-4 border rounded-lg hover:border-primary/50 transition-colors">
+                    <RadioGroupItem value="card" id="card" />
+                    <div className="bg-blue-100 p-2 rounded-lg">
+                      <CreditCard className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <Label htmlFor="card" className="flex-1 cursor-pointer">
+                      <div className="font-semibold text-gray-900">Credit/Debit Card</div>
+                      <div className="text-sm text-gray-500">Credit/Debit Card</div>
                     </Label>
-                    <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-8 h-5 bg-red-500 rounded-sm flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">M</span>
+                      </div>
+                      <div className="w-8 h-5 bg-blue-600 rounded-sm flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">JCB</span>
+                      </div>
+                      <div className="w-8 h-5 bg-blue-700 rounded-sm flex items-center justify-center">
+                        <span className="text-white text-xs font-bold">V</span>
+                      </div>
+                      <ChevronRight className="h-4 w-4 text-gray-400 ml-2" />
                     </div>
                   </div>
                   
-                  <div className="flex items-center space-x-2 p-3 border rounded-lg opacity-60">
-                    <RadioGroupItem value="truemoney" id="truemoney" disabled />
-                    <Wallet className="h-5 w-5 text-orange-500" />
-                    <Label htmlFor="truemoney" className="flex-1">
-                      <div className="font-medium">+66***###639</div>
-                      <div className="text-sm text-muted-foreground">TrueMoney</div>
+                  {/* QR PromptPay */}
+                  <div className="flex items-center space-x-2 p-4 border rounded-lg hover:border-primary/50 transition-colors">
+                    <RadioGroupItem value="qr" id="qr" />
+                    <div className="bg-blue-100 p-2 rounded-lg">
+                      <QrCode className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <Label htmlFor="qr" className="flex-1 cursor-pointer">
+                      <div className="font-semibold text-gray-900">QR PromptPay</div>
+                      <div className="text-sm text-gray-500">Scan QR code to pay</div>
                     </Label>
+                    <ChevronRight className="h-4 w-4 text-gray-400" />
                   </div>
                 </RadioGroup>
               </CardContent>
