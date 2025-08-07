@@ -147,11 +147,11 @@ const ProductListing = () => {
             </div>
 
             {/* Sort and View Options */}
-            <div className="flex items-center justify-between mb-6 pb-4 border-b">
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-muted-foreground">Sort By:</span>
+            <div className="flex items-center justify-between mb-6 pb-4 border-b gap-2">
+              <div className="flex items-center gap-2 sm:gap-4">
+                <span className="text-xs sm:text-sm text-muted-foreground">Sort By:</span>
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-40">
+                  <SelectTrigger className="w-32 sm:w-40 text-xs sm:text-sm h-8 sm:h-9">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -164,21 +164,23 @@ const ProductListing = () => {
                 </Select>
               </div>
 
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">View:</span>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <span className="text-xs sm:text-sm text-muted-foreground hidden sm:inline">View:</span>
                 <Button
                   variant={viewMode === "grid" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setViewMode("grid")}
+                  className="h-8 w-8 sm:h-9 sm:w-9 p-0"
                 >
-                  <Grid3X3 className="h-4 w-4" />
+                  <Grid3X3 className="h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
                 <Button
                   variant={viewMode === "list" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setViewMode("list")}
+                  className="h-8 w-8 sm:h-9 sm:w-9 p-0"
                 >
-                  <List className="h-4 w-4" />
+                  <List className="h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
               </div>
             </div>
