@@ -600,7 +600,7 @@ export default function Checkout() {
                               <div className="font-medium text-teal-800">฿19.52 <span className="text-gray-500 line-through text-sm">฿42.00</span></div>
                               <div className="text-sm text-gray-600">Standard</div>
                               <div className="text-sm text-gray-500">
-                                Guaranteed by 9 Aug. Get ฿25 LazRewards if your package arrives late.
+                                Guaranteed by 9 Aug. Get ฿25 LinkRewards if your package arrives late.
                               </div>
                             </div>
                             <div className="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center">
@@ -677,7 +677,7 @@ export default function Checkout() {
                               <div className="font-medium text-teal-800">฿13.48 <span className="text-gray-500 line-through text-sm">฿29.00</span></div>
                               <div className="text-sm text-gray-600">Standard</div>
                               <div className="text-sm text-gray-500">
-                                Guaranteed by 9 Aug. Get ฿25 LazRewards if your package arrives late.
+                                Guaranteed by 9 Aug. Get ฿25 LinkRewards if your package arrives late.
                               </div>
                             </div>
                             <div className="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center">
