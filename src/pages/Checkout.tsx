@@ -78,6 +78,15 @@ export default function Checkout() {
   const [isPaymentMethodsOpen, setIsPaymentMethodsOpen] = useState(false);
   const [selectedExtraMethods, setSelectedExtraMethods] = useState<string[]>([]);
   const [additionalPaymentMethods, setAdditionalPaymentMethods] = useState<string[]>([]);
+  const [isInvoiceSheetOpen, setIsInvoiceSheetOpen] = useState(false);
+  
+  // Invoice form states
+  const [invoiceInfo, setInvoiceInfo] = useState({
+    email: "jakrit.dev19@gmail.com",
+    billingAddress: "สิรดา ธำรำ 0863527663\nสบปิดิ์ ร้ำปี ร่ำวชำกระก๊วยิดส เคลส์ 50/37 ซอย 8 ซิ์ง อ.สิ่ง ลิ. สะหมำเชม/ Saphan Song, 10310, วำงห่องส่ำม/ Wang Thonglang, กรุงเทพมหำนคร/ Bangkok",
+    taxId: "",
+    headOfficeBranch: ""
+  });
   
   // Form states for new address
   const [newAddress, setNewAddress] = useState({
@@ -222,6 +231,11 @@ export default function Checkout() {
     if (paymentMethod === methodToRemove) {
       setPaymentMethod('card');
     }
+  };
+
+  // Handle save invoice info
+  const handleSaveInvoiceInfo = () => {
+    setIsInvoiceSheetOpen(false);
   };
 
   // Get payment method display info
@@ -1051,10 +1065,118 @@ export default function Checkout() {
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg">Invoice and Contact Info</CardTitle>
-                <Button variant="ghost" size="sm" className="text-primary self-start p-0 h-auto">
-                  Edit
-                </Button>
+                <Sheet open={isInvoiceSheetOpen} onOpenChange={setIsInvoiceSheetOpen}>
+                  <SheetTrigger asChild>
+                    <Button variant="ghost" size="sm" className="text-primary self-start p-0 h-auto">
+                      Edit
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="right" className="w-[500px]">
+                    <SheetHeader>
+                      <SheetTitle>Invoice and Contact Info</SheetTitle>
+                    </SheetHeader>
+                    
+                    <div className="mt-6 space-y-6">
+                      {/* Email */}
+                      <div className="space-y-2">
+                        <Label htmlFor="email" className="text-sm font-medium">* Email</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={invoiceInfo.email}
+                          onChange={(e) => setInvoiceInfo(prev => ({ ...prev, email: e.target.value }))}
+                          placeholder="Enter your email for get delivery status updates"
+                        />
+                      </div>
+
+                      {/* Billing Address */}
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <Label className="text-sm font-medium">* Billing Address</Label>
+                          <Button variant="ghost" size="sm" className="text-primary p-0 h-auto">
+                            Edit
+                          </Button>
+                        </div>
+                        <Textarea
+                          value={invoiceInfo.billingAddress}
+                          onChange={(e) => setInvoiceInfo(prev => ({ ...prev, billingAddress: e.target.value }))}
+                          rows={4}
+                          className="resize-none"
+                        />
+                        <p className="text-xs text-gray-500">
+                          Click to edit your billing information to be used for issuing tax invoice. *Please 
+                          input your full name in the Required field.
+                        </p>
+                      </div>
+
+                      {/* Company/Personal Tax ID */}
+                      <div className="space-y-2">
+                        <Label htmlFor="taxId" className="text-sm font-medium">Company/Personal Tax ID</Label>
+                        <Input
+                          id="taxId"
+                          value={invoiceInfo.taxId}
+                          onChange={(e) => setInvoiceInfo(prev => ({ ...prev, taxId: e.target.value }))}
+                          placeholder="Please enter a valid Tax ID"
+                          className="border-red-200"
+                        />
+                        <p className="text-xs text-red-500">
+                          Please input your company/personal tax ID to get invoice
+                        </p>
+                      </div>
+
+                      {/* Head office/Branch ID */}
+                      <div className="space-y-2">
+                        <Label htmlFor="headOfficeBranch" className="text-sm font-medium">Head office/Branch ID (for company)</Label>
+                        <Input
+                          id="headOfficeBranch"
+                          value={invoiceInfo.headOfficeBranch}
+                          onChange={(e) => setInvoiceInfo(prev => ({ ...prev, headOfficeBranch: e.target.value }))}
+                          placeholder="Please input head office/branch to get invoice"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-3 mt-8">
+                      <Button 
+                        variant="outline" 
+                        className="flex-1"
+                        onClick={() => setIsInvoiceSheetOpen(false)}
+                      >
+                        CANCEL
+                      </Button>
+                      <Button 
+                        className="flex-1 bg-teal-500 hover:bg-teal-600 text-white"
+                        onClick={handleSaveInvoiceInfo}
+                      >
+                        SAVE
+                      </Button>
+                    </div>
+                  </SheetContent>
+                </Sheet>
               </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="text-sm">
+                  <p className="font-medium">Email</p>
+                  <p className="text-gray-600">{invoiceInfo.email}</p>
+                </div>
+                <div className="text-sm">
+                  <p className="font-medium">Billing Address</p>
+                  <p className="text-gray-600 whitespace-pre-line">{invoiceInfo.billingAddress}</p>
+                </div>
+                {invoiceInfo.taxId && (
+                  <div className="text-sm">
+                    <p className="font-medium">Tax ID</p>
+                    <p className="text-gray-600">{invoiceInfo.taxId}</p>
+                  </div>
+                )}
+                {invoiceInfo.headOfficeBranch && (
+                  <div className="text-sm">
+                    <p className="font-medium">Head office/Branch ID</p>
+                    <p className="text-gray-600">{invoiceInfo.headOfficeBranch}</p>
+                  </div>
+                )}
+              </CardContent>
             </Card>
 
             {/* Order Detail */}
