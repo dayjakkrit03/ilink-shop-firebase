@@ -186,7 +186,7 @@ const ProductListing = () => {
             {/* Products Grid */}
             <div className={`grid mb-8 ${
               viewMode === "grid" 
-                ? "grid-cols-2 gap-2 sm:gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4" 
+                ? "grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" 
                 : "grid-cols-1 gap-4"
             }`}>
               {mockProducts.map((product) => (
