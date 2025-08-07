@@ -368,30 +368,30 @@ export default function Checkout() {
                           <DialogTrigger asChild>
                             <Button variant="outline" className="w-full justify-start gap-2">
                               <Plus className="h-4 w-4" />
-                              Add new address
+                              เพิ่มที่อยู่ใหม่
                             </Button>
                           </DialogTrigger>
                           <DialogContent className="sm:max-w-[500px]">
                             <DialogHeader>
-                              <DialogTitle>Add new shipping Address</DialogTitle>
+                              <DialogTitle>เพิ่มที่อยู่จัดส่งใหม่</DialogTitle>
                             </DialogHeader>
                             
                             <div className="grid gap-4 py-4">
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                  <Label htmlFor="name">Full name</Label>
+                                  <Label htmlFor="name">ชื่อ-นามสกุล</Label>
                                   <Input
                                     id="name"
-                                    placeholder="Please enter your full name"
+                                    placeholder="กรุณากรอกชื่อ-นามสกุล"
                                     value={newAddress.name}
                                     onChange={(e) => setNewAddress({...newAddress, name: e.target.value})}
                                   />
                                 </div>
                                 <div>
-                                  <Label htmlFor="phone">Phone Number</Label>
+                                  <Label htmlFor="phone">หมายเลขโทรศัพท์</Label>
                                   <Input
                                     id="phone"
-                                    placeholder="Please enter your phone number"
+                                    placeholder="กรุณากรอกหมายเลขโทรศัพท์"
                                     value={newAddress.phone}
                                     onChange={(e) => setNewAddress({...newAddress, phone: e.target.value})}
                                   />
@@ -399,10 +399,10 @@ export default function Checkout() {
                               </div>
                               
                               <div>
-                                <Label htmlFor="address">Address</Label>
+                                <Label htmlFor="address">ที่อยู่</Label>
                                 <Textarea
                                   id="address"
-                                  placeholder="House number, Floor, Building name, Street name"
+                                  placeholder="บ้านเลขที่ ชั้น ชื่ออาคาร ชื่อถนน"
                                   value={newAddress.address}
                                   onChange={(e) => setNewAddress({...newAddress, address: e.target.value})}
                                   className="min-h-[80px]"
@@ -411,19 +411,19 @@ export default function Checkout() {
                               
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                  <Label htmlFor="province">Province</Label>
+                                  <Label htmlFor="province">จังหวัด</Label>
                                   <Input
                                     id="province"
-                                    placeholder="Please select your province"
+                                    placeholder="กรุณาเลือกจังหวัด"
                                     value={newAddress.province}
                                     onChange={(e) => setNewAddress({...newAddress, province: e.target.value})}
                                   />
                                 </div>
                                 <div>
-                                  <Label htmlFor="district">District</Label>
+                                  <Label htmlFor="district">เขต/อำเภอ</Label>
                                   <Input
                                     id="district"
-                                    placeholder="Please select your district"
+                                    placeholder="กรุณาเลือกเขต/อำเภอ"
                                     value={newAddress.district}
                                     onChange={(e) => setNewAddress({...newAddress, district: e.target.value})}
                                   />
@@ -432,16 +432,16 @@ export default function Checkout() {
                               
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                  <Label htmlFor="subdistrict">Sub District</Label>
+                                  <Label htmlFor="subdistrict">แขวง/ตำบล</Label>
                                   <Input
                                     id="subdistrict"
-                                    placeholder="Please select your sub district"
+                                    placeholder="กรุณาเลือกแขวง/ตำบล"
                                     value={newAddress.subdistrict}
                                     onChange={(e) => setNewAddress({...newAddress, subdistrict: e.target.value})}
                                   />
                                 </div>
                                 <div>
-                                  <Label htmlFor="zipcode">Postcode</Label>
+                                  <Label htmlFor="zipcode">รหัสไปรษณีย์</Label>
                                   <Input
                                     id="zipcode"
                                     placeholder="00000"
@@ -452,7 +452,7 @@ export default function Checkout() {
                               </div>
                               
                               <div>
-                                <Label>Select a label for effective delivery</Label>
+                                <Label>เลือกป้ายกำกับสำหรับการจัดส่งที่มีประสิทธิภาพ</Label>
                                 <div className="flex gap-2 mt-2">
                                   <Button
                                     variant={newAddress.type === "HOME" ? "default" : "outline"}
@@ -460,7 +460,7 @@ export default function Checkout() {
                                     onClick={() => setNewAddress({...newAddress, type: "HOME"})}
                                   >
                                     <Home className="h-4 w-4 mr-1" />
-                                    HOME
+                                    บ้าน
                                   </Button>
                                   <Button
                                     variant={newAddress.type === "OFFICE" ? "default" : "outline"}
@@ -468,21 +468,21 @@ export default function Checkout() {
                                     onClick={() => setNewAddress({...newAddress, type: "OFFICE"})}
                                   >
                                     <Building className="h-4 w-4 mr-1" />
-                                    OFFICE
+                                    ออฟฟิศ
                                   </Button>
                                 </div>
                               </div>
                               
                               <div className="flex justify-end gap-2 pt-4">
                                 <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
-                                  Cancel
+                                  ยกเลิก
                                 </Button>
                                 <Button 
                                   className="bg-teal-500 hover:bg-teal-600"
                                   onClick={handleAddAddress}
                                   disabled={!newAddress.name || !newAddress.phone || !newAddress.address}
                                 >
-                                  SAVE
+                                  บันทึก
                                 </Button>
                               </div>
                             </div>
@@ -511,9 +511,9 @@ export default function Checkout() {
                                   <span className="font-semibold text-gray-900 truncate">{address.name}</span>
                                   <span className="text-gray-600 text-sm">{address.phone}</span>
                                   {address.isDefault && (
-                                    <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
-                                      DEFAULT
-                                    </span>
+                                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+                                    ค่าเริ่มต้น
+                                  </span>
                                   )}
                                 </div>
                                 
@@ -527,7 +527,7 @@ export default function Checkout() {
                                       handleEditAddress(address);
                                     }}
                                     className="h-9 w-9 p-0 hover:bg-blue-100 hover:text-blue-600"
-                                    title="Edit address"
+                                    title="แก้ไขที่อยู่"
                                   >
                                     <Edit className="h-4 w-4" />
                                   </Button>
@@ -543,7 +543,7 @@ export default function Checkout() {
                                         ? 'text-green-600 hover:bg-green-100' 
                                         : 'text-gray-400 hover:bg-gray-100 hover:text-green-600'
                                     }`}
-                                    title={address.isDefault ? "Default address" : "Set as default"}
+                                    title={address.isDefault ? "ที่อยู่เริ่มต้น" : "ตั้งเป็นค่าเริ่มต้น"}
                                   >
                                     <Check className="h-4 w-4" />
                                   </Button>
@@ -568,7 +568,7 @@ export default function Checkout() {
                                   className="w-full"
                                   onClick={() => handleSelectAddress(address)}
                                 >
-                                  {selectedAddress.id === address.id ? 'Selected' : 'Select This Address'}
+                                  {selectedAddress.id === address.id ? 'เลือกแล้ว' : 'เลือกที่อยู่นี้'}
                                 </Button>
                               </div>
                             </div>
@@ -579,25 +579,25 @@ export default function Checkout() {
                         <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
                           <DialogContent className="sm:max-w-[500px]">
                             <DialogHeader>
-                              <DialogTitle>Edit shipping Address</DialogTitle>
+                              <DialogTitle>แก้ไขที่อยู่จัดส่ง</DialogTitle>
                             </DialogHeader>
                             
                             <div className="grid gap-4 py-4">
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                  <Label htmlFor="edit-name">Full name</Label>
+                                  <Label htmlFor="edit-name">ชื่อ-นามสกุล</Label>
                                   <Input
                                     id="edit-name"
-                                    placeholder="Please enter your full name"
+                                    placeholder="กรุณากรอกชื่อ-นามสกุล"
                                     value={newAddress.name}
                                     onChange={(e) => setNewAddress({...newAddress, name: e.target.value})}
                                   />
                                 </div>
                                 <div>
-                                  <Label htmlFor="edit-phone">Phone Number</Label>
+                                  <Label htmlFor="edit-phone">หมายเลขโทรศัพท์</Label>
                                   <Input
                                     id="edit-phone"
-                                    placeholder="Please enter your phone number"
+                                    placeholder="กรุณากรอกหมายเลขโทรศัพท์"
                                     value={newAddress.phone}
                                     onChange={(e) => setNewAddress({...newAddress, phone: e.target.value})}
                                   />
@@ -605,10 +605,10 @@ export default function Checkout() {
                               </div>
                               
                               <div>
-                                <Label htmlFor="edit-address">Address</Label>
+                                <Label htmlFor="edit-address">ที่อยู่</Label>
                                 <Textarea
                                   id="edit-address"
-                                  placeholder="House number, Floor, Building name, Street name"
+                                  placeholder="บ้านเลขที่ ชั้น ชื่ออาคาร ชื่อถนน"
                                   value={newAddress.address}
                                   onChange={(e) => setNewAddress({...newAddress, address: e.target.value})}
                                   className="min-h-[80px]"
@@ -617,19 +617,19 @@ export default function Checkout() {
                               
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                  <Label htmlFor="edit-province">Province</Label>
+                                  <Label htmlFor="edit-province">จังหวัด</Label>
                                   <Input
                                     id="edit-province"
-                                    placeholder="Please select your province"
+                                    placeholder="กรุณาเลือกจังหวัด"
                                     value={newAddress.province}
                                     onChange={(e) => setNewAddress({...newAddress, province: e.target.value})}
                                   />
                                 </div>
                                 <div>
-                                  <Label htmlFor="edit-district">District</Label>
+                                  <Label htmlFor="edit-district">เขต/อำเภอ</Label>
                                   <Input
                                     id="edit-district"
-                                    placeholder="Please select your district"
+                                    placeholder="กรุณาเลือกเขต/อำเภอ"
                                     value={newAddress.district}
                                     onChange={(e) => setNewAddress({...newAddress, district: e.target.value})}
                                   />
@@ -638,16 +638,16 @@ export default function Checkout() {
                               
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                  <Label htmlFor="edit-subdistrict">Sub District</Label>
+                                  <Label htmlFor="edit-subdistrict">แขวง/ตำบล</Label>
                                   <Input
                                     id="edit-subdistrict"
-                                    placeholder="Please select your sub district"
+                                    placeholder="กรุณาเลือกแขวง/ตำบล"
                                     value={newAddress.subdistrict}
                                     onChange={(e) => setNewAddress({...newAddress, subdistrict: e.target.value})}
                                   />
                                 </div>
                                 <div>
-                                  <Label htmlFor="edit-zipcode">Postcode</Label>
+                                  <Label htmlFor="edit-zipcode">รหัสไปรษณีย์</Label>
                                   <Input
                                     id="edit-zipcode"
                                     placeholder="00000"
@@ -658,7 +658,7 @@ export default function Checkout() {
                               </div>
                               
                               <div>
-                                <Label>Select a label for effective delivery</Label>
+                                <Label>เลือกป้ายกำกับสำหรับการจัดส่งที่มีประสิทธิภาพ</Label>
                                 <div className="flex gap-2 mt-2">
                                   <Button
                                     variant={newAddress.type === "HOME" ? "default" : "outline"}
@@ -666,7 +666,7 @@ export default function Checkout() {
                                     onClick={() => setNewAddress({...newAddress, type: "HOME"})}
                                   >
                                     <Home className="h-4 w-4 mr-1" />
-                                    HOME
+                                    บ้าน
                                   </Button>
                                   <Button
                                     variant={newAddress.type === "OFFICE" ? "default" : "outline"}
@@ -674,21 +674,21 @@ export default function Checkout() {
                                     onClick={() => setNewAddress({...newAddress, type: "OFFICE"})}
                                   >
                                     <Building className="h-4 w-4 mr-1" />
-                                    OFFICE
+                                    ออฟฟิศ
                                   </Button>
                                 </div>
                               </div>
                               
                               <div className="flex justify-end gap-2 pt-4">
                                 <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
-                                  Cancel
+                                  ยกเลิก
                                 </Button>
                                 <Button 
                                   className="bg-teal-500 hover:bg-teal-600"
                                   onClick={handleSaveEditedAddress}
                                   disabled={!newAddress.name || !newAddress.phone || !newAddress.address}
                                 >
-                                  SAVE
+                                  บันทึก
                                 </Button>
                               </div>
                             </div>
@@ -720,13 +720,13 @@ export default function Checkout() {
             {/* Package 1 */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Package 1 of 2</CardTitle>
-                <p className="text-sm text-muted-foreground">Shipped by TechMall Official Store</p>
+                <CardTitle className="text-lg">แพ็กเกจ 1 จาก 2</CardTitle>
+                <p className="text-sm text-muted-foreground">จัดส่งโดย TechMall Official Store</p>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Delivery Options */}
                 <div>
-                  <h4 className="font-medium mb-3">Choose your delivery option</h4>
+                  <h4 className="font-medium mb-3">เลือกตัวเลือกการจัดส่งของคุณ</h4>
                   <RadioGroup value={deliveryOption} onValueChange={setDeliveryOption}>
                     <div className="border rounded-lg p-4 border-teal-500 bg-teal-50">
                       <div className="flex items-center space-x-2">
@@ -737,7 +737,7 @@ export default function Checkout() {
                               <div className="font-medium text-teal-800">฿19.52 <span className="text-gray-500 line-through text-sm">฿42.00</span></div>
                               <div className="text-sm text-gray-600">Standard</div>
                               <div className="text-sm text-gray-500">
-                                Guaranteed by 9 Aug. Get ฿25 LinkRewards if your package arrives late.
+                                รับประกันส่งภายใน 9 ส.ค. รับ ฿25 LinkRewards หากพัสดุมาสาย
                               </div>
                             </div>
                             <div className="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center">
@@ -762,7 +762,7 @@ export default function Checkout() {
                       <h3 className="font-medium text-sm">{checkoutItems[0]?.name}</h3>
                       <div className="flex justify-between items-center mt-2">
                         <div className="text-orange-600 font-bold">฿{checkoutItems[0]?.price.toLocaleString()}</div>
-                        <div className="text-sm text-gray-600">Qty: {checkoutItems[0]?.quantity}</div>
+                        <div className="text-sm text-gray-600">จำนวน: {checkoutItems[0]?.quantity}</div>
                       </div>
                     </div>
                     <AlertDialog>
@@ -797,13 +797,13 @@ export default function Checkout() {
             {/* Package 2 */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Package 2 of 2</CardTitle>
-                <p className="text-sm text-muted-foreground">Shipped by NetworkPro Store</p>
+                <CardTitle className="text-lg">แพ็กเกจ 2 จาก 2</CardTitle>
+                <p className="text-sm text-muted-foreground">จัดส่งโดย NetworkPro Store</p>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Delivery Options */}
                 <div>
-                  <h4 className="font-medium mb-3">Choose your delivery option</h4>
+                  <h4 className="font-medium mb-3">เลือกตัวเลือกการจัดส่งของคุณ</h4>
                   <RadioGroup value="express" onValueChange={() => {}}>
                     <div className="border rounded-lg p-4 border-teal-500 bg-teal-50">
                       <div className="flex items-center space-x-2">
@@ -814,7 +814,7 @@ export default function Checkout() {
                               <div className="font-medium text-teal-800">฿13.48 <span className="text-gray-500 line-through text-sm">฿29.00</span></div>
                               <div className="text-sm text-gray-600">Standard</div>
                               <div className="text-sm text-gray-500">
-                                Guaranteed by 9 Aug. Get ฿25 LinkRewards if your package arrives late.
+                                รับประกันส่งภายใน 9 ส.ค. รับ ฿25 LinkRewards หากพัสดุมาสาย
                               </div>
                             </div>
                             <div className="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center">
@@ -849,7 +849,7 @@ export default function Checkout() {
                                 <div className="text-sm text-orange-600">{item.discount}</div>
                               )}
                             </div>
-                            <div className="text-sm text-gray-600">Qty: {item.quantity}</div>
+                            <div className="text-sm text-gray-600">จำนวน: {item.quantity}</div>
                           </div>
                         </div>
                         <AlertDialog>
@@ -889,20 +889,20 @@ export default function Checkout() {
             {/* Payment Method */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Select payment method</CardTitle>
+                <CardTitle className="text-lg">เลือกวิธีชำระเงิน</CardTitle>
                 <Sheet open={isPaymentMethodsOpen} onOpenChange={setIsPaymentMethodsOpen}>
                   <SheetTrigger asChild>
                     <Button variant="ghost" size="sm" className="text-primary self-start p-0 h-auto">
-                      View all methods »
+                      ดูวิธีการทั้งหมด »
                     </Button>
                   </SheetTrigger>
                   <SheetContent side="right" className="w-[500px]">
                     <SheetHeader>
-                      <SheetTitle>Select Payment Method</SheetTitle>
+                      <SheetTitle>เลือกวิธีชำระเงิน</SheetTitle>
                     </SheetHeader>
                     
                     <div className="mt-4 space-y-3">
-                      <h3 className="text-sm font-medium text-gray-700">Recommended method(s)</h3>
+                      <h3 className="text-sm font-medium text-gray-700">วิธีที่แนะนำ</h3>
                       
                       {/* Credit/Debit Card */}
                       <div 
@@ -915,8 +915,8 @@ export default function Checkout() {
                           <CreditCard className="h-6 w-6 text-blue-600" />
                         </div>
                         <div className="flex-1">
-                          <div className="font-medium text-gray-900">Credit/Debit Card</div>
-                          <div className="text-sm text-gray-500">Credit/Debit Card</div>
+                          <div className="font-medium text-gray-900">บัตรเครดิต/เดบิต</div>
+                          <div className="text-sm text-gray-500">บัตรเครดิต/เดบิต</div>
                           <div className="flex items-center gap-1 mt-1">
                             <img src={mastercardLogo} alt="Mastercard" className="h-4 w-auto" />
                             <img src={jcbLogo} alt="JCB" className="h-4 w-auto" />
@@ -928,7 +928,7 @@ export default function Checkout() {
 
                       <Separator />
                       
-                      <h3 className="text-sm font-medium text-gray-700">Other Payment Methods</h3>
+                      <h3 className="text-sm font-medium text-gray-700">วิธีชำระเงินอื่น ๆ</h3>
                       
                       {/* Cash on Delivery */}
                       <div 
@@ -941,8 +941,8 @@ export default function Checkout() {
                           <Wallet className="h-6 w-6 text-green-600" />
                         </div>
                         <div className="flex-1">
-                          <div className="font-medium text-gray-900">Cash on Delivery</div>
-                          <div className="text-sm text-gray-500">Cash on Delivery</div>
+                          <div className="font-medium text-gray-900">เก็บเงินปลายทาง</div>
+                          <div className="text-sm text-gray-500">เก็บเงินปลายทาง</div>
                         </div>
                         {paymentMethod === 'cash' && <Check className="h-5 w-5 text-green-500" />}
                       </div>
@@ -959,7 +959,7 @@ export default function Checkout() {
                         </div>
                         <div className="flex-1">
                           <div className="font-medium text-gray-900">QR PromptPay</div>
-                          <div className="text-sm text-gray-500">Scan QR code to pay</div>
+                          <div className="text-sm text-gray-500">สแกน QR Code เพื่อชำระเงิน</div>
                         </div>
                         {paymentMethod === 'qr' && <Check className="h-5 w-5 text-green-500" />}
                       </div>
@@ -976,7 +976,7 @@ export default function Checkout() {
                         </div>
                         <div className="flex-1">
                           <div className="font-medium text-gray-900">LINE Pay</div>
-                          <div className="text-sm text-gray-500">Link your card or add sufficient funds before shopping</div>
+                          <div className="text-sm text-gray-500">เชื่อมต่อบัตรหรือเติมเงินก่อนช้อปปิ้ง</div>
                         </div>
                         {paymentMethod === 'linepay' && <Check className="h-5 w-5 text-green-500" />}
                       </div>
@@ -992,8 +992,8 @@ export default function Checkout() {
                           <Building2 className="h-6 w-6 text-blue-600" />
                         </div>
                         <div className="flex-1">
-                          <div className="font-medium text-gray-900">Internet banking</div>
-                          <div className="text-sm text-gray-500">Login with bank account to pay</div>
+                          <div className="font-medium text-gray-900">Internet Banking</div>
+                          <div className="text-sm text-gray-500">เข้าสู่ระบบด้วยบัญชีธนาคารเพื่อชำระเงิน</div>
                         </div>
                         {paymentMethod === 'internetbanking' && <Check className="h-5 w-5 text-green-500" />}
                       </div>
@@ -1009,8 +1009,8 @@ export default function Checkout() {
                           <ArrowLeftRight className="h-6 w-6 text-purple-600" />
                         </div>
                         <div className="flex-1">
-                          <div className="font-medium text-gray-900">Bank Transfer</div>
-                          <div className="text-sm text-gray-500">Transfer money directly to merchant's bank account</div>
+                          <div className="font-medium text-gray-900">โอนเงินผ่านธนาคาร</div>
+                          <div className="text-sm text-gray-500">โอนเงินโดยตรงไปยังบัญชีของผู้ขาย</div>
                         </div>
                         {paymentMethod === 'banktransfer' && <Check className="h-5 w-5 text-green-500" />}
                       </div>
@@ -1018,13 +1018,13 @@ export default function Checkout() {
 
                     <div className="flex justify-end gap-2 mt-6">
                       <Button variant="outline" onClick={() => setIsPaymentMethodsOpen(false)}>
-                        Cancel
+                        ยกเลิก
                       </Button>
                       <Button 
                         className="bg-orange-500 hover:bg-orange-600 text-white"
                         onClick={handleConfirmPaymentMethods}
                       >
-                        Confirm
+                        ยืนยัน
                       </Button>
                     </div>
                   </SheetContent>
@@ -1040,8 +1040,8 @@ export default function Checkout() {
                     </div>
                     <div className="flex-1">
                       <Label htmlFor="card" className="cursor-pointer">
-                        <div className="font-semibold text-gray-900">Credit/Debit Card</div>
-                        <div className="text-sm text-gray-500">Credit/Debit Card</div>
+                        <div className="font-semibold text-gray-900">บัตรเครดิต/เดบิต</div>
+                        <div className="text-sm text-gray-500">บัตรเครดิต/เดบิต</div>
                       </Label>
                       <div className="flex items-center gap-1 mt-2">
                         <img src={mastercardLogo} alt="Mastercard" className="h-4 w-auto" />
@@ -1060,7 +1060,7 @@ export default function Checkout() {
                     </div>
                     <Label htmlFor="qr" className="flex-1 cursor-pointer">
                       <div className="font-semibold text-gray-900">QR PromptPay</div>
-                      <div className="text-sm text-gray-500">Scan QR code to pay</div>
+                      <div className="text-sm text-gray-500">สแกน QR Code เพื่อชำระเงิน</div>
                     </Label>
                     {paymentMethod === 'qr' && <Check className="h-5 w-5 text-green-500" />}
                   </div>
@@ -1108,7 +1108,7 @@ export default function Checkout() {
               <CardContent>
                 <div className="flex gap-2">
                   <Input
-                    placeholder="Enter Voucher Code"
+                    placeholder="กรอกโค้ดส่วนลด"
                     value={voucherCode}
                     onChange={(e) => {
                       setVoucherCode(e.target.value);
@@ -1121,7 +1121,7 @@ export default function Checkout() {
                     className="bg-teal-500 text-white border-teal-500 hover:bg-teal-600"
                     onClick={handleApplyVoucher}
                   >
-                    APPLY
+                    ใช้
                   </Button>
                 </div>
                 
@@ -1166,34 +1166,34 @@ export default function Checkout() {
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center justify-between text-lg">
-                  Invoice and Contact Info
+                  ใบกำกับภาษีและข้อมูลติดต่อ
                   <Sheet open={isInvoiceSheetOpen} onOpenChange={setIsInvoiceSheetOpen}>
                     <SheetTrigger asChild>
                       <Button variant="ghost" size="sm" className="text-primary">
-                        Edit
+                        แก้ไข
                       </Button>
                     </SheetTrigger>
                     <SheetContent side="right" className="w-[500px]">
                       <SheetHeader>
-                        <SheetTitle>Invoice and Contact Info</SheetTitle>
+                        <SheetTitle>ใบกำกับภาษีและข้อมูลติดต่อ</SheetTitle>
                       </SheetHeader>
                       
                       <div className="mt-6 space-y-6">
                         {/* Email */}
                         <div className="space-y-2">
-                          <Label htmlFor="email" className="text-sm font-medium">* Email</Label>
+                          <Label htmlFor="email" className="text-sm font-medium">* อีเมล</Label>
                           <Input
                             id="email"
                             type="email"
                             value={invoiceInfo.email}
                             onChange={(e) => setInvoiceInfo(prev => ({ ...prev, email: e.target.value }))}
-                            placeholder="Enter your email for get delivery status updates"
+                            placeholder="กรอกอีเมลเพื่อรับการอัปเดตสถานะการจัดส่ง"
                           />
                         </div>
 
                         {/* Billing Address */}
                         <div className="space-y-2">
-                          <Label className="text-sm font-medium">* Billing Address</Label>
+                          <Label className="text-sm font-medium">* ที่อยู่ในการออกใบกำกับภาษี</Label>
                           <Textarea
                             value={invoiceInfo.billingAddress}
                             onChange={(e) => setInvoiceInfo(prev => ({ ...prev, billingAddress: e.target.value }))}
@@ -1201,34 +1201,34 @@ export default function Checkout() {
                             className="resize-none"
                           />
                           <p className="text-xs text-gray-500">
-                            Click to edit your billing information to be used for issuing tax invoice. *Please 
-                            input your full name in the Required field.
+                            คลิกเพื่อแก้ไขข้อมูลการเรียกเก็บเงินสำหรับการออกใบกำกับภาษี *กรุณา
+                            กรอกชื่อเต็มในช่องที่จำเป็น
                           </p>
                         </div>
 
                         {/* Company/Personal Tax ID */}
                         <div className="space-y-2">
-                          <Label htmlFor="taxId" className="text-sm font-medium">Company/Personal Tax ID</Label>
+                          <Label htmlFor="taxId" className="text-sm font-medium">เลขประจำตัวผู้เสียภาษี</Label>
                           <Input
                             id="taxId"
                             value={invoiceInfo.taxId}
                             onChange={(e) => setInvoiceInfo(prev => ({ ...prev, taxId: e.target.value }))}
-                            placeholder="Please enter a valid Tax ID"
+                            placeholder="กรุณากรอกเลขประจำตัวผู้เสียภาษีที่ถูกต้อง"
                             className="border-red-200"
                           />
                           <p className="text-xs text-red-500">
-                            Please input your company/personal tax ID to get invoice
+                            กรุณากรอกเลขประจำตัวผู้เสียภาษีเพื่อรับใบกำกับภาษี
                           </p>
                         </div>
 
                         {/* Head office/Branch ID */}
                         <div className="space-y-2">
-                          <Label htmlFor="headOfficeBranch" className="text-sm font-medium">Head office/Branch ID (for company)</Label>
+                          <Label htmlFor="headOfficeBranch" className="text-sm font-medium">รหัสสำนักงานใหญ่/สาขา (สำหรับบริษัท)</Label>
                           <Input
                             id="headOfficeBranch"
                             value={invoiceInfo.headOfficeBranch}
                             onChange={(e) => setInvoiceInfo(prev => ({ ...prev, headOfficeBranch: e.target.value }))}
-                            placeholder="Please input head office/branch to get invoice"
+                            placeholder="กรุณากรอกสำนักงานใหญ่/สาขาเพื่อรับใบกำกับภาษี"
                           />
                         </div>
                       </div>
@@ -1240,13 +1240,13 @@ export default function Checkout() {
                           className="flex-1"
                           onClick={() => setIsInvoiceSheetOpen(false)}
                         >
-                          CANCEL
+                          ยกเลิก
                         </Button>
                         <Button 
                           className="flex-1 bg-teal-500 hover:bg-teal-600 text-white"
                           onClick={handleSaveInvoiceInfo}
                         >
-                          SAVE
+                          บันทึก
                         </Button>
                       </div>
                     </SheetContent>
@@ -1259,18 +1259,18 @@ export default function Checkout() {
                   <p className="text-gray-600">{invoiceInfo.email}</p>
                 </div>
                 <div className="text-sm">
-                  <p className="font-medium">Billing Address</p>
+                  <p className="font-medium">ที่อยู่ในการออกใบกำกับภาษี</p>
                   <p className="text-gray-600 whitespace-pre-line">{invoiceInfo.billingAddress}</p>
                 </div>
                 {invoiceInfo.taxId && (
                   <div className="text-sm">
-                    <p className="font-medium">Tax ID</p>
+                    <p className="font-medium">เลขประจำตัวผู้เสียภาษี</p>
                     <p className="text-gray-600">{invoiceInfo.taxId}</p>
                   </div>
                 )}
                 {invoiceInfo.headOfficeBranch && (
                   <div className="text-sm">
-                    <p className="font-medium">Head office/Branch ID</p>
+                    <p className="font-medium">รหัสสำนักงานใหญ่/สาขา</p>
                     <p className="text-gray-600">{invoiceInfo.headOfficeBranch}</p>
                   </div>
                 )}
@@ -1280,16 +1280,16 @@ export default function Checkout() {
             {/* Order Detail */}
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">ORDER DETAIL</CardTitle>
+                <CardTitle className="text-lg">รายละเอียดคำสั่งซื้อ</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span>Subtotal ({checkoutItems.length} items)</span>
+                  <span>ราคาสินค้า ({checkoutItems.length} รายการ)</span>
                   <span>฿{subtotal.toLocaleString()}</span>
                 </div>
                 
                 <div className="flex justify-between text-sm">
-                  <span>Shipping Fee</span>
+                  <span>ค่าจัดส่ง</span>
                   <span className={shippingFee === 0 ? "text-green-600" : ""}>
                     {shippingFee === 0 ? "฿65.00" : `฿${shippingFee}`}
                   </span>
@@ -1297,20 +1297,20 @@ export default function Checkout() {
                 
                 {voucherDiscount > 0 && (
                   <div className="flex justify-between text-sm">
-                    <span>Voucher discount</span>
+                    <span>ส่วนลดจากโค้ด</span>
                     <span className="text-green-600">-฿{voucherDiscount.toLocaleString()}</span>
                   </div>
                 )}
                 
                 <div className="flex justify-between text-sm">
-                  <span>Shipping discount</span>
+                  <span>ส่วนลดค่าจัดส่ง</span>
                   <span className="text-green-600">-฿65.00</span>
                 </div>
                 
                 <Separator />
                 
                 <div className="flex justify-between font-bold text-lg">
-                  <span>Total</span>
+                  <span>ยอดรวมทั้งหมด</span>
                   <span className="text-orange-600">฿{total.toLocaleString()}</span>
                 </div>
                 
@@ -1319,7 +1319,7 @@ export default function Checkout() {
                   size="lg"
                   onClick={handlePlaceOrder}
                 >
-                  PLACE ORDER NOW
+                  สั่งซื้อสินค้า
                 </Button>
               </CardContent>
             </Card>
