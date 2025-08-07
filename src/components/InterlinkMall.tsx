@@ -6,6 +6,12 @@ import storeThailandPool from "@/assets/store-thailand-pool.jpg";
 import storeIn2it from "@/assets/store-in2it.jpg";
 import storeToymart from "@/assets/store-toy-smart.jpg";
 import storeQuiescent from "@/assets/store-quiescent.jpg";
+import logoCbCotton from "@/assets/logo-cb-cotton.jpg";
+import logoCorrettoSuite from "@/assets/logo-corretto-suite.jpg";
+import logoThailandTech from "@/assets/logo-thailand-tech.jpg";
+import logoIn2it from "@/assets/logo-in2it.jpg";
+import logoSmartTech from "@/assets/logo-smart-tech.jpg";
+import logoQuiescent from "@/assets/logo-quiescent.jpg";
 
 const interlinkStores = [
   {
@@ -13,42 +19,42 @@ const interlinkStores = [
     name: "CB Cotton IT Store",
     brand: "IT & Network Solutions",
     image: storeCbCotton,
-    logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop"
+    logo: logoCbCotton
   },
   {
     id: 2,
     name: "CORRETTO SUITE",
     brand: "Enterprise IT Equipment",
     image: storeCorrettoSuite,
-    logo: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=100&h=100&fit=crop"
+    logo: logoCorrettoSuite
   },
   {
     id: 3,
     name: "Thailand Tech Plaza",
     brand: "Network & Server Solutions",
     image: storeThailandPool,
-    logo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop"
+    logo: logoThailandTech
   },
   {
     id: 4,
     name: "IN2IT Computer",
     brand: "Colorful Tech Solutions",
     image: storeIn2it,
-    logo: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=100&h=100&fit=crop"
+    logo: logoIn2it
   },
   {
     id: 5,
     name: "Smart Tech Shop",
     brand: "Smart IT Solutions",
     image: storeToymart,
-    logo: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=100&h=100&fit=crop"
+    logo: logoSmartTech
   },
   {
     id: 6,
     name: "Quiescent Systems",
     brand: "Professional IT Hardware",
     image: storeQuiescent,
-    logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop"
+    logo: logoQuiescent
   },
 ];
 
