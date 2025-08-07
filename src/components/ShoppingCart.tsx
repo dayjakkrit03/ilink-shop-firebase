@@ -56,6 +56,7 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalUniqueItems = items.length; // Count unique items, not quantities
+  const selectedUniqueItems = selectedItems.length; // Count selected unique items
   const selectedTotalItems = items
     .filter(item => selectedItems.includes(item.id))
     .reduce((sum, item) => sum + item.quantity, 0);
@@ -187,12 +188,12 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
           {items.length > 0 && (
             <div className="border-t pt-4 space-y-4">
               <div className="flex justify-between items-center">
-                <span className="font-medium">รวม ({selectedItems.length} รายการ):</span>
+                <span className="font-medium">รวม ({selectedUniqueItems} รายการ):</span>
                 <span className="font-bold text-lg text-primary">฿{selectedTotalPrice.toLocaleString()}</span>
               </div>
               
               <div className="space-y-2">
-                <Button 
+                <Button
                   className="w-full" 
                   size="lg"
                   disabled={selectedItems.length === 0}
@@ -201,7 +202,7 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
                     handleClose();
                   }}
                 >
-                  ชำระเงิน ({selectedTotalItems} รายการ)
+                  ชำระเงิน ({selectedUniqueItems} รายการ)
                 </Button>
                 <Button 
                   variant="outline" 
