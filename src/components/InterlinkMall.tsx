@@ -1,47 +1,53 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
+import storeCbCotton from "@/assets/store-cb-cotton.jpg";
+import storeCorrettoSuite from "@/assets/store-corretto-suite.jpg";
+import storeThailandPool from "@/assets/store-thailand-pool.jpg";
+import storeIn2it from "@/assets/store-in2it.jpg";
+import storeToymart from "@/assets/store-toy-smart.jpg";
+import storeQuiescent from "@/assets/store-quiescent.jpg";
 
 const interlinkStores = [
   {
     id: 1,
-    name: "CB Cotton",
-    brand: "CB Cotton",
-    image: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=400&h=300&fit=crop",
+    name: "CB Cotton IT Store",
+    brand: "IT & Network Solutions",
+    image: storeCbCotton,
     logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop"
   },
   {
     id: 2,
     name: "CORRETTO SUITE",
-    brand: "CORRETTO SUITE",
-    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=300&fit=crop",
+    brand: "Enterprise IT Equipment",
+    image: storeCorrettoSuite,
     logo: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=100&h=100&fit=crop"
   },
   {
     id: 3,
-    name: "Thailand Pool Tables",
-    brand: "Thailand Pool Tables",
-    image: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=400&h=300&fit=crop",
+    name: "Thailand Tech Plaza",
+    brand: "Network & Server Solutions",
+    image: storeThailandPool,
     logo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop"
   },
   {
     id: 4,
-    name: "IN2IT",
-    brand: "Enjoy Colourful Life",
-    image: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=400&h=300&fit=crop",
+    name: "IN2IT Computer",
+    brand: "Colorful Tech Solutions",
+    image: storeIn2it,
     logo: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=100&h=100&fit=crop"
   },
   {
     id: 5,
-    name: "Toy Smart Shop",
-    brand: "Toy Smart",
-    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=400&h=300&fit=crop",
+    name: "Smart Tech Shop",
+    brand: "Smart IT Solutions",
+    image: storeToymart,
     logo: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=100&h=100&fit=crop"
   },
   {
     id: 6,
-    name: "Quiescent",
-    brand: "Quiescent",
-    image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop",
+    name: "Quiescent Systems",
+    brand: "Professional IT Hardware",
+    image: storeQuiescent,
     logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop"
   },
 ];
