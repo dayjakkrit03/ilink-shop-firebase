@@ -213,6 +213,7 @@ const ProductListing = () => {
                   isFreeShipping={product.isFreeShipping}
                   isInterlinkMall={product.isInterlinkMall}
                   isClearanceSale={product.isClearanceSale}
+                  viewMode={viewMode}
                 />
               ))}
             </div>
