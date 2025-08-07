@@ -127,14 +127,14 @@ const ProductListing = () => {
           )}
         </nav>
 
-        <div className="flex gap-6">
+        <div className="flex flex-col lg:flex-row gap-6">
           {/* Filters Sidebar */}
-          <div className="w-64 shrink-0 hidden lg:block">
+          <div className="w-full lg:w-64 lg:shrink-0 hidden lg:block">
             <ProductFilters />
           </div>
 
           {/* Main Content */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             {/* Header */}
             <div className="mb-6">
               <h1 className="text-2xl font-bold mb-2">
