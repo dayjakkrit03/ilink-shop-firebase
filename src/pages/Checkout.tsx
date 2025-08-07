@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building, Edit, Check, QrCode, Trash2 } from "lucide-react";
+import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building, Edit, Check, QrCode, Trash2, Smartphone, Building2, ArrowLeftRight } from "lucide-react";
 import mastercardLogo from "@/assets/mastercard-logo.svg";
 import jcbLogo from "@/assets/jcb-logo.svg";
 import visaLogo from "@/assets/visa-logo.svg";
@@ -75,6 +75,7 @@ export default function Checkout() {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editingAddress, setEditingAddress] = useState<any>(null);
   const [checkoutItems, setCheckoutItems] = useState(initialCheckoutItems);
+  const [isPaymentMethodsOpen, setIsPaymentMethodsOpen] = useState(false);
   
   // Form states for new address
   const [newAddress, setNewAddress] = useState({
@@ -753,9 +754,145 @@ export default function Checkout() {
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg">Select payment method</CardTitle>
-                <Button variant="ghost" size="sm" className="text-primary self-start p-0 h-auto">
-                  View all methods »
-                </Button>
+                <Dialog open={isPaymentMethodsOpen} onOpenChange={setIsPaymentMethodsOpen}>
+                  <DialogTrigger asChild>
+                    <Button variant="ghost" size="sm" className="text-primary self-start p-0 h-auto">
+                      View all methods »
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[500px]">
+                    <DialogHeader>
+                      <DialogTitle>Select Payment Method</DialogTitle>
+                    </DialogHeader>
+                    
+                    <div className="mt-4 space-y-3">
+                      <h3 className="text-sm font-medium text-gray-700">Recommended method(s)</h3>
+                      
+                      {/* Credit/Debit Card */}
+                      <div 
+                        className={`flex items-center space-x-3 p-4 border-2 rounded-lg hover:border-primary/50 transition-colors cursor-pointer ${
+                          paymentMethod === 'card' ? 'border-primary bg-primary/5' : 'border-gray-200'
+                        }`}
+                        onClick={() => setPaymentMethod('card')}
+                      >
+                        <div className="bg-blue-100 p-2 rounded-lg">
+                          <CreditCard className="h-6 w-6 text-blue-600" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900">Credit/Debit Card</div>
+                          <div className="text-sm text-gray-500">Credit/Debit Card</div>
+                          <div className="flex items-center gap-1 mt-1">
+                            <img src={mastercardLogo} alt="Mastercard" className="h-4 w-auto" />
+                            <img src={jcbLogo} alt="JCB" className="h-4 w-auto" />
+                            <img src={visaLogo} alt="Visa" className="h-4 w-auto" />
+                          </div>
+                        </div>
+                        {paymentMethod === 'card' && <Check className="h-5 w-5 text-green-500" />}
+                      </div>
+
+                      <Separator />
+                      
+                      <h3 className="text-sm font-medium text-gray-700">Other Payment Methods</h3>
+                      
+                      {/* Cash on Delivery */}
+                      <div 
+                        className={`flex items-center space-x-3 p-4 border-2 rounded-lg hover:border-primary/50 transition-colors cursor-pointer ${
+                          paymentMethod === 'cash' ? 'border-primary bg-primary/5' : 'border-gray-200'
+                        }`}
+                        onClick={() => setPaymentMethod('cash')}
+                      >
+                        <div className="bg-green-100 p-2 rounded-lg">
+                          <Wallet className="h-6 w-6 text-green-600" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900">Cash on Delivery</div>
+                          <div className="text-sm text-gray-500">Cash on Delivery</div>
+                        </div>
+                        {paymentMethod === 'cash' && <Check className="h-5 w-5 text-green-500" />}
+                      </div>
+
+                      {/* QR PromptPay */}
+                      <div 
+                        className={`flex items-center space-x-3 p-4 border-2 rounded-lg hover:border-primary/50 transition-colors cursor-pointer ${
+                          paymentMethod === 'qr' ? 'border-primary bg-primary/5' : 'border-gray-200'
+                        }`}
+                        onClick={() => setPaymentMethod('qr')}
+                      >
+                        <div className="bg-blue-100 p-2 rounded-lg">
+                          <QrCode className="h-6 w-6 text-blue-600" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900">QR PromptPay</div>
+                          <div className="text-sm text-gray-500">Scan QR code to pay</div>
+                        </div>
+                        {paymentMethod === 'qr' && <Check className="h-5 w-5 text-green-500" />}
+                      </div>
+
+                      {/* LINE Pay */}
+                      <div 
+                        className={`flex items-center space-x-3 p-4 border-2 rounded-lg hover:border-primary/50 transition-colors cursor-pointer ${
+                          paymentMethod === 'linepay' ? 'border-primary bg-primary/5' : 'border-gray-200'
+                        }`}
+                        onClick={() => setPaymentMethod('linepay')}
+                      >
+                        <div className="bg-green-100 p-2 rounded-lg">
+                          <Smartphone className="h-6 w-6 text-green-600" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900">LINE Pay</div>
+                          <div className="text-sm text-gray-500">Link your card or add sufficient funds before shopping</div>
+                        </div>
+                        {paymentMethod === 'linepay' && <Check className="h-5 w-5 text-green-500" />}
+                      </div>
+
+                      {/* Internet Banking */}
+                      <div 
+                        className={`flex items-center space-x-3 p-4 border-2 rounded-lg hover:border-primary/50 transition-colors cursor-pointer ${
+                          paymentMethod === 'internetbanking' ? 'border-primary bg-primary/5' : 'border-gray-200'
+                        }`}
+                        onClick={() => setPaymentMethod('internetbanking')}
+                      >
+                        <div className="bg-blue-100 p-2 rounded-lg">
+                          <Building2 className="h-6 w-6 text-blue-600" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900">Internet banking</div>
+                          <div className="text-sm text-gray-500">Login with bank account to pay</div>
+                        </div>
+                        {paymentMethod === 'internetbanking' && <Check className="h-5 w-5 text-green-500" />}
+                      </div>
+
+                      {/* Bank Transfer */}
+                      <div 
+                        className={`flex items-center space-x-3 p-4 border-2 rounded-lg hover:border-primary/50 transition-colors cursor-pointer ${
+                          paymentMethod === 'banktransfer' ? 'border-primary bg-primary/5' : 'border-gray-200'
+                        }`}
+                        onClick={() => setPaymentMethod('banktransfer')}
+                      >
+                        <div className="bg-purple-100 p-2 rounded-lg">
+                          <ArrowLeftRight className="h-6 w-6 text-purple-600" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-medium text-gray-900">Bank Transfer</div>
+                          <div className="text-sm text-gray-500">Transfer money directly to merchant's bank account</div>
+                        </div>
+                        {paymentMethod === 'banktransfer' && <Check className="h-5 w-5 text-green-500" />}
+                      </div>
+                    </div>
+
+                    <div className="flex justify-end gap-2 mt-6">
+                      <Button variant="outline" onClick={() => setIsPaymentMethodsOpen(false)}>
+                        Cancel
+                      </Button>
+                      <Button 
+                        className="bg-orange-500 hover:bg-orange-600 text-white"
+                        onClick={() => setIsPaymentMethodsOpen(false)}
+                      >
+                        Confirm
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </CardHeader>
               <CardContent className="space-y-3">
                 <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
