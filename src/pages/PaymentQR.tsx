@@ -167,6 +167,18 @@ const PaymentQR = () => {
                       <div className="text-sm text-muted-foreground">
                         จำนวน: {item.quantity}
                       </div>
+                      {item.originalPrice && (
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-sm text-muted-foreground line-through">
+                            ฿{item.originalPrice.toLocaleString()}
+                          </span>
+                          {item.discount && (
+                            <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded">
+                              {item.discount}
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <div className="font-medium">
                       ฿{(item.price * item.quantity).toLocaleString()}
