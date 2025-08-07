@@ -214,6 +214,7 @@ const ProductListing = () => {
                   isInterlinkMall={product.isInterlinkMall}
                   isClearanceSale={product.isClearanceSale}
                   viewMode={viewMode}
+                  onAddToCart={() => setIsCartOpen(true)}
                 />
               ))}
             </div>

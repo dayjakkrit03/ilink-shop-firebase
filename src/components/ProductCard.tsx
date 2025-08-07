@@ -17,6 +17,7 @@ interface ProductCardProps {
   showRating?: boolean;
   isInterlinkMall?: boolean;
   isClearanceSale?: boolean;
+  onAddToCart?: () => void;
 }
 
 export const ProductCard = ({
@@ -33,6 +34,7 @@ export const ProductCard = ({
   showRating = true,
   isInterlinkMall = false,
   isClearanceSale = false,
+  onAddToCart,
   viewMode = "grid",
 }: ProductCardProps & { viewMode?: "grid" | "list" }) => {
   const navigate = useNavigate();
@@ -138,7 +140,10 @@ export const ProductCard = ({
                 className="group-hover:shadow-glow transition-all duration-300 whitespace-nowrap" 
                 size="sm" 
                 variant="cart"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onAddToCart?.();
+                }}
               >
                 <ShoppingCart className="h-4 w-4 mr-1 group-hover:animate-bounce-gentle" />
                 ใส่ตะกร้า
@@ -246,7 +251,10 @@ export const ProductCard = ({
           className="w-full group-hover:shadow-glow transition-all duration-300" 
           size="sm" 
           variant="cart"
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            onAddToCart?.();
+          }}
         >
           <ShoppingCart className="h-4 w-4 mr-2 group-hover:animate-bounce-gentle" />
           ใส่ตะกร้า
