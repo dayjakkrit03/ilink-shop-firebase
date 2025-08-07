@@ -79,7 +79,7 @@ const PaymentSuccess = () => {
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <div className="text-center mb-4">
             <p className="text-gray-600 mb-2">
-              กรุณาเตรียมเงินสดให้พร้อมในวันที่จัดส่ง
+              ชำระเงินเรียบร้อยแล้ว
             </p>
             <div className="text-2xl font-bold text-orange-500">
               ฿{paymentData.amount.toLocaleString()}
