@@ -1091,12 +1091,7 @@ export default function Checkout() {
 
                       {/* Billing Address */}
                       <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <Label className="text-sm font-medium">* Billing Address</Label>
-                          <Button variant="ghost" size="sm" className="text-primary p-0 h-auto">
-                            Edit
-                          </Button>
-                        </div>
+                        <Label className="text-sm font-medium">* Billing Address</Label>
                         <Textarea
                           value={invoiceInfo.billingAddress}
                           onChange={(e) => setInvoiceInfo(prev => ({ ...prev, billingAddress: e.target.value }))}
