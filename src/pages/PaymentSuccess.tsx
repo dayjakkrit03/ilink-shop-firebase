@@ -98,7 +98,7 @@ const PaymentSuccess = () => {
                 <p className="text-sm text-gray-600">{paymentData.items.length} รายการ</p>
               </div>
             </div>
-            <div className="text-left md:text-right pl-20 md:pl-0">
+            <div className="text-right pl-20 md:pl-0">
               <p className="text-sm text-gray-600">คาดว่าจะส่งภายใน</p>
               <p className="font-semibold">{formatDate(2)} - {formatDate(5)}</p>
             </div>
