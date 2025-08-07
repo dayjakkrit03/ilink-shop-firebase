@@ -69,6 +69,7 @@ export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [voucherCode, setVoucherCode] = useState("");
   const [appliedVoucher, setAppliedVoucher] = useState<{ code: string; discount: number } | null>(null);
+  const [voucherError, setVoucherError] = useState("");
   const [addresses, setAddresses] = useState(initialAddresses);
   const [selectedAddress, setSelectedAddress] = useState(initialAddresses[0]);
   const [isAddressSheetOpen, setIsAddressSheetOpen] = useState(false);
@@ -110,17 +111,23 @@ export default function Checkout() {
   // Handle applying voucher
   const handleApplyVoucher = () => {
     if (voucherCode.trim()) {
+      // Clear previous error
+      setVoucherError("");
+      
       // Mock voucher validation - in real app, this would validate with backend
       const mockVouchers = {
         "SAVE100": { code: "SAVE100", discount: 100 },
         "DISCOUNT50": { code: "DISCOUNT50", discount: 50 },
-        "FREESHIP": { code: "FREESHIP", discount: 65 }
+        "FREESHIP": { code: "FREESHIP", discount: 65 },
+        "VC0002": { code: "VC0002", discount: 200 }
       };
       
       const voucher = mockVouchers[voucherCode.toUpperCase() as keyof typeof mockVouchers];
       if (voucher) {
         setAppliedVoucher(voucher);
         setVoucherCode("");
+      } else {
+        setVoucherError("โค้ดส่วนลดไม่ถูกต้อง");
       }
     }
   };
@@ -1070,7 +1077,10 @@ export default function Checkout() {
                   <Input
                     placeholder="Enter Voucher Code"
                     value={voucherCode}
-                    onChange={(e) => setVoucherCode(e.target.value)}
+                    onChange={(e) => {
+                      setVoucherCode(e.target.value);
+                      setVoucherError(""); // Clear error when typing
+                    }}
                     className="flex-1"
                   />
                   <Button 
@@ -1081,6 +1091,13 @@ export default function Checkout() {
                     APPLY
                   </Button>
                 </div>
+                
+                {/* Error Message */}
+                {voucherError && (
+                  <div className="mt-2 text-sm text-red-600">
+                    {voucherError}
+                  </div>
+                )}
                 
                 {/* Applied Voucher Display */}
                 {appliedVoucher && (
