@@ -1,19 +1,30 @@
 import { useNavigate } from "react-router-dom";
-import { Cable, Wifi, Database, Codesandbox, Phone, Sun, Shield, Network, MonitorSpeaker, Server, Camera, HardDrive } from "lucide-react";
+import lanUtpImg from "@/assets/category-lan-utp.jpg";
+import fiberOpticImg from "@/assets/category-fiber-optic.jpg";
+import fttrFttxImg from "@/assets/category-fttr-fttx.jpg";
+import dataCenterImg from "@/assets/category-data-center.jpg";
+import coaxialImg from "@/assets/category-coaxial.jpg";
+import telephoneImg from "@/assets/category-telephone.jpg";
+import solarImg from "@/assets/category-solar.jpg";
+import securityControlImg from "@/assets/category-security-control.jpg";
+import networkingImg from "@/assets/category-networking.jpg";
+import germanyRackImg from "@/assets/category-germany-rack.jpg";
+import cctvCabinetImg from "@/assets/category-cctv-cabinet.jpg";
+import linkRackImg from "@/assets/category-link-rack.jpg";
 
 const categories = [
-  { icon: Cable, name: "LAN (UTP) System", color: "bg-primary" },
-  { icon: Wifi, name: "FIBER OPTIC System", color: "bg-secondary" },
-  { icon: Database, name: "FTTR/FTTx OVAL / FLAT CABLE", color: "bg-accent" },
-  { icon: Server, name: "DATA CENTER System", color: "bg-primary" },
-  { icon: Codesandbox, name: "COAXIAL (RG) System", color: "bg-secondary" },
-  { icon: Phone, name: "Telephone CABLE", color: "bg-secondary" },
-  { icon: Sun, name: "SOLAR CABLE", color: "bg-primary" },
-  { icon: Shield, name: "SECURITY AND CONTROL System", color: "bg-destructive" },
-  { icon: Network, name: "NETWORKING System", color: "bg-primary" },
-  { icon: MonitorSpeaker, name: "GERMANY RACK", color: "bg-secondary" },
-  { icon: Camera, name: "CCTV OUTDOOR CABINET", color: "bg-accent" },
-  { icon: HardDrive, name: "LINK RACK", color: "bg-accent" },
+  { image: lanUtpImg, name: "LAN (UTP) System", color: "bg-primary" },
+  { image: fiberOpticImg, name: "FIBER OPTIC System", color: "bg-secondary" },
+  { image: fttrFttxImg, name: "FTTR/FTTx OVAL / FLAT CABLE", color: "bg-accent" },
+  { image: dataCenterImg, name: "DATA CENTER System", color: "bg-primary" },
+  { image: coaxialImg, name: "COAXIAL (RG) System", color: "bg-secondary" },
+  { image: telephoneImg, name: "Telephone CABLE", color: "bg-secondary" },
+  { image: solarImg, name: "SOLAR CABLE", color: "bg-primary" },
+  { image: securityControlImg, name: "SECURITY AND CONTROL System", color: "bg-destructive" },
+  { image: networkingImg, name: "NETWORKING System", color: "bg-primary" },
+  { image: germanyRackImg, name: "GERMANY RACK", color: "bg-secondary" },
+  { image: cctvCabinetImg, name: "CCTV OUTDOOR CABINET", color: "bg-accent" },
+  { image: linkRackImg, name: "LINK RACK", color: "bg-accent" },
 ];
 
 export const CategoryGrid = () => {
@@ -33,7 +44,6 @@ export const CategoryGrid = () => {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6">
           {categories.map((category, index) => {
-            const Icon = category.icon;
             return (
               <div
                 key={index}
@@ -41,8 +51,12 @@ export const CategoryGrid = () => {
                 className="flex flex-col items-center p-6 rounded-xl bg-card hover:bg-gradient-card shadow-soft hover:shadow-card-hover transition-all duration-300 cursor-pointer group animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className={`${category.color} text-white p-4 rounded-2xl mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-soft`}>
-                  <Icon className="h-6 w-6" />
+                <div className="mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                  <img 
+                    src={category.image} 
+                    alt={category.name}
+                    className="w-16 h-16 object-cover rounded-2xl shadow-soft"
+                  />
                 </div>
                 <span className="text-sm font-medium text-center group-hover:text-primary transition-colors line-clamp-2 leading-tight">
                   {category.name}
