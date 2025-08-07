@@ -68,7 +68,7 @@ export default function Checkout() {
   const [deliveryOption, setDeliveryOption] = useState("standard");
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [voucherCode, setVoucherCode] = useState("");
-  const [appliedVoucher, setAppliedVoucher] = useState<{ code: string; discount: number } | null>(null);
+  const [appliedVouchers, setAppliedVouchers] = useState<{ code: string; discount: number }[]>([]);
   const [voucherError, setVoucherError] = useState("");
   const [addresses, setAddresses] = useState(initialAddresses);
   const [selectedAddress, setSelectedAddress] = useState(initialAddresses[0]);
@@ -105,7 +105,7 @@ export default function Checkout() {
   // Calculate totals
   const subtotal = checkoutItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const shippingFee = deliveryOption === "standard" ? 0 : 65;
-  const voucherDiscount = appliedVoucher ? appliedVoucher.discount : 0;
+  const voucherDiscount = appliedVouchers.reduce((sum, voucher) => sum + voucher.discount, 0);
   const total = subtotal + shippingFee - voucherDiscount;
 
   // Handle applying voucher
@@ -119,17 +119,29 @@ export default function Checkout() {
         "SAVE100": { code: "SAVE100", discount: 100 },
         "DISCOUNT50": { code: "DISCOUNT50", discount: 50 },
         "FREESHIP": { code: "FREESHIP", discount: 65 },
+        "VC0001": { code: "VC0001", discount: 100 },
         "VC0002": { code: "VC0002", discount: 200 }
       };
       
       const voucher = mockVouchers[voucherCode.toUpperCase() as keyof typeof mockVouchers];
       if (voucher) {
-        setAppliedVoucher(voucher);
-        setVoucherCode("");
+        // Check if voucher is already applied
+        const isAlreadyApplied = appliedVouchers.some(v => v.code === voucher.code);
+        if (isAlreadyApplied) {
+          setVoucherError("โค้ดนี้ถูกใช้แล้ว");
+        } else {
+          setAppliedVouchers(prev => [...prev, voucher]);
+          setVoucherCode("");
+        }
       } else {
         setVoucherError("โค้ดส่วนลดไม่ถูกต้อง");
       }
     }
+  };
+
+  // Handle removing voucher
+  const handleRemoveVoucher = (codeToRemove: string) => {
+    setAppliedVouchers(prev => prev.filter(voucher => voucher.code !== codeToRemove));
   };
 
   // Handle adding new address
@@ -1099,17 +1111,31 @@ export default function Checkout() {
                   </div>
                 )}
                 
-                {/* Applied Voucher Display */}
-                {appliedVoucher && (
-                  <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Check className="h-4 w-4 text-green-600" />
-                        <span className="font-medium text-green-800">{appliedVoucher.code}</span>
-                        <span className="text-sm text-green-600">ใช้แล้ว</span>
+                {/* Applied Vouchers Display */}
+                {appliedVouchers.length > 0 && (
+                  <div className="mt-3 space-y-2">
+                    {appliedVouchers.map((voucher) => (
+                      <div key={voucher.code} className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Check className="h-4 w-4 text-green-600" />
+                            <span className="font-medium text-green-800">{voucher.code}</span>
+                            <span className="text-sm text-green-600">ใช้แล้ว</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-green-600 font-medium">-฿{voucher.discount}</span>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleRemoveVoucher(voucher.code)}
+                              className="h-6 w-6 p-0 text-red-600 hover:text-red-700 hover:bg-red-50"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
                       </div>
-                      <span className="text-green-600 font-medium">-฿{appliedVoucher.discount}</span>
-                    </div>
+                    ))}
                   </div>
                 )}
               </CardContent>
