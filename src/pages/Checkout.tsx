@@ -64,12 +64,27 @@ const initialAddresses = [
 ];
 
 export default function Checkout() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Read URL parameters from cart
+  const urlParams = new URLSearchParams(location.search);
+  const urlSubtotal = Number(urlParams.get('subtotal')) || 0;
+  const urlShipping = Number(urlParams.get('shipping')) || 0;
+  const urlTotal = Number(urlParams.get('total')) || 0;
+  const selectedItemIds = urlParams.get('selectedItems')?.split(',').map(Number) || [];
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  useEffect(() => {
+    // Update checkout items when URL parameters change
+    const filteredItems = selectedItemIds.length > 0 
+      ? initialCheckoutItems.filter(item => selectedItemIds.includes(item.id))
+      : initialCheckoutItems;
+    setCheckoutItems(filteredItems);
+  }, [location.search, selectedItemIds]);
   const [deliveryOption, setDeliveryOption] = useState("standard");
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [voucherCode, setVoucherCode] = useState("");
@@ -81,7 +96,11 @@ export default function Checkout() {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editingAddress, setEditingAddress] = useState<any>(null);
-  const [checkoutItems, setCheckoutItems] = useState(initialCheckoutItems);
+  // Filter items based on selected items from cart, or use all items if no selection
+  const filteredItems = selectedItemIds.length > 0 
+    ? initialCheckoutItems.filter(item => selectedItemIds.includes(item.id))
+    : initialCheckoutItems;
+  const [checkoutItems, setCheckoutItems] = useState(filteredItems);
   const [isPaymentMethodsOpen, setIsPaymentMethodsOpen] = useState(false);
   const [selectedExtraMethods, setSelectedExtraMethods] = useState<string[]>([]);
   const [additionalPaymentMethods, setAdditionalPaymentMethods] = useState<string[]>([]);
@@ -107,11 +126,11 @@ export default function Checkout() {
     zipcode: ""
   });
 
-  // Calculate totals
-  const subtotal = checkoutItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const shippingFee = deliveryOption === "standard" ? 0 : 65;
+  // Calculate totals - use URL params if available, otherwise calculate from items
+  const subtotal = urlSubtotal > 0 ? urlSubtotal : checkoutItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const shippingFee = urlShipping >= 0 ? urlShipping : (deliveryOption === "standard" ? 0 : 65);
   const voucherDiscount = appliedVouchers.reduce((sum, voucher) => sum + voucher.discount, 0);
-  const total = subtotal + shippingFee - voucherDiscount;
+  const total = urlTotal > 0 && voucherDiscount === 0 ? urlTotal : subtotal + shippingFee - voucherDiscount;
 
   // Handle applying voucher
   const handleApplyVoucher = () => {

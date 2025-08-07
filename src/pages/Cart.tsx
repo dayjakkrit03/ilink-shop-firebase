@@ -220,17 +220,19 @@ export default function Cart() {
                 </div>
                 
                 <p className="text-xs text-muted-foreground">
-                  VAT included, where applicable
+                  รวม VAT แล้ว
                 </p>
               </div>
               
-              <Link to="/checkout">
+              <Link 
+                to={`/checkout?subtotal=${subtotal}&shipping=${shippingFee}&total=${total}&selectedItems=${selectedItems.join(',')}`}
+              >
                 <Button 
                   className="w-full mt-4" 
                   size="lg"
                   disabled={selectedItems.length === 0}
                 >
-                  PROCEED TO CHECKOUT ({selectedItems.length})
+                  ดำเนินการชำระเงิน ({selectedItems.length})
                 </Button>
               </Link>
             </div>
