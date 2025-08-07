@@ -190,18 +190,6 @@ export default function Cart() {
 
           {/* Order Summary */}
           <div className="space-y-4">
-            {/* Location */}
-            <div className="p-4 bg-card rounded-lg border">
-              <div className="flex items-center gap-2 mb-2">
-                <MapPin className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm font-medium">ที่อยู่จัดส่ง</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                10310, ราชเทวี Wang Thonglang กรุงเทพมหานคร/
-                <br />
-                Bangkok
-              </p>
-            </div>
 
             {/* Order Summary */}
             <div className="p-4 bg-card rounded-lg border">
