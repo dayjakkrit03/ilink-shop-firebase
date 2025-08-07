@@ -220,20 +220,6 @@ export default function Cart() {
                   </span>
                 </div>
                 
-                {/* Voucher */}
-                <div className="space-y-2">
-                  <div className="flex gap-2">
-                    <Input
-                      placeholder="Enter Voucher Code"
-                      value={voucherCode}
-                      onChange={(e) => setVoucherCode(e.target.value)}
-                      className="flex-1"
-                    />
-                    <Button variant="outline" size="sm">
-                      ใช้
-                    </Button>
-                  </div>
-                </div>
                 
                 <Separator />
                 
