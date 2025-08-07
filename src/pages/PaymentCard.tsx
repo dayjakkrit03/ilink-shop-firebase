@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, CreditCard } from "lucide-react";
+import switchImage from "@/assets/switch-24port.jpg";
+import cableImage from "@/assets/lan-cable-cat6.jpg";
+import routerImage from "@/assets/wifi-router-ac1200.jpg";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -11,6 +15,17 @@ interface PaymentData {
   orderId: string;
   items: any[];
 }
+
+const getProductImage = (productName: string) => {
+  if (productName.includes("Switch") || productName.includes("switch")) {
+    return switchImage;
+  } else if (productName.includes("สายแลน") || productName.includes("Cable") || productName.includes("cable")) {
+    return cableImage;
+  } else if (productName.includes("WiFi") || productName.includes("Router") || productName.includes("router")) {
+    return routerImage;
+  }
+  return switchImage; // default fallback
+};
 
 const PaymentCard = () => {
   const location = useLocation();
@@ -119,7 +134,12 @@ const PaymentCard = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 {paymentData.items.map((item, index) => (
-                  <div key={index} className="flex justify-between">
+                  <div key={index} className="flex gap-3">
+                    <img 
+                      src={getProductImage(item.name)} 
+                      alt={item.name}
+                      className="w-16 h-16 object-cover rounded-lg"
+                    />
                     <div className="flex-1">
                       <div className="font-medium">{item.name}</div>
                       <div className="text-sm text-muted-foreground">
@@ -132,11 +152,31 @@ const PaymentCard = () => {
                   </div>
                 ))}
                 
-                <div className="border-t pt-4">
-                  <div className="flex justify-between font-medium text-lg">
-                    <span>ยอดรวมทั้งหมด</span>
-                    <span>฿{paymentData.amount.toLocaleString()}</span>
-                  </div>
+                <Separator className="my-4" />
+                
+                {/* Subtotal */}
+                <div className="flex justify-between text-sm">
+                  <span>ราคาสินค้า</span>
+                  <span>฿{paymentData.items.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString()}</span>
+                </div>
+                
+                {/* Shipping discount */}
+                <div className="flex justify-between text-sm text-green-600">
+                  <span>ส่วนลดค่าจัดส่ง</span>
+                  <span>-฿65</span>
+                </div>
+                
+                {/* Coupon discount */}
+                <div className="flex justify-between text-sm text-green-600">
+                  <span>ส่วนลดจากโค้ด</span>
+                  <span>-฿100</span>
+                </div>
+                
+                <Separator className="my-4" />
+                
+                <div className="flex justify-between font-medium text-lg">
+                  <span>ยอดรวมทั้งหมด</span>
+                  <span>฿{paymentData.amount.toLocaleString()}</span>
                 </div>
               </CardContent>
             </Card>
