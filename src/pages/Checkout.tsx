@@ -68,6 +68,7 @@ export default function Checkout() {
   const [deliveryOption, setDeliveryOption] = useState("standard");
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [voucherCode, setVoucherCode] = useState("");
+  const [appliedVoucher, setAppliedVoucher] = useState<{ code: string; discount: number } | null>(null);
   const [addresses, setAddresses] = useState(initialAddresses);
   const [selectedAddress, setSelectedAddress] = useState(initialAddresses[0]);
   const [isAddressSheetOpen, setIsAddressSheetOpen] = useState(false);
@@ -103,8 +104,26 @@ export default function Checkout() {
   // Calculate totals
   const subtotal = checkoutItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const shippingFee = deliveryOption === "standard" ? 0 : 65;
-  const shippingDiscount = 0; // Could be calculated based on voucher
-  const total = subtotal + shippingFee - shippingDiscount;
+  const voucherDiscount = appliedVoucher ? appliedVoucher.discount : 0;
+  const total = subtotal + shippingFee - voucherDiscount;
+
+  // Handle applying voucher
+  const handleApplyVoucher = () => {
+    if (voucherCode.trim()) {
+      // Mock voucher validation - in real app, this would validate with backend
+      const mockVouchers = {
+        "SAVE100": { code: "SAVE100", discount: 100 },
+        "DISCOUNT50": { code: "DISCOUNT50", discount: 50 },
+        "FREESHIP": { code: "FREESHIP", discount: 65 }
+      };
+      
+      const voucher = mockVouchers[voucherCode.toUpperCase() as keyof typeof mockVouchers];
+      if (voucher) {
+        setAppliedVoucher(voucher);
+        setVoucherCode("");
+      }
+    }
+  };
 
   // Handle adding new address
   const handleAddAddress = () => {
@@ -1054,10 +1073,28 @@ export default function Checkout() {
                     onChange={(e) => setVoucherCode(e.target.value)}
                     className="flex-1"
                   />
-                  <Button variant="outline" className="bg-teal-500 text-white border-teal-500 hover:bg-teal-600">
+                  <Button 
+                    variant="outline" 
+                    className="bg-teal-500 text-white border-teal-500 hover:bg-teal-600"
+                    onClick={handleApplyVoucher}
+                  >
                     APPLY
                   </Button>
                 </div>
+                
+                {/* Applied Voucher Display */}
+                {appliedVoucher && (
+                  <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-600" />
+                        <span className="font-medium text-green-800">{appliedVoucher.code}</span>
+                        <span className="text-sm text-green-600">ใช้แล้ว</span>
+                      </div>
+                      <span className="text-green-600 font-medium">-฿{appliedVoucher.discount}</span>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
@@ -1194,9 +1231,16 @@ export default function Checkout() {
                   </span>
                 </div>
                 
+                {voucherDiscount > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span>Voucher discount</span>
+                    <span className="text-green-600">-฿{voucherDiscount.toLocaleString()}</span>
+                  </div>
+                )}
+                
                 <div className="flex justify-between text-sm">
-                  <span>Shipping discount and voucher</span>
-                  <span className="text-green-600">-฿{(65 + shippingDiscount).toLocaleString()}</span>
+                  <span>Shipping discount</span>
+                  <span className="text-green-600">-฿65.00</span>
                 </div>
                 
                 <Separator />
