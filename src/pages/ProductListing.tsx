@@ -109,7 +109,7 @@ const ProductListing = () => {
     <div className="min-h-screen bg-background">
       <Header onCartClick={() => setIsCartOpen(true)} cartItemCount={cartItemCount} />
       
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-2 sm:px-4 py-6">
         {/* Breadcrumb */}
         <nav className="text-sm text-muted-foreground mb-4">
           <span className="cursor-pointer hover:text-primary transition-colors" onClick={() => navigate('/')}>หน้าแรก</span>
@@ -184,10 +184,10 @@ const ProductListing = () => {
             </div>
 
             {/* Products Grid */}
-            <div className={`grid gap-4 mb-8 ${
+            <div className={`grid mb-8 ${
               viewMode === "grid" 
-                ? "grid-cols-2 md:grid-cols-3 xl:grid-cols-4" 
-                : "grid-cols-1"
+                ? "grid-cols-2 gap-2 sm:gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4" 
+                : "grid-cols-1 gap-4"
             }`}>
               {mockProducts.map((product) => (
                 <ProductCard

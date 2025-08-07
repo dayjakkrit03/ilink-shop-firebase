@@ -92,8 +92,8 @@ export const ProductCard = ({
       </div>
 
       {/* Product Info */}
-      <div className="p-5">
-        <h3 className="font-medium text-sm line-clamp-2 mb-2 group-hover:text-primary transition-colors leading-tight min-h-[2.5rem]">
+      <div className="p-3 sm:p-5">
+        <h3 className="font-medium text-xs sm:text-sm line-clamp-2 mb-2 group-hover:text-primary transition-colors leading-tight min-h-[2rem] sm:min-h-[2.5rem]">
           {name}
         </h3>
 
