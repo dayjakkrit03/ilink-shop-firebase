@@ -76,6 +76,8 @@ export default function Checkout() {
   const [editingAddress, setEditingAddress] = useState<any>(null);
   const [checkoutItems, setCheckoutItems] = useState(initialCheckoutItems);
   const [isPaymentMethodsOpen, setIsPaymentMethodsOpen] = useState(false);
+  const [selectedExtraMethods, setSelectedExtraMethods] = useState<string[]>([]);
+  const [additionalPaymentMethods, setAdditionalPaymentMethods] = useState<string[]>([]);
   
   // Form states for new address
   const [newAddress, setNewAddress] = useState({
@@ -190,6 +192,58 @@ export default function Checkout() {
   // Handle remove item from checkout
   const handleRemoveItem = (itemId: number) => {
     setCheckoutItems(items => items.filter(item => item.id !== itemId));
+  };
+
+  // Handle confirm payment methods
+  const handleConfirmPaymentMethods = () => {
+    const methodsToAdd = [];
+    
+    if (paymentMethod === 'linepay' && !additionalPaymentMethods.includes('linepay')) {
+      methodsToAdd.push('linepay');
+    }
+    if (paymentMethod === 'internetbanking' && !additionalPaymentMethods.includes('internetbanking')) {
+      methodsToAdd.push('internetbanking');
+    }
+    if (paymentMethod === 'banktransfer' && !additionalPaymentMethods.includes('banktransfer')) {
+      methodsToAdd.push('banktransfer');
+    }
+    
+    setAdditionalPaymentMethods(prev => [...prev, ...methodsToAdd]);
+    setIsPaymentMethodsOpen(false);
+  };
+
+  // Handle remove additional payment method
+  const handleRemovePaymentMethod = (methodToRemove: string) => {
+    setAdditionalPaymentMethods(prev => prev.filter(method => method !== methodToRemove));
+    // If the removed method was selected, reset to card
+    if (paymentMethod === methodToRemove) {
+      setPaymentMethod('card');
+    }
+  };
+
+  // Get payment method display info
+  const getPaymentMethodInfo = (method: string) => {
+    const methodsMap = {
+      linepay: {
+        icon: <Smartphone className="h-6 w-6 text-green-600" />,
+        bgColor: "bg-green-100",
+        name: "LINE Pay",
+        description: "Link your card or add sufficient funds before shopping"
+      },
+      internetbanking: {
+        icon: <Building2 className="h-6 w-6 text-blue-600" />,
+        bgColor: "bg-blue-100",
+        name: "Internet banking",
+        description: "Login with bank account to pay"
+      },
+      banktransfer: {
+        icon: <ArrowLeftRight className="h-6 w-6 text-purple-600" />,
+        bgColor: "bg-purple-100",
+        name: "Bank Transfer",
+        description: "Transfer money directly to merchant's bank account"
+      }
+    };
+    return methodsMap[method as keyof typeof methodsMap];
   };
 
   return (
@@ -886,7 +940,7 @@ export default function Checkout() {
                       </Button>
                       <Button 
                         className="bg-orange-500 hover:bg-orange-600 text-white"
-                        onClick={() => setIsPaymentMethodsOpen(false)}
+                        onClick={handleConfirmPaymentMethods}
                       >
                         Confirm
                       </Button>
@@ -928,6 +982,38 @@ export default function Checkout() {
                     </Label>
                     {paymentMethod === 'qr' && <Check className="h-5 w-5 text-green-500" />}
                   </div>
+
+                  {/* Additional Payment Methods */}
+                  {additionalPaymentMethods.map((method) => {
+                    const methodInfo = getPaymentMethodInfo(method);
+                    if (!methodInfo) return null;
+
+                    return (
+                      <div key={method} className={`flex items-center space-x-2 p-4 border-2 rounded-lg hover:border-primary/50 transition-colors ${paymentMethod === method ? 'border-primary bg-primary/5' : 'border-gray-200'}`}>
+                        <RadioGroupItem value={method} id={method} />
+                        <div className={`${methodInfo.bgColor} p-2 rounded-lg`}>
+                          {methodInfo.icon}
+                        </div>
+                        <Label htmlFor={method} className="flex-1 cursor-pointer">
+                          <div className="font-semibold text-gray-900">{methodInfo.name}</div>
+                          <div className="text-sm text-gray-500">{methodInfo.description}</div>
+                        </Label>
+                        {paymentMethod === method && <Check className="h-5 w-5 text-green-500" />}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleRemovePaymentMethod(method);
+                          }}
+                          className="h-8 w-8 p-0 text-gray-400 hover:text-red-500"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    );
+                  })}
                 </RadioGroup>
               </CardContent>
             </Card>
