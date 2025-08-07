@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ShoppingCart as CartIcon, Plus, Minus, X } from "lucide-react";
+import { ShoppingCart as CartIcon, Plus, Minus, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
   Sheet,
@@ -151,7 +151,7 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
                         className="h-6 w-6 text-destructive"
                         onClick={() => updateQuantity(item.id, 0)}
                       >
-                        <X className="h-3 w-3" />
+                        <Trash2 className="h-3 w-3" />
                       </Button>
                     </div>
                     
