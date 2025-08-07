@@ -14,6 +14,14 @@ interface PaymentData {
   amount: number;
   orderId: string;
   items: any[];
+  subtotal?: number;
+  shippingFee?: number;
+  shippingDiscount?: number;
+  voucherDiscount?: number;
+  appliedVouchers?: Array<{
+    code: string;
+    discount: number;
+  }>;
 }
 
 const getProductImage = (productName: string) => {
@@ -171,20 +179,44 @@ const PaymentQR = () => {
                 {/* Subtotal */}
                 <div className="flex justify-between text-sm">
                   <span>ราคาสินค้า</span>
-                  <span>฿{paymentData.items.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString()}</span>
+                  <span>฿{(paymentData.subtotal || paymentData.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)).toLocaleString()}</span>
                 </div>
+                
+                {/* Shipping Fee */}
+                {(paymentData.shippingFee || 0) > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span>ค่าจัดส่ง</span>
+                    <span>฿{paymentData.shippingFee!.toLocaleString()}</span>
+                  </div>
+                )}
                 
                 {/* Shipping discount */}
-                <div className="flex justify-between text-sm text-green-600">
-                  <span>ส่วนลดค่าจัดส่ง</span>
-                  <span>-฿65</span>
-                </div>
+                {(paymentData.shippingDiscount || 0) > 0 && (
+                  <div className="flex justify-between text-sm text-green-600">
+                    <span>ส่วนลดค่าจัดส่ง</span>
+                    <span>-฿{paymentData.shippingDiscount!.toLocaleString()}</span>
+                  </div>
+                )}
                 
-                {/* Coupon discount */}
-                <div className="flex justify-between text-sm text-green-600">
-                  <span>ส่วนลดจากโค้ด</span>
-                  <span>-฿100</span>
-                </div>
+                {/* Coupon discounts */}
+                {paymentData.appliedVouchers && paymentData.appliedVouchers.length > 0 && (
+                  <>
+                    {paymentData.appliedVouchers.map((voucher, index) => (
+                      <div key={index} className="flex justify-between text-sm text-green-600">
+                        <span>ส่วนลดจากโค้ด ({voucher.code})</span>
+                        <span>-฿{voucher.discount.toLocaleString()}</span>
+                      </div>
+                    ))}
+                  </>
+                )}
+                
+                {/* Fallback voucher discount if appliedVouchers is not available */}
+                {(!paymentData.appliedVouchers || paymentData.appliedVouchers.length === 0) && (paymentData.voucherDiscount || 0) > 0 && (
+                  <div className="flex justify-between text-sm text-green-600">
+                    <span>ส่วนลดจากโค้ด</span>
+                    <span>-฿{paymentData.voucherDiscount!.toLocaleString()}</span>
+                  </div>
+                )}
                 
                 <Separator className="my-4" />
                 

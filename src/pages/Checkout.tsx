@@ -286,7 +286,12 @@ export default function Checkout() {
     const paymentData = {
       amount: total,
       orderId: `ORDER-${Date.now()}`,
-      items: checkoutItems
+      items: checkoutItems,
+      subtotal: subtotal,
+      shippingFee: shippingFee,
+      shippingDiscount: deliveryOption === "standard" ? 65 : 0,
+      voucherDiscount: voucherDiscount,
+      appliedVouchers: appliedVouchers
     };
 
     // Redirect based on payment method
