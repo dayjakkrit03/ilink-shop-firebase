@@ -163,34 +163,34 @@ export const ProductCard = ({
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-spring"
         />
         {discount && (
-          <Badge className="absolute top-3 left-3 bg-sale text-sale-foreground px-3 py-1 text-xs font-bold shadow-glow animate-bounce-gentle">
+          <Badge className="absolute top-2 left-2 bg-sale text-sale-foreground px-2 py-1 text-xs font-bold shadow-soft rounded-md backdrop-blur-sm bg-opacity-90">
             -{discount}%
           </Badge>
         )}
         <Button
           size="sm"
           variant="ghost"
-          className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-all duration-300 ${
+          className={`absolute top-2 right-2 p-1.5 rounded-full backdrop-blur-md transition-all duration-300 ${
             isLiked 
-              ? "text-sale bg-white/20 hover:bg-white/30 scale-110" 
-              : "text-white/80 bg-black/20 hover:bg-white/20 hover:text-sale"
+              ? "text-sale bg-white/30 hover:bg-white/40" 
+              : "text-white/90 bg-black/30 hover:bg-white/30 hover:text-sale"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
-          <Heart className={`h-4 w-4 transition-transform ${isLiked ? "fill-current scale-110" : "hover:scale-110"}`} />
+          <Heart className={`h-3.5 w-3.5 transition-transform ${isLiked ? "fill-current" : ""}`} />
         </Button>
         {isInterlinkMall && (
-          <Badge className="absolute top-12 left-3 bg-primary text-primary-foreground px-3 py-1 text-xs font-bold shadow-glow">
+          <Badge className="absolute bottom-2 left-2 bg-primary/90 text-primary-foreground px-2 py-1 text-xs font-medium shadow-soft backdrop-blur-sm">
             InterlinkMall
           </Badge>
         )}
         {isClearanceSale && (
-          <Badge className="absolute top-12 left-3 bg-warning text-warning-foreground px-3 py-1 text-xs font-bold shadow-glow">
+          <Badge className="absolute bottom-2 left-2 bg-warning/90 text-warning-foreground px-2 py-1 text-xs font-medium shadow-soft backdrop-blur-sm">
             Clearance Sale
           </Badge>
         )}
         {isFreeShipping && (
-          <div className="absolute bottom-3 left-3 bg-success text-success-foreground text-xs px-3 py-1 rounded-full shadow-soft font-medium">
+          <div className="absolute bottom-2 right-2 bg-success/90 text-success-foreground text-xs px-2 py-1 rounded-md shadow-soft font-medium backdrop-blur-sm">
             ส่งฟรี
           </div>
         )}
