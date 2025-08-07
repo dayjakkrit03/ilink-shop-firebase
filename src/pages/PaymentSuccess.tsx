@@ -88,7 +88,7 @@ const PaymentSuccess = () => {
 
           <h3 className="font-semibold text-lg mb-4">วันที่จัดส่งของคุณ</h3>
           
-          <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4 p-4 bg-gray-50 rounded-lg">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 p-4 bg-gray-50 rounded-lg">
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Package className="h-8 w-8 text-orange-500" />
@@ -98,7 +98,7 @@ const PaymentSuccess = () => {
                 <p className="text-sm text-gray-600">{paymentData.items.length} รายการ</p>
               </div>
             </div>
-            <div className="text-right pl-20 md:pl-0">
+            <div className="text-right flex-shrink-0 pl-20 md:pl-4">
               <p className="text-sm text-gray-600">คาดว่าจะส่งภายใน</p>
               <p className="font-semibold">{formatDate(2)} - {formatDate(5)}</p>
             </div>
