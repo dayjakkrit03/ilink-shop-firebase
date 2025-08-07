@@ -19,21 +19,23 @@ const cartItems = [
     name: "Switch 24 Port Gigabit",
     price: 2899,
     quantity: 1,
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=100&h=100&fit=crop"
+    image: "/src/assets/switch-24port.jpg"
   },
   {
     id: 2,
     name: "สายแลน Cat6 UTP Cable 305m",
     price: 1599,
+    originalPrice: 1799,
+    discount: "Save ฿200",
     quantity: 2,
-    image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=100&h=100&fit=crop"
+    image: "/src/assets/lan-cable-cat6.jpg"
   },
   {
     id: 3,
     name: "WiFi Router AC1200",
     price: 1899,
     quantity: 1,
-    image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=100&h=100&fit=crop"
+    image: "/src/assets/wifi-router-ac1200.jpg"
   }
 ];
 
@@ -113,46 +115,66 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
                 </div>
                 
                 {items.map((item) => (
-                  <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg">
-                    <Checkbox
-                      checked={selectedItems.includes(item.id)}
-                      onCheckedChange={() => toggleItemSelection(item.id)}
-                    />
-                    <img 
-                      src={item.image} 
-                      alt={item.name}
-                      className="w-12 h-12 object-cover rounded"
-                    />
-                    <div className="flex-1">
-                      <h4 className="font-medium text-sm">{item.name}</h4>
-                      <p className="text-primary font-semibold">฿{item.price.toLocaleString()}</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="h-8 w-8"
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      >
-                        <Minus className="h-3 w-3" />
-                      </Button>
-                      <span className="w-8 text-center">{item.quantity}</span>
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        className="h-8 w-8"
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      >
-                        <Plus className="h-3 w-3" />
-                      </Button>
+                  <div key={item.id} className="flex flex-col gap-3 p-3 border rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <Checkbox
+                        checked={selectedItems.includes(item.id)}
+                        onCheckedChange={() => toggleItemSelection(item.id)}
+                      />
+                      <img 
+                        src={item.image} 
+                        alt={item.name}
+                        className="w-16 h-16 object-cover rounded"
+                      />
+                      <div className="flex-1">
+                        <h4 className="font-medium text-sm">{item.name}</h4>
+                        <div className="flex items-center gap-2 mt-1">
+                          <p className="text-primary font-semibold">฿{item.price.toLocaleString()}</p>
+                          {item.originalPrice && (
+                            <>
+                              <span className="text-xs text-muted-foreground line-through">
+                                ฿{item.originalPrice.toLocaleString()}
+                              </span>
+                              {item.discount && (
+                                <span className="text-xs bg-red-100 text-red-600 px-1.5 py-0.5 rounded">
+                                  {item.discount}
+                                </span>
+                              )}
+                            </>
+                          )}
+                        </div>
+                      </div>
                       <Button
                         size="icon"
                         variant="ghost"
-                        className="h-8 w-8 text-destructive"
+                        className="h-6 w-6 text-destructive"
                         onClick={() => updateQuantity(item.id, 0)}
                       >
                         <X className="h-3 w-3" />
                       </Button>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">จำนวน:</span>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          className="h-7 w-7"
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        >
+                          <Minus className="h-3 w-3" />
+                        </Button>
+                        <span className="w-8 text-center text-sm">{item.quantity}</span>
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          className="h-7 w-7"
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        >
+                          <Plus className="h-3 w-3" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 ))}
