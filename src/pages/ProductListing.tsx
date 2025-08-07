@@ -11,6 +11,14 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Grid3X3, List, ChevronLeft, ChevronRight } from "lucide-react";
 
+// Import generated images
+import ethernetWallplate from "@/assets/ethernet-wallplate.jpg";
+import tvNetworkWallplate from "@/assets/tv-network-wallplate.jpg";
+import starlinkStandardKit from "@/assets/starlink-standard-kit.jpg";
+import starlinkMini from "@/assets/starlink-mini.jpg";
+import wifiRouterAC1200 from "@/assets/wifi-router-ac1200-new.jpg";
+import ethernetPciCard from "@/assets/ethernet-pci-card.jpg";
+
 const ProductListing = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -39,7 +47,7 @@ const ProductListing = () => {
       name: "Ethernet Wallplate HD Multimedia Network Wall Plate",
       price: 221.00,
       originalPrice: null,
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=300&fit=crop",
+      image: ethernetWallplate,
       rating: 4.5,
       reviews: 128,
       discount: null,
@@ -51,7 +59,7 @@ const ProductListing = () => {
       name: "Wall Plate Professional TV & Network Wallplate for Home",
       price: 231.00,
       originalPrice: null,
-      image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=300&h=300&fit=crop",
+      image: tvNetworkWallplate,
       rating: 4.3,
       reviews: 95,
       discount: null,
@@ -63,7 +71,7 @@ const ProductListing = () => {
       name: "Starlink Standard kit v4 Gen 3",
       price: 20000.00,
       originalPrice: null,
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=300&h=300&fit=crop",
+      image: starlinkStandardKit,
       rating: 4.8,
       reviews: 234,
       discount: null,
@@ -74,7 +82,7 @@ const ProductListing = () => {
       name: "Starlink mini",
       price: 19000.00,
       originalPrice: null,
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&h=300&fit=crop",
+      image: starlinkMini,
       rating: 4.6,
       reviews: 156,
       discount: null,
@@ -85,7 +93,7 @@ const ProductListing = () => {
       name: "imou HR12F มาตรฐาน1วัน AC1200 Dual-Band Wi-Fi Router By Vika",
       price: 390.00,
       originalPrice: null,
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=300&h=300&fit=crop",
+      image: wifiRouterAC1200,
       rating: 4.2,
       reviews: 67,
       discount: null,
@@ -96,7 +104,7 @@ const ProductListing = () => {
       name: "10M/100M/1000Mbps Network Card Gigabit Ethernet PCI Express",
       price: 87.18,
       originalPrice: 174.36,
-      image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=300&h=300&fit=crop",
+      image: ethernetPciCard,
       rating: 4.4,
       reviews: 89,
       discount: 50,
