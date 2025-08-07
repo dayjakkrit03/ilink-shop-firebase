@@ -3,50 +3,54 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "./ProductCard";
 import { Clock } from "lucide-react";
+import ethernetPciCard from "@/assets/ethernet-pci-card.jpg";
+import wifiRouterAc1200 from "@/assets/wifi-router-ac1200.jpg";
+import switch24port from "@/assets/switch-24port.jpg";
+import lanCat5eLszh from "@/assets/lan-cat5e-lszh.jpg";
 
 const flashSaleProducts = [
   {
     id: 1,
-    name: "แท็บเล็ต 10.1 นิ้ว 128GB WiFi+4G",
-    price: 2990,
-    originalPrice: 5990,
+    name: "Ethernet PCI Network Card Gigabit",
+    price: 650,
+    originalPrice: 1300,
     discount: 50,
     rating: 4.6,
     reviews: 234,
-    image: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=400&h=400&fit=crop",
+    image: ethernetPciCard,
     isFreeShipping: true,
   },
   {
     id: 2,
-    name: "หม้อข้าวไฟฟ้า 1.8 ลิตร ผิวต้านติด",
-    price: 590,
-    originalPrice: 1190,
+    name: "WiFi Router AC1200 Dual Band",
+    price: 1490,
+    originalPrice: 2980,
     discount: 50,
     rating: 4.7,
     reviews: 345,
-    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=400&fit=crop",
+    image: wifiRouterAc1200,
     isFreeShipping: true,
   },
   {
     id: 3,
-    name: "เครื่องปั่นน้ำผลไม้ ความจุ 1.5L",
-    price: 890,
-    originalPrice: 1780,
+    name: "24-Port Managed Switch Gigabit",
+    price: 1945,
+    originalPrice: 3890,
     discount: 50,
     rating: 4.5,
     reviews: 167,
-    image: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=400&h=400&fit=crop",
+    image: switch24port,
     isFreeShipping: true,
   },
   {
     id: 4,
-    name: "ลำโพงบลูทูธ กันน้ำ เสียงใส 360 องศา",
-    price: 799,
-    originalPrice: 1598,
+    name: "CAT5E UTP Cable LSZH 305m",
+    price: 1297,
+    originalPrice: 2594,
     discount: 50,
     rating: 4.8,
     reviews: 456,
-    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=400&h=400&fit=crop",
+    image: lanCat5eLszh,
     isFreeShipping: true,
   },
 ];
