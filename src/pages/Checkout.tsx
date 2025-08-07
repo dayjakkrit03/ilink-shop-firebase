@@ -196,22 +196,12 @@ export default function Checkout() {
 
   // Handle confirm payment methods
   const handleConfirmPaymentMethods = () => {
-    const methodsToAdd = [];
-    
-    if (paymentMethod === 'linepay' && !additionalPaymentMethods.includes('linepay')) {
-      methodsToAdd.push('linepay');
-    }
-    if (paymentMethod === 'internetbanking' && !additionalPaymentMethods.includes('internetbanking')) {
-      methodsToAdd.push('internetbanking');
-    }
-    if (paymentMethod === 'banktransfer' && !additionalPaymentMethods.includes('banktransfer')) {
-      methodsToAdd.push('banktransfer');
-    }
-    if (paymentMethod === 'cod' && !additionalPaymentMethods.includes('cod')) {
-      methodsToAdd.push('cod');
-    }
+    const methodsToAdd = selectedExtraMethods.filter(method => 
+      !additionalPaymentMethods.includes(method)
+    );
     
     setAdditionalPaymentMethods(prev => [...prev, ...methodsToAdd]);
+    setSelectedExtraMethods([]);
     setIsPaymentMethodsOpen(false);
   };
 
