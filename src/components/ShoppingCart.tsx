@@ -55,6 +55,7 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
   const [selectedItems, setSelectedItems] = useState<number[]>(cartItems.map(item => item.id)); // Select all by default
 
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  const totalUniqueItems = items.length; // Count unique items, not quantities
   const selectedTotalItems = items
     .filter(item => selectedItems.includes(item.id))
     .reduce((sum, item) => sum + item.quantity, 0);
@@ -91,7 +92,7 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <CartIcon className="h-5 w-5" />
-            ตะกร้าสินค้า ({totalItems} รายการ)
+            ตะกร้าสินค้า ({totalUniqueItems} รายการ)
           </SheetTitle>
         </SheetHeader>
         
@@ -154,7 +155,7 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
                       </Button>
                     </div>
                     
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-end gap-2">
                       <span className="text-sm text-muted-foreground">จำนวน:</span>
                       <div className="flex items-center gap-2">
                         <Button
