@@ -11,13 +11,13 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Grid3X3, List, ChevronLeft, ChevronRight } from "lucide-react";
 
-// Import generated images
-import ethernetWallplate from "@/assets/ethernet-wallplate.jpg";
-import tvNetworkWallplate from "@/assets/tv-network-wallplate.jpg";
-import starlinkStandardKit from "@/assets/starlink-standard-kit.jpg";
-import starlinkMini from "@/assets/starlink-mini.jpg";
-import wifiRouterAC1200 from "@/assets/wifi-router-ac1200-new.jpg";
-import ethernetPciCard from "@/assets/ethernet-pci-card.jpg";
+// Import LAN cable product images
+import lanCat5eBox from "@/assets/lan-cat5e-box.jpg";
+import lanCat5eReel from "@/assets/lan-cat5e-reel.jpg";
+import lanCat5ePremium from "@/assets/lan-cat5e-premium.jpg";
+import lanCat5eStrand from "@/assets/lan-cat5e-strand.jpg";
+import lanCat5ePlenum from "@/assets/lan-cat5e-plenum.jpg";
+import lanCat5eLszh from "@/assets/lan-cat5e-lszh.jpg";
 
 const ProductListing = () => {
   const [searchParams] = useSearchParams();
@@ -44,72 +44,72 @@ const ProductListing = () => {
   const mockProducts = [
     {
       id: 1,
-      name: "Ethernet Wallplate HD Multimedia Network Wall Plate",
-      price: 221.00,
+      name: "US-9015LSZH CAT 5E UTP Cable LSZH 305m",
+      price: 4837.00,
       originalPrice: null,
-      image: ethernetWallplate,
-      rating: 4.5,
-      reviews: 128,
+      image: lanCat5eLszh,
+      rating: 4.8,
+      reviews: 156,
       discount: null,
       isInterlinkMall: true,
       badge: "InterlinkMall"
     },
     {
       id: 2,
-      name: "Wall Plate Professional TV & Network Wallplate for Home",
-      price: 231.00,
+      name: "US-9025LSZH CAT 5E STRAND Cable 305m",
+      price: 6046.00,
       originalPrice: null,
-      image: tvNetworkWallplate,
-      rating: 4.3,
-      reviews: 95,
+      image: lanCat5eStrand,
+      rating: 4.6,
+      reviews: 89,
       discount: null,
       isFreeShipping: true,
       badge: "InterlinkMall"
     },
     {
       id: 3,
-      name: "Starlink Standard kit v4 Gen 3",
-      price: 20000.00,
+      name: "US-9055E CAT 5E UTP Cable Outdoor 305m",
+      price: 37771.00,
       originalPrice: null,
-      image: starlinkStandardKit,
-      rating: 4.8,
+      image: lanCat5eReel,
+      rating: 4.9,
       reviews: 234,
       discount: null,
       badge: "สินค้าแนะนำ"
     },
     {
       id: 4,
-      name: "Starlink mini",
-      price: 19000.00,
+      name: "US-9035 CAT 5E UTP Cable Indoor 305m",
+      price: 6094.00,
       originalPrice: null,
-      image: starlinkMini,
-      rating: 4.6,
-      reviews: 156,
+      image: lanCat5eBox,
+      rating: 4.7,
+      reviews: 178,
       discount: null,
       badge: "สินค้าแนะนำ"
     },
     {
       id: 5,
-      name: "imou HR12F มาตรฐาน1วัน AC1200 Dual-Band Wi-Fi Router By Vika",
-      price: 390.00,
+      name: "US-9045 CAT 5E UTP Cable Plenum 305m",
+      price: 5896.00,
       originalPrice: null,
-      image: wifiRouterAC1200,
-      rating: 4.2,
-      reviews: 67,
+      image: lanCat5ePlenum,
+      rating: 4.5,
+      reviews: 123,
       discount: null,
       badge: null
     },
     {
       id: 6,
-      name: "10M/100M/1000Mbps Network Card Gigabit Ethernet PCI Express",
-      price: 87.18,
-      originalPrice: 174.36,
-      image: ethernetPciCard,
-      rating: 4.4,
-      reviews: 89,
-      discount: 50,
-      isClearanceSale: true,
-      badge: "Clearance Sale"
+      name: "US-9015M CAT 5E UTP Cable Premium 305m",
+      price: 6420.00,
+      originalPrice: null,
+      image: lanCat5ePremium,
+      rating: 4.6,
+      reviews: 145,
+      discount: null,
+      isClearanceSale: false,
+      badge: "InterlinkMall"
     }
   ];
 
