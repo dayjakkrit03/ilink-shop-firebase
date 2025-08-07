@@ -3,7 +3,7 @@ import { ArrowLeft, MapPin, Truck, CreditCard, Wallet, Plus, Home, Building, Edi
 import mastercardLogo from "@/assets/mastercard-logo.svg";
 import jcbLogo from "@/assets/jcb-logo.svg";
 import visaLogo from "@/assets/visa-logo.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -65,6 +65,7 @@ export default function Checkout() {
   }, []);
 
   const location = useLocation();
+  const navigate = useNavigate();
   const [deliveryOption, setDeliveryOption] = useState("standard");
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [voucherCode, setVoucherCode] = useState("");
@@ -274,6 +275,26 @@ export default function Checkout() {
   // Handle save invoice info
   const handleSaveInvoiceInfo = () => {
     setIsInvoiceSheetOpen(false);
+  };
+
+  // Handle place order
+  const handlePlaceOrder = () => {
+    const paymentData = {
+      amount: total,
+      orderId: `ORDER-${Date.now()}`,
+      items: checkoutItems
+    };
+
+    // Redirect based on payment method
+    if (paymentMethod === 'card') {
+      navigate('/payment/card', { state: paymentData });
+    } else if (paymentMethod === 'qr') {
+      navigate('/payment/qr', { state: paymentData });
+    } else {
+      // For other payment methods, you can add more conditions
+      // For now, default to card payment
+      navigate('/payment/card', { state: paymentData });
+    }
   };
 
   // Get payment method display info
@@ -1293,7 +1314,11 @@ export default function Checkout() {
                   <span className="text-orange-600">฿{total.toLocaleString()}</span>
                 </div>
                 
-                <Button className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white" size="lg">
+                <Button 
+                  className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white" 
+                  size="lg"
+                  onClick={handlePlaceOrder}
+                >
                   PLACE ORDER NOW
                 </Button>
               </CardContent>
