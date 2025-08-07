@@ -72,7 +72,8 @@ export default function Checkout() {
   const urlSubtotal = Number(urlParams.get('subtotal')) || 0;
   const urlShipping = Number(urlParams.get('shipping')) || 0;
   const urlTotal = Number(urlParams.get('total')) || 0;
-  const selectedItemIds = urlParams.get('selectedItems')?.split(',').map(Number) || [];
+  const cartItemsParam = urlParams.get('items');
+  const cartItems = cartItemsParam ? JSON.parse(decodeURIComponent(cartItemsParam)) : [];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -80,11 +81,10 @@ export default function Checkout() {
 
   useEffect(() => {
     // Update checkout items when URL parameters change
-    const filteredItems = selectedItemIds.length > 0 
-      ? initialCheckoutItems.filter(item => selectedItemIds.includes(item.id))
-      : initialCheckoutItems;
-    setCheckoutItems(filteredItems);
-  }, [location.search, selectedItemIds]);
+    if (cartItems.length > 0) {
+      setCheckoutItems(cartItems);
+    }
+  }, [location.search]);
   const [deliveryOption, setDeliveryOption] = useState("standard");
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [voucherCode, setVoucherCode] = useState("");
@@ -96,11 +96,8 @@ export default function Checkout() {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editingAddress, setEditingAddress] = useState<any>(null);
-  // Filter items based on selected items from cart, or use all items if no selection
-  const filteredItems = selectedItemIds.length > 0 
-    ? initialCheckoutItems.filter(item => selectedItemIds.includes(item.id))
-    : initialCheckoutItems;
-  const [checkoutItems, setCheckoutItems] = useState(filteredItems);
+  // Use cart items if available, otherwise use initial items
+  const [checkoutItems, setCheckoutItems] = useState(cartItems.length > 0 ? cartItems : initialCheckoutItems);
   const [isPaymentMethodsOpen, setIsPaymentMethodsOpen] = useState(false);
   const [selectedExtraMethods, setSelectedExtraMethods] = useState<string[]>([]);
   const [additionalPaymentMethods, setAdditionalPaymentMethods] = useState<string[]>([]);

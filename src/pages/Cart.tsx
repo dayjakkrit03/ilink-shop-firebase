@@ -225,7 +225,7 @@ export default function Cart() {
               </div>
               
               <Link 
-                to={`/checkout?subtotal=${subtotal}&shipping=${shippingFee}&total=${total}&selectedItems=${selectedItems.join(',')}`}
+                to={`/checkout?subtotal=${subtotal}&shipping=${shippingFee}&total=${total}&items=${encodeURIComponent(JSON.stringify(selectedItemsData))}`}
               >
                 <Button 
                   className="w-full mt-4" 
