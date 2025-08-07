@@ -17,6 +17,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
+import switch24PortImage from "@/assets/switch-24port.jpg";
+import lanCableCat6Image from "@/assets/lan-cable-cat6.jpg";
+import wifiRouterAC1200Image from "@/assets/wifi-router-ac1200.jpg";
+
 // Mock data for checkout items (in real app, this would come from state/props)
 const initialCheckoutItems = [
   {
@@ -24,7 +28,7 @@ const initialCheckoutItems = [
     name: "Switch 24 Port Gigabit",
     price: 2899,
     quantity: 1,
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=100&h=100&fit=crop",
+    image: switch24PortImage,
     store: "TechMall Official Store"
   },
   {
@@ -33,7 +37,7 @@ const initialCheckoutItems = [
     price: 1599,
     originalPrice: 1799,
     quantity: 2,
-    image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=100&h=100&fit=crop",
+    image: lanCableCat6Image,
     store: "NetworkPro Store",
     discount: "Save ฿200"
   },
@@ -42,7 +46,7 @@ const initialCheckoutItems = [
     name: "WiFi Router AC1200",
     price: 1899,
     quantity: 1,
-    image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=100&h=100&fit=crop",
+    image: wifiRouterAC1200Image,
     store: "ConnectTech Store"
   }
 ];

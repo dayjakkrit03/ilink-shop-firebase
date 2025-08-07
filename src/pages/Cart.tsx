@@ -7,6 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import switch24PortImage from "@/assets/switch-24port.jpg";
+import lanCableCat6Image from "@/assets/lan-cable-cat6.jpg";
+import wifiRouterAC1200Image from "@/assets/wifi-router-ac1200.jpg";
 
 // Mock cart data - same as in ShoppingCart component
 const cartItems = [
@@ -15,7 +18,7 @@ const cartItems = [
     name: "Switch 24 Port Gigabit",
     price: 2899,
     quantity: 1,
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=100&h=100&fit=crop",
+    image: switch24PortImage,
     store: "TechMall Official Store"
   },
   {
@@ -24,7 +27,7 @@ const cartItems = [
     price: 1599,
     originalPrice: 1799,
     quantity: 2,
-    image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=100&h=100&fit=crop",
+    image: lanCableCat6Image,
     store: "NetworkPro Store",
     discount: "Save ฿200"
   },
@@ -33,7 +36,7 @@ const cartItems = [
     name: "WiFi Router AC1200",
     price: 1899,
     quantity: 1,
-    image: "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=100&h=100&fit=crop",
+    image: wifiRouterAC1200Image,
     store: "ConnectTech Store"
   }
 ];
