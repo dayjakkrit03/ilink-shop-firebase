@@ -8,6 +8,7 @@ import solarCable from "@/assets/solar-cable-red.jpg";
 import telephoneCable from "@/assets/telephone-cable.jpg";
 import serverRack from "@/assets/server-rack-19inch.jpg";
 import lanCat5eBox from "@/assets/lan-cat5e-box.jpg";
+import fiberMediaConverter from "@/assets/fiber-media-converter.jpg";
 import starlinkStandardKit from "@/assets/starlink-standard-kit.jpg";
 
 // Mock product data with Interlink categories
@@ -91,13 +92,13 @@ const products = [
   },
   {
     id: 8,
-    name: "Telephone Cable 4-Pair Indoor 305m",
-    price: 980,
-    originalPrice: 1250,
-    discount: 22,
-    rating: 4.4,
-    reviews: 98,
-    image: telephoneCable,
+    name: "UT-0216 Fiber Media Converter RJ45",
+    price: 2247,
+    originalPrice: 2800,
+    discount: 20,
+    rating: 4.6,
+    reviews: 124,
+    image: fiberMediaConverter,
     isFreeShipping: true,
   },
 ];
