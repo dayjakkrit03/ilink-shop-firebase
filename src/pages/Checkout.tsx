@@ -817,16 +817,16 @@ export default function Checkout() {
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg">Select payment method</CardTitle>
-                <Dialog open={isPaymentMethodsOpen} onOpenChange={setIsPaymentMethodsOpen}>
-                  <DialogTrigger asChild>
+                <Sheet open={isPaymentMethodsOpen} onOpenChange={setIsPaymentMethodsOpen}>
+                  <SheetTrigger asChild>
                     <Button variant="ghost" size="sm" className="text-primary self-start p-0 h-auto">
                       View all methods »
                     </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[500px]">
-                    <DialogHeader>
-                      <DialogTitle>Select Payment Method</DialogTitle>
-                    </DialogHeader>
+                  </SheetTrigger>
+                  <SheetContent side="right" className="w-[500px]">
+                    <SheetHeader>
+                      <SheetTitle>Select Payment Method</SheetTitle>
+                    </SheetHeader>
                     
                     <div className="mt-4 space-y-3">
                       <h3 className="text-sm font-medium text-gray-700">Recommended method(s)</h3>
@@ -954,8 +954,8 @@ export default function Checkout() {
                         Confirm
                       </Button>
                     </div>
-                  </DialogContent>
-                </Dialog>
+                  </SheetContent>
+                </Sheet>
               </CardHeader>
               <CardContent className="space-y-3">
                 <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
