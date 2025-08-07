@@ -207,6 +207,9 @@ export default function Checkout() {
     if (paymentMethod === 'banktransfer' && !additionalPaymentMethods.includes('banktransfer')) {
       methodsToAdd.push('banktransfer');
     }
+    if (paymentMethod === 'cod' && !additionalPaymentMethods.includes('cod')) {
+      methodsToAdd.push('cod');
+    }
     
     setAdditionalPaymentMethods(prev => [...prev, ...methodsToAdd]);
     setIsPaymentMethodsOpen(false);
@@ -241,6 +244,12 @@ export default function Checkout() {
         bgColor: "bg-purple-100",
         name: "Bank Transfer",
         description: "Transfer money directly to merchant's bank account"
+      },
+      cod: {
+        icon: <Truck className="h-6 w-6 text-orange-600" />,
+        bgColor: "bg-orange-100",
+        name: "Cash on Delivery",
+        description: "Pay when your order is delivered"
       }
     };
     return methodsMap[method as keyof typeof methodsMap];
