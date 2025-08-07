@@ -12,6 +12,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 
+// Import product images
+import switch24port from "@/assets/switch-24port.jpg";
+import lanCableCat6 from "@/assets/lan-cable-cat6.jpg";
+import wifiRouterAC1200 from "@/assets/wifi-router-ac1200.jpg";
+
 // Mock cart data
 const cartItems = [
   {
@@ -19,7 +24,7 @@ const cartItems = [
     name: "Switch 24 Port Gigabit",
     price: 2899,
     quantity: 1,
-    image: "/src/assets/switch-24port.jpg"
+    image: switch24port
   },
   {
     id: 2,
@@ -28,14 +33,14 @@ const cartItems = [
     originalPrice: 1799,
     discount: "Save ฿200",
     quantity: 2,
-    image: "/src/assets/lan-cable-cat6.jpg"
+    image: lanCableCat6
   },
   {
     id: 3,
     name: "WiFi Router AC1200",
     price: 1899,
     quantity: 1,
-    image: "/src/assets/wifi-router-ac1200.jpg"
+    image: wifiRouterAC1200
   }
 ];
 
