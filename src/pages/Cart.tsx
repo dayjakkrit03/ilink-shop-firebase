@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, Plus, Minus, X, MapPin } from "lucide-react";
+import { ArrowLeft, Plus, Minus, Trash2, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -102,7 +102,7 @@ export default function Cart() {
               />
               <span className="font-medium">เลือกทั้งหมด ({items.length} รายการ)</span>
               <Button variant="ghost" size="sm" className="ml-auto text-destructive">
-                ลบ
+                <Trash2 className="h-4 w-4" />
               </Button>
             </div>
 
@@ -177,7 +177,7 @@ export default function Cart() {
                             className="h-8 w-8 text-destructive"
                             onClick={() => updateQuantity(item.id, 0)}
                           >
-                            <X className="h-4 w-4" />
+                            <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
                       </div>
