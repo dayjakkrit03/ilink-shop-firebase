@@ -108,7 +108,12 @@ const PaymentCard = () => {
                     <div className="text-gray-500 text-sm">
                       ปุ่มชำระเงินจะแสดงที่นี่
                       <br />
-                      (K-Payment Gateway Button)
+                      <button 
+                        onClick={() => navigate('/payment/success', { state: { paymentData } })}
+                        className="text-blue-600 hover:text-blue-800 underline cursor-pointer"
+                      >
+                        (K-Payment Gateway Button)
+                      </button>
                     </div>
                   </div>
                   
