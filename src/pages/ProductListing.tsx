@@ -208,37 +208,49 @@ const ProductListing = () => {
             </div>
 
             {/* Pagination */}
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-1 sm:gap-2 flex-wrap">
               <Button
                 variant="outline"
                 size="sm"
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage(currentPage - 1)}
+                className="text-xs sm:text-sm px-2 sm:px-3"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
               
-              {[1, 2, 3, 4, 5].map((page) => (
-                <Button
-                  key={page}
-                  variant={page === currentPage ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setCurrentPage(page)}
-                >
-                  {page}
-                </Button>
-              ))}
+              {/* Show fewer pages on mobile */}
+              <div className="flex gap-1 sm:gap-2">
+                {(window.innerWidth < 640 ? [1, 2, 3] : [1, 2, 3, 4, 5]).map((page) => (
+                  <Button
+                    key={page}
+                    variant={page === currentPage ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setCurrentPage(page)}
+                    className="text-xs sm:text-sm px-2 sm:px-3 min-w-[32px] sm:min-w-[36px]"
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </div>
               
-              <span className="text-sm text-muted-foreground mx-2">...</span>
-              <Button variant="outline" size="sm">64</Button>
+              <span className="text-xs sm:text-sm text-muted-foreground mx-1 sm:mx-2">...</span>
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="text-xs sm:text-sm px-2 sm:px-3 min-w-[32px] sm:min-w-[36px]"
+              >
+                64
+              </Button>
               
               <Button
                 variant="outline"
                 size="sm"
                 disabled={currentPage === totalPages}
                 onClick={() => setCurrentPage(currentPage + 1)}
+                className="text-xs sm:text-sm px-2 sm:px-3"
               >
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </div>
           </div>
