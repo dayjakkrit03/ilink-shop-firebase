@@ -120,7 +120,7 @@ const ProductDetail = () => {
     <div className="min-h-screen bg-background">
       <Header onCartClick={() => setIsCartVisible(true)} />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 max-w-full overflow-hidden">
         {/* Breadcrumb */}
         <nav className="text-sm text-muted-foreground mb-8 overflow-hidden">
           <div className="flex flex-wrap items-center gap-2">
