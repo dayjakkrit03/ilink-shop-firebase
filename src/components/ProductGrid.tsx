@@ -103,7 +103,11 @@ const products = [
   },
 ];
 
-export const ProductGrid = () => {
+interface ProductGridProps {
+  onAddToCart?: () => void;
+}
+
+export const ProductGrid = ({ onAddToCart }: ProductGridProps) => {
   return (
     <section className="py-12 bg-gradient-subtle">
       <div className="container mx-auto px-4">
@@ -122,7 +126,7 @@ export const ProductGrid = () => {
               key={product.id}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <ProductCard {...product} />
+              <ProductCard {...product} onAddToCart={onAddToCart} />
             </div>
           ))}
         </div>

@@ -19,7 +19,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header onCartClick={() => setIsCartOpen(true)} cartItemCount={cartItemCount} />
       <HeroSection />
-      <ProductGrid />
+      <ProductGrid onAddToCart={() => setIsCartOpen(true)} />
       <CategoryGrid />
       <FlashSale />
       <InterlinkMall />
