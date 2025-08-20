@@ -122,25 +122,27 @@ const ProductDetail = () => {
       
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
-        <nav className="text-sm text-muted-foreground mb-8">
-          <span 
-            className="hover:text-primary cursor-pointer" 
-            onClick={() => navigate('/')}
-          >
-            หน้าแรก
-          </span>
-          <span className="mx-2">/</span>
-          <span 
-            className="hover:text-primary cursor-pointer"
-            onClick={() => navigate('/products')}
-          >
-            สินค้า
-          </span>
-          <span className="mx-2">/</span>
-          <span className="text-primary">{product.name}</span>
+        <nav className="text-sm text-muted-foreground mb-8 overflow-hidden">
+          <div className="flex flex-wrap items-center gap-2">
+            <span 
+              className="hover:text-primary cursor-pointer" 
+              onClick={() => navigate('/')}
+            >
+              หน้าแรก
+            </span>
+            <span>/</span>
+            <span 
+              className="hover:text-primary cursor-pointer"
+              onClick={() => navigate('/products')}
+            >
+              สินค้า
+            </span>
+            <span>/</span>
+            <span className="text-primary truncate">{product.name}</span>
+          </div>
         </nav>
 
-        <div className="grid lg:grid-cols-5 gap-12 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-12 mb-12">
           {/* Product Images */}
           <div className="lg:col-span-2 space-y-4 relative">
             <div className="aspect-square bg-muted/30 rounded-lg overflow-hidden relative">
@@ -159,10 +161,10 @@ const ProductDetail = () => {
               )}
             </div>
             
-            {/* Zoom overlay */}
+            {/* Zoom overlay - Only show on desktop */}
             {showZoom && (
               <div 
-                className="absolute top-0 left-full ml-4 w-96 h-96 bg-white rounded-lg shadow-xl border overflow-hidden z-50"
+                className="hidden lg:block absolute top-0 left-full ml-4 w-96 h-96 bg-white rounded-lg shadow-xl border overflow-hidden z-50"
                 style={{
                   backgroundImage: `url(${product.images[selectedImage]})`,
                   backgroundSize: '200%',
@@ -173,13 +175,14 @@ const ProductDetail = () => {
             )}
 
             {/* Thumbnail Carousel */}
-            <div className="max-w-md mx-auto">
+            <div className="w-full">
               <Carousel className="w-full">
                 <CarouselContent className="-ml-2">
                   {product.images.map((image, index) => (
-                    <CarouselItem key={index} className="pl-2 basis-1/4">
+                    <CarouselItem key={index} className="pl-2 basis-1/4 sm:basis-1/5">
                       <button
                         onMouseEnter={() => setSelectedImage(index)}
+                        onClick={() => setSelectedImage(index)}
                         className={`aspect-square rounded-lg overflow-hidden border-2 transition-colors w-full ${
                           selectedImage === index 
                             ? 'border-primary' 
@@ -208,10 +211,10 @@ const ProductDetail = () => {
           </div>
 
           {/* Product Info */}
-          <div className="lg:col-span-3 space-y-6">
+          <div className="lg:col-span-3 space-y-4 lg:space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
-              <p className="text-muted-foreground">Brand: {product.brand} | Model (SKU): {product.model} | หน่วยสินค้า: BX.</p>
+              <h1 className="text-2xl md:text-3xl font-bold mb-2 break-words">{product.name}</h1>
+              <p className="text-muted-foreground text-sm md:text-base break-words">Brand: {product.brand} | Model (SKU): {product.model} | หน่วยสินค้า: BX.</p>
             </div>
 
             {/* Rating */}
@@ -235,12 +238,12 @@ const ProductDetail = () => {
 
             {/* Price */}
             <div className="space-y-2">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl font-bold text-sale">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="text-2xl md:text-3xl font-bold text-sale">
                   ฿{product.price.toLocaleString()}
                 </span>
                 {product.originalPrice && (
-                  <span className="text-xl text-muted-foreground line-through">
+                  <span className="text-lg md:text-xl text-muted-foreground line-through">
                     ฿{product.originalPrice.toLocaleString()}
                   </span>
                 )}
@@ -255,10 +258,10 @@ const ProductDetail = () => {
 
             {/* Promotions */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="text-muted-foreground font-medium">Promotions:</span>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-muted-foreground font-medium text-sm md:text-base">Promotions:</span>
                 <Badge className="bg-primary text-primary-foreground">B2</Badge>
-                <Badge variant="outline" className="text-primary border-primary">
+                <Badge variant="outline" className="text-primary border-primary text-xs md:text-sm">
                   Buy 2, get 3% off. Buy 4, get 5% off.
                 </Badge>
               </div>
@@ -266,12 +269,12 @@ const ProductDetail = () => {
 
             {/* Delivery Options */}
             <div className="space-y-3">
-              <h3 className="text-muted-foreground font-medium">Delivery Options:</h3>
+              <h3 className="text-muted-foreground font-medium text-sm md:text-base">Delivery Options:</h3>
               <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">กรุงเทพมหานคร/ Bangkok, วังทองหลาง/ Wang Thonglang, 10310</span>
-                  <Button variant="link" className="text-primary text-sm p-0 h-auto">CHANGE</Button>
+                <div className="flex flex-wrap items-start gap-2">
+                  <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0 mt-0.5" />
+                  <span className="text-sm flex-1 break-words">กรุงเทพมหานคร/ Bangkok, วังทองหลาง/ Wang Thonglang, 10310</span>
+                  <Button variant="link" className="text-primary text-sm p-0 h-auto whitespace-nowrap">CHANGE</Button>
                 </div>
                 <div className="flex items-center gap-2">
                   <Package className="h-4 w-4 text-muted-foreground" />
@@ -282,58 +285,64 @@ const ProductDetail = () => {
             </div>
 
             {/* Return & Warranty */}
-            <div className="flex items-center gap-2">
-              <span className="text-muted-foreground font-medium">Return & Warranty:</span>
-              <RotateCcw className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm">Change of Mind • 7 Days Free Return • Warranty not available</span>
+            <div className="flex flex-wrap items-start gap-2">
+              <span className="text-muted-foreground font-medium text-sm md:text-base">Return & Warranty:</span>
+              <div className="flex items-center gap-2">
+                <RotateCcw className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                <span className="text-sm break-words">Change of Mind • 7 Days Free Return • Warranty not available</span>
+              </div>
             </div>
 
             {/* Color Family */}
-            <div className="flex items-center gap-4">
-              <span className="text-muted-foreground font-medium">Color Family:</span>
-              <RadioGroup value={selectedColor} onValueChange={setSelectedColor} className="flex gap-3">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Black" id="black" />
-                  <Label htmlFor="black" className="flex items-center gap-2 cursor-pointer">
-                    <div className="w-6 h-6 bg-black rounded border"></div>
-                    Black
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Silver" id="silver" />
-                  <Label htmlFor="silver" className="flex items-center gap-2 cursor-pointer">
-                    <div className="w-6 h-6 bg-gray-300 rounded border"></div>
-                    Silver
-                  </Label>
-                </div>
-              </RadioGroup>
-              <span className="text-sm text-muted-foreground">({selectedColor})</span>
+            <div className="space-y-3 sm:space-y-0 sm:flex sm:items-center sm:gap-4">
+              <span className="text-muted-foreground font-medium text-sm md:text-base">Color Family:</span>
+              <div className="flex flex-wrap items-center gap-3">
+                <RadioGroup value={selectedColor} onValueChange={setSelectedColor} className="flex gap-3">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Black" id="black" />
+                    <Label htmlFor="black" className="flex items-center gap-2 cursor-pointer">
+                      <div className="w-6 h-6 bg-black rounded border"></div>
+                      Black
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="Silver" id="silver" />
+                    <Label htmlFor="silver" className="flex items-center gap-2 cursor-pointer">
+                      <div className="w-6 h-6 bg-gray-300 rounded border"></div>
+                      Silver
+                    </Label>
+                  </div>
+                </RadioGroup>
+                <span className="text-sm text-muted-foreground">({selectedColor})</span>
+              </div>
             </div>
 
             {/* Storage Capacity */}
-            <div className="flex items-center gap-4">
-              <span className="text-muted-foreground font-medium">Storage Capacity:</span>
-              <RadioGroup value={selectedStorage} onValueChange={setSelectedStorage} className="flex gap-3">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="512GB" id="512gb" />
-                  <Label htmlFor="512gb" className="cursor-pointer border rounded-lg px-3 py-2 hover:bg-muted/50 transition-colors">
-                    512GB
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="1TB" id="1tb" />
-                  <Label htmlFor="1tb" className="cursor-pointer border rounded-lg px-3 py-2 hover:bg-muted/50 transition-colors">
-                    1TB
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="2TB" id="2tb" />
-                  <Label htmlFor="2tb" className="cursor-pointer border rounded-lg px-3 py-2 hover:bg-muted/50 transition-colors">
-                    2TB
-                  </Label>
-                </div>
-              </RadioGroup>
-              <span className="text-sm text-muted-foreground">({selectedStorage})</span>
+            <div className="space-y-3 sm:space-y-0 sm:flex sm:items-center sm:gap-4">
+              <span className="text-muted-foreground font-medium text-sm md:text-base">Storage Capacity:</span>
+              <div className="flex flex-wrap items-center gap-3">
+                <RadioGroup value={selectedStorage} onValueChange={setSelectedStorage} className="flex flex-wrap gap-3">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="512GB" id="512gb" />
+                    <Label htmlFor="512gb" className="cursor-pointer border rounded-lg px-3 py-2 hover:bg-muted/50 transition-colors text-sm">
+                      512GB
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="1TB" id="1tb" />
+                    <Label htmlFor="1tb" className="cursor-pointer border rounded-lg px-3 py-2 hover:bg-muted/50 transition-colors text-sm">
+                      1TB
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="2TB" id="2tb" />
+                    <Label htmlFor="2tb" className="cursor-pointer border rounded-lg px-3 py-2 hover:bg-muted/50 transition-colors text-sm">
+                      2TB
+                    </Label>
+                  </div>
+                </RadioGroup>
+                <span className="text-sm text-muted-foreground">({selectedStorage})</span>
+              </div>
             </div>
 
             {/* Stock Status */}
@@ -433,10 +442,10 @@ const ProductDetail = () => {
 
         {/* Product Details Tabs */}
         <Tabs defaultValue="description" className="mb-12">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="description">รายละเอียด</TabsTrigger>
-            <TabsTrigger value="specifications">สเปค</TabsTrigger>
-            <TabsTrigger value="reviews">รีวิว ({product.reviews})</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 text-sm">
+            <TabsTrigger value="description" className="text-xs sm:text-sm">รายละเอียด</TabsTrigger>
+            <TabsTrigger value="specifications" className="text-xs sm:text-sm">สเปค</TabsTrigger>
+            <TabsTrigger value="reviews" className="text-xs sm:text-sm">รีวิว ({product.reviews})</TabsTrigger>
           </TabsList>
           
           <TabsContent value="description" className="space-y-4">
