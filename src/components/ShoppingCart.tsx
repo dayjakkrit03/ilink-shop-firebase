@@ -104,7 +104,7 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
         
         <div className="flex flex-col h-full">
           {/* Cart Items */}
-          <div className="flex-1 overflow-y-auto py-4">
+          <div className="flex-1 overflow-y-auto py-4 max-h-[calc(100vh-200px)]">
             {items.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
                 <CartIcon className="h-12 w-12 mb-4" />

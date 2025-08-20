@@ -387,8 +387,8 @@ export default function Checkout() {
                       <SheetHeader>
                         <SheetTitle>ที่อยู่จัดส่ง</SheetTitle>
                       </SheetHeader>
-                      
-                      <div className="mt-6 space-y-4">
+                       
+                       <div className="mt-6 space-y-4 overflow-y-auto max-h-[calc(100vh-120px)]">
                         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
                           <DialogTrigger asChild>
                             <Button variant="outline" className="w-full justify-start gap-2">
@@ -925,8 +925,8 @@ export default function Checkout() {
                     <SheetHeader>
                       <SheetTitle>เลือกวิธีชำระเงิน</SheetTitle>
                     </SheetHeader>
-                    
-                    <div className="mt-4 space-y-3">
+                     
+                     <div className="mt-4 space-y-3 overflow-y-auto max-h-[calc(100vh-120px)]">
                       <h3 className="text-sm font-medium text-gray-700">วิธีที่แนะนำ</h3>
                       
                       {/* Credit/Debit Card */}
@@ -1202,8 +1202,8 @@ export default function Checkout() {
                       <SheetHeader>
                         <SheetTitle>ใบกำกับภาษีและข้อมูลติดต่อ</SheetTitle>
                       </SheetHeader>
-                      
-                      <div className="mt-6 space-y-6">
+                       
+                       <div className="mt-6 space-y-6 overflow-y-auto max-h-[calc(100vh-120px)]">
                         {/* Email */}
                         <div className="space-y-2">
                           <Label htmlFor="email" className="text-sm font-medium">* อีเมล</Label>
