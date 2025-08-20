@@ -7,14 +7,130 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.12 (cd3cf9e)"
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contacts: {
+        Row: {
+          company: string | null
+          created_at: string | null
+          email: string | null
+          first_name: string
+          id: number
+          job_title: string | null
+          last_name: string | null
+          notes: string | null
+          phone_number: string | null
+          profile_image_url: string | null
+          uid: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string | null
+          email?: string | null
+          first_name: string
+          id?: number
+          job_title?: string | null
+          last_name?: string | null
+          notes?: string | null
+          phone_number?: string | null
+          profile_image_url?: string | null
+          uid?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          company?: string | null
+          created_at?: string | null
+          email?: string | null
+          first_name?: string
+          id?: number
+          job_title?: string | null
+          last_name?: string | null
+          notes?: string | null
+          phone_number?: string | null
+          profile_image_url?: string | null
+          uid?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          created_at: string | null
+          id: number
+          name: string
+          price: number
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          name: string
+          price: number
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          name?: string
+          price?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          full_name: string | null
+          id: string
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      userdata: {
+        Row: {
+          createddate: string | null
+          email: string
+          modifieddate: string | null
+          password: string
+          status: boolean
+          userid: number
+          username: string
+        }
+        Insert: {
+          createddate?: string | null
+          email: string
+          modifieddate?: string | null
+          password: string
+          status: boolean
+          userid?: number
+          username: string
+        }
+        Update: {
+          createddate?: string | null
+          email?: string
+          modifieddate?: string | null
+          password?: string
+          status?: boolean
+          userid?: number
+          username?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
