@@ -103,6 +103,7 @@ export type Database = {
       }
       userdata: {
         Row: {
+          auth_user_id: string | null
           createddate: string | null
           email: string
           modifieddate: string | null
@@ -112,6 +113,7 @@ export type Database = {
           username: string
         }
         Insert: {
+          auth_user_id?: string | null
           createddate?: string | null
           email: string
           modifieddate?: string | null
@@ -121,6 +123,7 @@ export type Database = {
           username: string
         }
         Update: {
+          auth_user_id?: string | null
           createddate?: string | null
           email?: string
           modifieddate?: string | null
@@ -136,7 +139,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin_user: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
