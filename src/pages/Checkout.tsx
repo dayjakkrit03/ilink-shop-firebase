@@ -383,7 +383,7 @@ export default function Checkout() {
                         แก้ไข
                       </Button>
                     </SheetTrigger>
-                    <SheetContent className="w-[400px] sm:w-[540px]">
+                    <SheetContent className="w-[400px] sm:w-[540px] max-w-full overflow-hidden">
                       <SheetHeader>
                         <SheetTitle>ที่อยู่จัดส่ง</SheetTitle>
                       </SheetHeader>
@@ -921,7 +921,7 @@ export default function Checkout() {
                       ดูวิธีการทั้งหมด »
                     </Button>
                   </SheetTrigger>
-                  <SheetContent side="right" className="w-[500px]">
+                  <SheetContent side="right" className="w-[500px] max-w-full overflow-hidden">
                     <SheetHeader>
                       <SheetTitle>เลือกวิธีชำระเงิน</SheetTitle>
                     </SheetHeader>
@@ -1198,7 +1198,7 @@ export default function Checkout() {
                         แก้ไข
                       </Button>
                     </SheetTrigger>
-                    <SheetContent side="right" className="w-[500px]">
+                    <SheetContent side="right" className="w-[500px] max-w-full overflow-hidden">
                       <SheetHeader>
                         <SheetTitle>ใบกำกับภาษีและข้อมูลติดต่อ</SheetTitle>
                       </SheetHeader>

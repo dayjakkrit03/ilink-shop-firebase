@@ -94,7 +94,7 @@ export const ShoppingCart = ({ isOpen: externalIsOpen, isVisible, onClose }: Sho
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => open ? handleOpen() : handleClose()}>
-      <SheetContent side="right" className="w-96 sm:max-w-md">
+      <SheetContent side="right" className="w-96 sm:max-w-md max-w-full overflow-hidden">
         <SheetHeader>
           <SheetTitle className="flex items-center gap-2">
             <CartIcon className="h-5 w-5" />
