@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "../dist-server",
+    "moduleResolution": "nodenext"
+    },
+    "include": [
+    "index.ts"
+    ]
+}
